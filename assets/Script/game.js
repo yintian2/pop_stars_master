@@ -98,11 +98,11 @@ cc.Class({
           canFall = 0
         }
       }
-      // if (j == 0) {
-      //   setTimeout(() => {
-      //     this.generateNewBlocks()
-      //   }, 200)
-      // }
+      if (j == 0) {
+        setTimeout(() => {
+          this.generateNewBlocks()
+        }, 200)
+      }
     }
   },
   //防抖动 判断是否需要生成新方块
