@@ -7,14 +7,17 @@ cc.Class({
   properties: {
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束
     blockPrefab: cc.Prefab,
+    blockSprite: [cc.SpriteFrame] //todo: 换成动态生成
   },
   init(c) {
     this._controller = c
-  },
-  start() {
     this.bindNode()
     this.generatePool()
+    this.rowNum = parseInt(c.config.json.rowNum)
+    this.gap = parseInt(c.config.json.gap)
+    this.blockWidth = (730 - (this.rowNum + 1) * this.gap) / this.rowNum
   },
+  // 生成对象池
   generatePool() {
     this.blockPool = new cc.NodePool()
     for (let i = 0; i < Math.pow(this.rowNum, 2); i++) {
@@ -22,11 +25,25 @@ cc.Class({
       this.blockPool.put(block)
     }
   },
+  // 初始化地图
   mapSet(num) {
+    this.map = new Array()
+    let self = this
     return new Promise((resolve, reject) => {
+      for (let i = 0; i < num; i++) { //行
+        this.map[i] = new Array()
+        for (let j = 0; j < num; j++) { //列
+          self.map[i][j] = self.instantiateBlock(self, {
+            x: j,
+            y: i,
+            width: self.blockWidth,
+            startTime: (i * num + j + 1) * 80
+          }, self.blocksContainer)
+        }
+      }
       setTimeout(() => {
         resolve('200 OK');
-      }, 5000)
+      }, 80 * Math.pow(num, 2))
     })
   },
   // 动态获取需要动态控制的组件
@@ -36,14 +53,14 @@ cc.Class({
     this.playerSprite = this.node.getChildByName('playerNode').getChildByName('Sprite').getComponent(cc.Sprite)
     this.blocksContainer = this.node.getChildByName('map')
   },
+  // 游戏开始
   gameStart() {
-
-    // 实例化方框
     this.mapSet(this.rowNum || 8).then((result) => {
       console.log('游戏状态改变', result)
       this._status = 1
     })
   },
+  // 实例化单个方块
   instantiateBlock(self, data, parent) {
     let block = null
     if (self.blockPool && self.blockPool.size() > 0) {
@@ -55,10 +72,12 @@ cc.Class({
     block.scale = 1
     block.x = 0
     block.y = 0
-    block.getComponent('Cell').init(self, data)
+    block.getComponent('cell').init(self, data, this.blockWidth)
+    return block
   },
+  // 回收所有节点
   recoveryAllBlocks() {
-    let childrens = this.blocksContaine.childrens
+    let childrens = this.blocksContainer.childrens
     if (childrens.length != 0) {
       let length = childrens.length
       for (let i = 0; i < length; i++) {

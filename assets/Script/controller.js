@@ -15,7 +15,6 @@ cc.Class({
     this.game.init(this)
     // this.social.init(this)
     this.lateStart()
-    this.loadConfig()
   },
   lateStart() {
     this.pageMgr.onOpenPage(0)
@@ -24,7 +23,4 @@ cc.Class({
     this.pageMgr.onOpenPage(1)
     this.game.gameStart()
   },
-  loadConfig() {
-    this.game.rowNum = this.config.json.rowNum
-  }
 });
