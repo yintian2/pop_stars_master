@@ -26,31 +26,25 @@ cc.Class({
     this.getComponent(cc.Sprite).spriteFrame = this._game.blockSprite[this.color - 1]
   },
   onTouched(color) {
-    console.log('方块位置', this.iid, this.jid)
-    color = color.type ? this.color : color
+    if (color.type) {
+      console.log('方块位置', this.iid, this.jid)
+      color = this.color
+    }
     let self = this
     if (this._status == 1 && this._game._status == 1 && this.color == color) {
       this.playDieAction().then(() => {
         self._game.checkNeedFall()
         if (self.iid - 1 >= 0) {
           self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
-        } else {
-          // console.log('上方没有东西:', self.iid, self.jid)
         }
         if (self.iid + 1 < this._game.rowNum) {
           self._game.map[self.iid + 1][self.jid].getComponent('cell').onTouched(color)
-        } else {
-          //  console.log('下方没有东西', self.iid, self.jid)
         }
         if (self.jid - 1 >= 0) {
           self._game.map[self.iid][self.jid - 1].getComponent('cell').onTouched(color)
-        } else {
-          //  console.log('左边没有东西', self.iid, self.jid)
         }
         if (self.jid + 1 < this._game.rowNum) {
           self._game.map[self.iid][self.jid + 1].getComponent('cell').onTouched(color)
-        } else {
-          //  console.log('右边没有东西', self.iid, self.jid)
         }
       })
     }

@@ -47,13 +47,13 @@ cc.Class({
             x: j,
             y: i,
             width: self.blockWidth,
-            startTime: (i * num + j + 1) * self._controller.config.json.startAnimationTime / num
+            startTime: (i + j + 1) * self._controller.config.json.startAnimationTime / num * 2
           }, self.blocksContainer)
         }
       }
       setTimeout(() => {
         resolve('200 OK');
-      }, self._controller.config.json.startAnimationTime / num * Math.pow(num, 2))
+      }, self._controller.config.json.startAnimationTime * num / 2)
     })
   },
 
@@ -63,8 +63,10 @@ cc.Class({
       clearTimeout(this.checkNeedFallTimer)
     }
     this.checkNeedFallTimer = setTimeout(() => {
-      this.onFall()
-    }, 300)
+      if (this._status == 1) {
+        this.onFall()
+      }
+    }, 210)
   },
   //方块下落
   onFall() {
@@ -109,8 +111,10 @@ cc.Class({
       clearTimeout(this.checkNeedGeneratorTimer)
     }
     this.checkNeedGeneratorTimer = setTimeout(() => {
-      this.generateNewBlocks()
-    }, 300)
+      if (this._status == 4) {
+        this.generateNewBlocks()
+      }
+    }, 250)
   },
   //生成新方块
   generateNewBlocks() {
