@@ -10,7 +10,6 @@ cc.Class({
   init(g, data, width) {
     this._game = g
     // 计算宽
-    this._status = 1
     this.node.width = this.node.height = width
     this.startTime = data.startTime
     this.iid = data.y
@@ -73,13 +72,17 @@ cc.Class({
     this.node.scaleX = 0
     this.node.scaleY = 0
     let action = cc.scaleTo(0.2 / this._game.animationSpeed, 1, 1)
-    // let seq = cc.sequence(action)
-    // 如果有延迟时间就用延迟时间
-    this.startTime ? setTimeout(() => {
-      this.node.runAction(action)
+    let seq = cc.sequence(action, cc.callFunc(() => {
       this._status = 1
-    }, this.startTime) : this.node.runAction(action)
-
+    }, this))
+    // 如果有延迟时间就用延迟时间
+    if (this.startTime) {
+      setTimeout(() => {
+        this.node.runAction(seq)
+      }, this.startTime)
+    } else {
+      this.node.runAction(seq)
+    }
   },
   playDieAction() {
     let self = this

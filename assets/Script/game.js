@@ -64,7 +64,7 @@ cc.Class({
     }
     this.checkNeedFallTimer = setTimeout(() => {
       this.onFall()
-    }, 500)
+    }, 300)
   },
   //方块下落
   onFall() {
@@ -110,7 +110,7 @@ cc.Class({
     }
     this.checkNeedGeneratorTimer = setTimeout(() => {
       this.generateNewBlocks()
-    }, 400)
+    }, 300)
   },
   //生成新方块
   generateNewBlocks() {
