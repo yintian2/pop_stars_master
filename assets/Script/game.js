@@ -13,8 +13,9 @@ cc.Class({
     this._controller = c
     this.bindNode()
     this.generatePool()
-    this.rowNum = parseInt(c.config.json.rowNum)
-    this.gap = parseInt(c.config.json.gap)
+    this.rowNum = c.config.json.rowNum
+    this.gap = c.config.json.gap
+    this.animationSpeed = c.config.json.gap
     this.blockWidth = (730 - (this.rowNum + 1) * this.gap) / this.rowNum
   },
   // 动态获取需要动态控制的组件
@@ -29,7 +30,7 @@ cc.Class({
   //---------------- 游戏控制 ---------------------
   // 游戏开始
   gameStart() {
-    this.mapSet(this.rowNum || 8).then((result) => {
+    this.mapSet(this.rowNum).then((result) => {
       console.log('游戏状态改变', result)
       this._status = 1
     })
@@ -46,13 +47,13 @@ cc.Class({
             x: j,
             y: i,
             width: self.blockWidth,
-            startTime: (i * num + j + 1) * 600 / num
+            startTime: (i * num + j + 1) * self._controller.config.json.startAnimationTime / num
           }, self.blocksContainer)
         }
       }
       setTimeout(() => {
         resolve('200 OK');
-      }, 600 / num * Math.pow(num, 2))
+      }, self._controller.config.json.startAnimationTime / num * Math.pow(num, 2))
     })
   },
 
@@ -76,13 +77,13 @@ cc.Class({
     //如果有空 就判断有几个空 然后让最上方的方块掉落下来
     for (let j = this.rowNum - 1; j >= 0; j--) {
       for (let i = this.rowNum - 1; i >= 0; i--) {
-        if (this.map[i][j].getComponent('cell')._status == 0) {
+        if (this.map[i][j].getComponent('cell')._status == 2) {
           this.blockPool.put(this.map[i][j])
           this.map[i][j] = null
           canFall++
           console.log('找到可以掉落的区域:', i, canFall)
         } else {
-          if (canFall != 0 && (i + canFall) < this.rowNum) {
+          if (canFall != 0) {
             this.map[i + canFall][j] = this.map[i][j]
             this.map[i][j] = null
             this.map[i + canFall][j].getComponent('cell').playFallAction(canFall, {
@@ -95,11 +96,11 @@ cc.Class({
           canFall = 0
         }
       }
-      if (j == 0) {
-        setTimeout(() => {
-          this.generateNewBlocks()
-        }, 200)
-      }
+      // if (j == 0) {
+      //   setTimeout(() => {
+      //     this.generateNewBlocks()
+      //   }, 200)
+      // }
     }
   },
   //防抖动 判断是否需要生成新方块
@@ -109,7 +110,7 @@ cc.Class({
     }
     this.checkNeedGeneratorTimer = setTimeout(() => {
       this.generateNewBlocks()
-    }, 300)
+    }, 400)
   },
   //生成新方块
   generateNewBlocks() {
@@ -120,7 +121,7 @@ cc.Class({
             x: j,
             y: i,
             width: this.blockWidth,
-            startTime: 600 / this.rowNum
+            startTime: null
           }, this.blocksContainer)
         }
       }
@@ -153,11 +154,11 @@ cc.Class({
   },
   // 回收所有节点
   recoveryAllBlocks() {
-    let childrens = this.blocksContainer.childrens
-    if (childrens.length != 0) {
-      let length = childrens.length
+    let children = this.blocksContainer.children
+    if (children.length != 0) {
+      let length = children.length
       for (let i = 0; i < length; i++) {
-        this.blockPool.put(childrens[i])
+        this.blockPool.put(children[i])
       }
     }
   },

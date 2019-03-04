@@ -5,11 +5,12 @@
 cc.Class({
   extends: cc.Component,
   properties: {
-    _status: 0, //1为可触发点击
+    _status: 0, //1为可触发点击 2为已经消失
   },
   init(g, data, width) {
     this._game = g
     // 计算宽
+    this._status = 1
     this.node.width = this.node.height = width
     this.startTime = data.startTime
     this.iid = data.y
@@ -59,7 +60,7 @@ cc.Class({
     this._status = 0
     this.iid = data.y
     this.jid = data.x
-    let action = cc.moveBy(0.2 * y, 0, -y * (this._game.gap + this._game.blockWidth))
+    let action = cc.moveBy(0.2 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth))
     let seq = cc.sequence(action, cc.callFunc(() => {
       this._status = 1
       this._game.checkNeedGenerator()
@@ -71,7 +72,7 @@ cc.Class({
     this._status = 0
     this.node.scaleX = 0
     this.node.scaleY = 0
-    let action = cc.scaleTo(0.2, 1, 1)
+    let action = cc.scaleTo(0.2 / this._game.animationSpeed, 1, 1)
     // let seq = cc.sequence(action)
     // 如果有延迟时间就用延迟时间
     this.startTime ? setTimeout(() => {
@@ -82,16 +83,15 @@ cc.Class({
   },
   playDieAction() {
     let self = this
-    this._status = 0
+    this._status = 2
     this.node.scaleX = 1
     this.node.scaleY = 1
     return new Promise((resolve, reject) => {
-      let action = cc.scaleTo(0.2, 0, 0)
-      // let seq = cc.sequence(action, resolve(''))
-      self.node.runAction(action)
-      setTimeout(() => {
+      let action = cc.scaleTo(0.2 / self._game.animationSpeed, 0, 0)
+      let seq = cc.sequence(action, cc.callFunc(() => {
         resolve('')
-      }, 200);
+      }, this))
+      self.node.runAction(seq)
     });
   }
 });
