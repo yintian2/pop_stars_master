@@ -6,5 +6,9 @@
   "最开始的动画生成速度": "默认600",
   "startAnimationTime": 200,
   "动画速度": "默认1， 1.3就是1.3倍的速度",
-  "animationSpeed": 1
+  "animationSpeed": 1,
+  "消除得分": "",
+  "scoreBase": 100,
+  "初始步数": "",
+  "originStep": 30
 }

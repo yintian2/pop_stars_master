@@ -28,25 +28,30 @@ cc.Class({
   onTouched(color) {
     if (color.type) {
       console.log('方块位置', this.iid, this.jid)
+      this._game._score.onStep(-1)
       color = this.color
     }
-    let self = this
     if (this._status == 1 && this._game._status == 1 && this.color == color) {
       this.playDieAction().then(() => {
-        self._game.checkNeedFall()
-        if (self.iid - 1 >= 0) {
-          self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
-        }
-        if (self.iid + 1 < this._game.rowNum) {
-          self._game.map[self.iid + 1][self.jid].getComponent('cell').onTouched(color)
-        }
-        if (self.jid - 1 >= 0) {
-          self._game.map[self.iid][self.jid - 1].getComponent('cell').onTouched(color)
-        }
-        if (self.jid + 1 < this._game.rowNum) {
-          self._game.map[self.iid][self.jid + 1].getComponent('cell').onTouched(color)
-        }
+        this.onBlockPop(color)
       })
+    }
+  },
+  onBlockPop(color) {
+    let self = this
+    self._game.checkNeedFall()
+    self._game._score.addScore(cc.v2(this.node.x, this.node.y))
+    if (self.iid - 1 >= 0) {
+      self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
+    }
+    if (self.iid + 1 < this._game.rowNum) {
+      self._game.map[self.iid + 1][self.jid].getComponent('cell').onTouched(color)
+    }
+    if (self.jid - 1 >= 0) {
+      self._game.map[self.iid][self.jid - 1].getComponent('cell').onTouched(color)
+    }
+    if (self.jid + 1 < this._game.rowNum) {
+      self._game.map[self.iid][self.jid + 1].getComponent('cell').onTouched(color)
     }
   },
   playFallAction(y, data) { //下降了几个格子

@@ -13,6 +13,7 @@ cc.Class({
     this._controller = c
     this.bindNode()
     this.generatePool()
+    this._score = c.scoreMgr
     this.rowNum = c.config.json.rowNum
     this.gap = c.config.json.gap
     this.animationSpeed = c.config.json.gap
@@ -20,9 +21,7 @@ cc.Class({
   },
   // 动态获取需要动态控制的组件
   bindNode() {
-    this.leftStepLabel = this.node.getChildByName('leftStepNode').getChildByName('Label').getComponent(cc.Label)
-    this.scoreLabel = this.node.getChildByName('scoreNode').getChildByName('Label').getComponent(cc.Label)
-    this.playerSprite = this.node.getChildByName('playerNode').getChildByName('Sprite').getComponent(cc.Sprite)
+    this.playerSprite = this.node.getChildByName('UI').getChildByName('playerNode').getChildByName('Sprite').getComponent(cc.Sprite)
     this.blocksContainer = this.node.getChildByName('map')
   },
 
@@ -30,10 +29,12 @@ cc.Class({
   //---------------- 游戏控制 ---------------------
   // 游戏开始
   gameStart() {
+    this._score.init(this)
     this.mapSet(this.rowNum).then((result) => {
       console.log('游戏状态改变', result)
       this._status = 1
     })
+
   },
   // 初始化地图
   mapSet(num) {
@@ -72,7 +73,6 @@ cc.Class({
   onFall() {
     let self = this
     this._status = 4
-    console.log('下落函数:', this._status)
     let canFall = 0
     //算法 
     //从每一列的最下面一个开始往上判断
@@ -83,7 +83,6 @@ cc.Class({
           this.blockPool.put(this.map[i][j])
           this.map[i][j] = null
           canFall++
-          console.log('找到可以掉落的区域:', i, canFall)
         } else {
           if (canFall != 0) {
             this.map[i + canFall][j] = this.map[i][j]
@@ -132,6 +131,18 @@ cc.Class({
     }
     this._status = 1
   },
+  gameOver() {
+    this._status = 3
+    this._controller.pageMgr.addPage(2)
+    this._controller.pageMgr.addPage(4)
+  },
+  restart() {
+    this._controller.pageMgr.onOpenPage(1)
+    this.recoveryAllBlocks().then(() => {
+      this.gameStart()
+    })
+  },
+
   //--------------------- 预制体实例化---------------------
   // 生成对象池
   generatePool() {
@@ -158,12 +169,21 @@ cc.Class({
   },
   // 回收所有节点
   recoveryAllBlocks() {
-    let children = this.blocksContainer.children
-    if (children.length != 0) {
-      let length = children.length
-      for (let i = 0; i < length; i++) {
-        this.blockPool.put(children[i])
+    return new Promise((resolve, reject) => {
+      let children = this.blocksContainer.children
+      if (children.length != 0) {
+        let length = children.length
+        console.log(length)
+        for (let i = 0; i < length; i++) {
+          this.blockPool.put(children[0])
+        }
+        for (let i = 0; i < this.rowNum; i++) {
+          for (let j = 0; j < this.rowNum; j++) {
+            this.map[i][j] = null
+          }
+        }
       }
-    }
+      resolve('')
+    })
   },
 });
