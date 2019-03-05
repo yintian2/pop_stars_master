@@ -21,17 +21,23 @@ cc.Class({
     this.label.node.scale = 1
     let action1 = cc.scaleTo(0.1, 1.2, 1.2)
     let action2 = cc.moveBy(0.1, 0, 30)
-    let action3 = cc.moveTo(0.3, 0, 500)
+    let action3 = cc.moveTo(0.5, 0, 470)
     let action4 = cc.scaleTo(0.3, 0, 0)
 
-    let seq = cc.sequence(cc.spawn(action1, action2), cc.moveBy(0.3, 0, 0), cc.callFunc(() => {
-      let seq2 = cc.sequence(cc.spawn(action3, action4), cc.callFunc(() => {
+    // let seq = cc.sequence(cc.spawn(action1, action2), cc.moveBy(0.3, 0, 0), cc.callFunc(() => {
+    //   let seq2 = cc.sequence(cc.spawn(action3, action4), cc.callFunc(() => {
+    //     s.scorePool.put(this.node)
+    //   }, this))
+    //   this.node.runAction(seq2)
+    // }, this))
+    // this.label.node.runAction(seq)
+    let seq = cc.sequence(action1, cc.callFunc(() => {
+      let seq2 = cc.sequence(action3.easing(cc.easeBackOut()), cc.moveBy(0.3, 0, 0), action4, cc.callFunc(() => {
         s.scorePool.put(this.node)
       }, this))
       this.node.runAction(seq2)
     }, this))
     this.label.node.runAction(seq)
-
   }
 
   // update (dt) {},

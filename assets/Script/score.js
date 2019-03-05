@@ -16,6 +16,7 @@ cc.Class({
     this.chain = 1
     this.scoreLabel.string = "当前得分:" + this.score
     this.leftStepLabel.string = "剩余步数:" + this.leftStep
+    this.scoreTimer = []
   },
   start() {
     this.generatePool()
@@ -64,8 +65,9 @@ cc.Class({
       this.chain = 1
     }, 500)
     this.score += this.chain * this._controller.config.json.scoreBase
-
-    this.scoreLabel.string = "当前得分:" + this.score
+    this.scoreTimer[this.chain] = setTimeout(() => {
+      this.scoreLabel.string = "当前得分:" + this.score
+    }, 600 + 250 * this.chain)
     this.instantiatescore(this, this.chain * this._controller.config.json.scoreBase, pos)
     this.chain++
   },
