@@ -158,13 +158,13 @@
     "_spriteFrame": {
       "__uuid__": "4e30b587-6446-44b8-a5eb-a8d08af04587"
     },
-    "_stopped": false,
+    "_stopped": true,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 8,
-    "duration": -1,
-    "emissionRate": 8,
-    "life": 1,
+    "duration": -5,
+    "emissionRate": 500,
+    "life": 0.5,
     "lifeVar": 0,
     "_startColor": {
       "__type__": "cc.Color",
