@@ -15,6 +15,7 @@ cc.Class({
   start() {
     this.game.init(this)
     // this.social.init(this)
+    this.musicMgr.init()
     this.lateStart()
   },
   lateStart() {

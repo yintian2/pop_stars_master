@@ -9,6 +9,7 @@ cc.Class({
   },
   init(g, data, width) {
     this._game = g
+    this._controller = g._controller
     // 计算宽
     this.node.width = this.node.height = width
     this.startTime = data.startTime
@@ -40,7 +41,8 @@ cc.Class({
   onBlockPop(color) {
     let self = this
     self._game.checkNeedFall()
-    self._game._score.addScore(cc.v2(this.node.x, this.node.y))
+    self._controller.musicMgr.onPlayAudio(0)
+    self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
     if (self.iid - 1 >= 0) {
       self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
     }
