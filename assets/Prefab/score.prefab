@@ -151,34 +151,34 @@
     "_enabled": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 1,
-    "_custom": true,
+    "_custom": false,
     "_file": {
-      "__uuid__": "87e1e3b4-06c2-47dd-85fe-f7d4ba37b2b7"
+      "__uuid__": "ef4e3eb8-24e1-43dc-a425-14a2c05672c7"
     },
     "_spriteFrame": {
-      "__uuid__": "393ac1a8-7fc3-4127-b4fd-d138ec7d984b"
+      "__uuid__": "bfc6b38f-6a08-4121-99a1-10b28a291901"
     },
     "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
-    "totalParticles": 5,
-    "duration": 0.1,
-    "emissionRate": 500,
-    "life": 0.2,
-    "lifeVar": 0.2,
+    "totalParticles": 10,
+    "duration": -1,
+    "emissionRate": 10,
+    "life": 1,
+    "lifeVar": 0,
     "_startColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 51,
+      "r": 51,
+      "g": 102,
+      "b": 175,
       "a": 255
     },
     "_startColorVar": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+      "r": 0,
+      "g": 0,
+      "b": 51,
+      "a": 25
     },
     "_endColor": {
       "__type__": "cc.Color",
@@ -194,13 +194,13 @@
       "b": 0,
       "a": 0
     },
-    "angle": -90,
+    "angle": 0,
     "angleVar": 360,
-    "startSize": 40,
+    "startSize": 111,
     "startSizeVar": 10,
-    "endSize": 0,
+    "endSize": 40,
     "endSizeVar": 0,
-    "startSpin": 0,
+    "startSpin": 720,
     "startSpinVar": 0,
     "endSpin": 0,
     "endSpinVar": 0,
@@ -211,8 +211,8 @@
     },
     "posVar": {
       "__type__": "cc.Vec2",
-      "x": 15,
-      "y": -20
+      "x": 0,
+      "y": 0
     },
     "positionType": 0,
     "emitterMode": 0,
@@ -221,8 +221,8 @@
       "x": 0,
       "y": 0
     },
-    "speed": 2000,
-    "speedVar": 5,
+    "speed": 100,
+    "speedVar": 200,
     "tangentialAccel": 0,
     "tangentialAccelVar": 0,
     "radialAccel": 0,
