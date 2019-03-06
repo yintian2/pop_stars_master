@@ -24,8 +24,6 @@ cc.Class({
     this.playerSprite = this.node.getChildByName('UI').getChildByName('playerNode').getChildByName('Sprite').getComponent(cc.Sprite)
     this.blocksContainer = this.node.getChildByName('map')
   },
-
-
   //---------------- 游戏控制 ---------------------
   // 游戏开始
   gameStart() {
