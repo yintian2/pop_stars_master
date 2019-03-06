@@ -5,7 +5,7 @@
 cc.Class({
   extends: cc.Component,
   properties: {
-    _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态
+    _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
     blockSprite: [cc.SpriteFrame] //todo: 换成动态生成
   },
@@ -64,7 +64,7 @@ cc.Class({
       clearTimeout(this.checkNeedFallTimer)
     }
     this.checkNeedFallTimer = setTimeout(() => {
-      if (this._status == 1) {
+      if (this._status == 5) {
         this.onFall()
       }
     }, 210)

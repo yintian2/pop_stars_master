@@ -8,6 +8,7 @@ cc.Class({
   properties: {
     scorePrefab: cc.Prefab,
     scoreParticlePrefab: cc.Prefab,
+    mainScoreLabel: cc.Label,
   },
   init(g) {
     this._game = g
@@ -19,6 +20,8 @@ cc.Class({
     this.progressBar.init(0, 20000)
     this.leftStepLabel.string = "剩余步数:" + this.leftStep
     this.scoreTimer = []
+    this.currentAddedScore = 0
+    this.mainScoreLabel.node.active = false
   },
   start() {
     this.generatePool()
@@ -37,7 +40,7 @@ cc.Class({
     }
   },
   // 实例化单个方块
-  instantiatescore(self, num, pos) {
+  instantiateScore(self, num, pos) {
     let score = null
     if (self.scorePool && self.scorePool.size() > 0) {
       score = self.scorePool.get()
@@ -74,18 +77,27 @@ cc.Class({
   },
   addScore(pos) {
     // 一次消除可以叠chain
+    this.mainScoreLabel.node.active = true
+    this.mainScoreLabel.node.x = 0
+    this.mainScoreLabel.node.y = 0
+    this.mainScoreLabel.node.scale = 1
     if (this.chainTimer) {
       clearTimeout(this.chainTimer)
     }
     this.chainTimer = setTimeout(() => {
-      this.chain = 1
-    }, 500)
-    this.score += this._controller.config.json.scoreBase
-    this.scoreTimer[this.chain] = setTimeout(() => {
-      //this.scoreLabel.string = "当前得分:" + this.score
-      this.progressBar.init(this.score, 20000)
-    }, 600 + 250 * this.chain)
-    this.instantiatescore(this, this.chain * this._controller.config.json.scoreBase, pos)
+      let action = cc.spawn(cc.moveTo(0.2, 0, 355), cc.scaleTo(0.2, 0.4)).easing(cc.easeBackOut())
+      let seq = cc.sequence(action, cc.callFunc(() => {
+        this.score += this.currentAddedScore
+        this.progressBar.init(this.score, 20000)
+        this.chain = 1
+        this.currentAddedScore = 0
+        this.mainScoreLabel.node.active = false
+      }, this))
+      this.mainScoreLabel.node.runAction(seq)
+    }, 300)
+    this.currentAddedScore += this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain)
+    this.mainScoreLabel.string = this.currentAddedScore
+    this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
     this.chain++
   },
 });
