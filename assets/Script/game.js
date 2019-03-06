@@ -54,7 +54,7 @@ cc.Class({
       }
       setTimeout(() => {
         resolve('200 OK');
-      }, self._controller.config.json.startAnimationTime * num / 2)
+      }, self._controller.config.json.startAnimationTime * num / 2/ (cc.game.getFrameRate() / 60))
     })
   },
 
@@ -67,7 +67,7 @@ cc.Class({
       if (this._status == 5) {
         this.onFall()
       }
-    }, 210)
+    }, 250 / (cc.game.getFrameRate() / 60))
   },
   //方块下落
   onFall() {
@@ -113,7 +113,7 @@ cc.Class({
       if (this._status == 4) {
         this.generateNewBlocks()
       }
-    }, 250)
+    }, 250 / (cc.game.getFrameRate() / 60))
   },
   //生成新方块
   generateNewBlocks() {

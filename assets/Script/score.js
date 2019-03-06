@@ -16,12 +16,14 @@ cc.Class({
     this.score = 0
     this.leftStep = this._controller.config.json.originStep
     this.chain = 1
-    // this.scoreLabel.string = "当前得分:" + this.score
-    this.progressBar.init(0, 20000)
+    this.level = 1
+    this.levelData = g._controller.config.json.levelData
+    this.progressBar.init(0, this.levelData[this.level - 1])
     this.leftStepLabel.string = "剩余步数:" + this.leftStep
     this.scoreTimer = []
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false
+
   },
   start() {
     this.generatePool()
@@ -88,16 +90,24 @@ cc.Class({
       let action = cc.spawn(cc.moveTo(0.2, 0, 355), cc.scaleTo(0.2, 0.4)).easing(cc.easeBackOut())
       let seq = cc.sequence(action, cc.callFunc(() => {
         this.score += this.currentAddedScore
-        this.progressBar.init(this.score, 20000)
+        if (this.score > this.levelData[this.level - 1].score) {
+          this.score = this.score - this.levelData[this.level - 1].score
+          this.level++
+          this.onLevelUp()
+        }
+        this.progressBar.init(this.score, this.levelData[this.level - 1])
         this.chain = 1
         this.currentAddedScore = 0
         this.mainScoreLabel.node.active = false
       }, this))
       this.mainScoreLabel.node.runAction(seq)
-    }, 300)
+    }, 300 / (cc.game.getFrameRate() / 60))
     this.currentAddedScore += this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain)
     this.mainScoreLabel.string = this.currentAddedScore
     this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
     this.chain++
   },
+  onLevelUp() {
+    this.onStep(this.level + 3)
+  }
 });

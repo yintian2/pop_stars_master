@@ -88,7 +88,7 @@ cc.Class({
     if (this.startTime) {
       setTimeout(() => {
         this.node.runAction(seq)
-      }, this.startTime)
+      }, this.startTime / (cc.game.getFrameRate() / 60))
     } else {
       this.node.runAction(seq)
     }

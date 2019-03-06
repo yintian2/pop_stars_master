@@ -19,7 +19,7 @@ cc.Class({
       this.node.active = false
       this.particle.stopSystem()
       //  s.scoreParticlePool.put(this.node)
-    }, time)
+    }, time / (cc.game.getFrameRate() / 60))
   }
 
   // update (dt) {},
