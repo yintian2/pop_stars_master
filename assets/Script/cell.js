@@ -49,7 +49,7 @@ cc.Class({
     let self = this
     self._game.checkNeedFall()
     self._game._status = 5
-    self._controller.musicMgr.onPlayAudio(0)
+    self._controller.musicMgr.onPlayAudio(self._game._score.chain - 1)
     self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
     if (self.iid - 1 >= 0) {
       self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)

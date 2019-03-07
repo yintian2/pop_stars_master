@@ -10,6 +10,7 @@ cc.Class({
     scoreParticlePrefab: cc.Prefab,
     mainScoreLabel: cc.Label,
     successDialog: require('successDialog'),
+    avatarSpriteArr: [cc.SpriteFrame]
   },
   init(g) {
     this._game = g
@@ -24,7 +25,7 @@ cc.Class({
     this.scoreTimer = []
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false
-
+    this.playerSprite.spriteFrame = this.avatarSpriteArr[this.level - 1]
   },
   start() {
     this.generatePool()
@@ -63,6 +64,7 @@ cc.Class({
     scoreParticle.getComponent('scoreParticle').init(self, pos, this._controller.config.json.scoreParticleTime)
   },
   bindNode() {
+    this.playerSprite = this.node.getChildByName('UI').getChildByName('playerNode').getChildByName('Sprite').getComponent(cc.Sprite)
     this.leftStepLabel = this.node.getChildByName('UI').getChildByName('leftStepNode').getChildByName('Label').getComponent(cc.Label)
     this.progressBar = this.node.getChildByName('UI').getChildByName('scoreNode').getChildByName('progressBar').getComponent('progress')
     this.scoreContainer = this.node.getChildByName('UI').getChildByName('scoreGroup')
@@ -89,9 +91,10 @@ cc.Class({
         y: 355
       }, cc.callFunc(() => {
         this.score += this.currentAddedScore
-        if (this.score > this.levelData[this.level - 1].score) {
+        if (this.score >= this.levelData[this.level - 1].score) {
           this.score = this.score - this.levelData[this.level - 1].score
           this.level++
+
           this.onLevelUp()
         }
         this.progressBar.init(this.score, this.levelData[this.level - 1])
@@ -134,6 +137,8 @@ cc.Class({
         y: 630
       }, cc.callFunc(() => {
         this._game._status = 1
+        this.mainScoreLabel.node.active = false
+        this.playerSprite.spriteFrame = this.avatarSpriteArr[this.level - 1]
         cc.log('升级啦')
       }))
     }, 300);

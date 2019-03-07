@@ -34,31 +34,32 @@ cc.Class({
     })
   },
   onPlayAudio(num) {
-    let self = this
-    if (this.audios[num].isPlaying) {
-      if (this.audios[num + 1]) {
-        self.onPlayAudio(num + 1)
-      } else {
-        console.log('创建新的音乐实例')
-        let music = null
-        if (self.musicPool && self.musicPool.size() > 0) {
-          music = self.musicPool.get()
-        } else {
-          music = cc.instantiate(self.audioPrefab)
-        }
-        music.parent = self.node
-        this.audios[num + 1] = music.getComponent(cc.AudioSource)
-        music.getComponent(cc.AudioSource).play()
-      }
-      //  music.getComponent(cc.AudioSource).audioClip=this.audios[num].audioClip
-      // this.audios[num].stop()
-      // this.audios[num].rewind()
-      // this.audios[num].play()
-    } else {
-      console.log('使用旧的音乐')
+    // let self = this
+    // if (this.audios[num].isPlaying) {
+    //   if (this.audios[num + 1]) {
+    //     self.onPlayAudio(num + 1)
+    //   } else {
+    //     console.log('创建新的音乐实例')
+    //     let music = null
+    //     if (self.musicPool && self.musicPool.size() > 0) {
+    //       music = self.musicPool.get()
+    //     } else {
+    //       music = cc.instantiate(self.audioPrefab)
+    //     }
+    //     music.parent = self.node
+    //     this.audios[num + 1] = music.getComponent(cc.AudioSource)
+    //     music.getComponent(cc.AudioSource).play()
+    //   }
+    if (num < this.audio.length) {
+      this.audios[num].stop()
       this.audios[num].rewind()
       this.audios[num].play()
     }
+    // } else {
+    //   console.log('使用旧的音乐')
+    //   this.audios[num].rewind()
+    //   this.audios[num].play()
+    // }
   },
   start() {
     // this.onPlayAudio(1);

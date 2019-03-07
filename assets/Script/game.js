@@ -21,7 +21,6 @@ cc.Class({
   },
   // 动态获取需要动态控制的组件
   bindNode() {
-    this.playerSprite = this.node.getChildByName('UI').getChildByName('playerNode').getChildByName('Sprite').getComponent(cc.Sprite)
     this.blocksContainer = this.node.getChildByName('map')
   },
   //---------------- 游戏控制 ---------------------
