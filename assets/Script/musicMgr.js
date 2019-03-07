@@ -50,7 +50,7 @@ cc.Class({
     //     this.audios[num + 1] = music.getComponent(cc.AudioSource)
     //     music.getComponent(cc.AudioSource).play()
     //   }
-    if (num < this.audio.length) {
+    if (num < this.audios.length) {
       this.audios[num].stop()
       this.audios[num].rewind()
       this.audios[num].play()

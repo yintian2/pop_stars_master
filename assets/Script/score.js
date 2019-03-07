@@ -94,7 +94,6 @@ cc.Class({
         if (this.score >= this.levelData[this.level - 1].score) {
           this.score = this.score - this.levelData[this.level - 1].score
           this.level++
-
           this.onLevelUp()
         }
         this.progressBar.init(this.score, this.levelData[this.level - 1])
@@ -127,7 +126,6 @@ cc.Class({
   },
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)
-    this.onStep(this.level + 3)
     this._game._status = 2
     this.initCurrentScoreLabel()
     this.mainScoreLabel.string = this.level + 3
@@ -136,9 +134,10 @@ cc.Class({
         x: -248,
         y: 630
       }, cc.callFunc(() => {
+        this.onStep(this.level + 3)
         this._game._status = 1
         this.mainScoreLabel.node.active = false
-        this.playerSprite.spriteFrame = this.avatarSpriteArr[this.level - 1]
+        this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1) % 3]
         cc.log('升级啦')
       }))
     }, 300);
