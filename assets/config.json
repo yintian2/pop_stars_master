@@ -15,84 +15,64 @@
   "scoreParticleTime": 1000,
   "官员分数配置": "",
   "levelData": [{
-    "name": "九品小吏",
+    "name": "农民",
     "score": 500,
     "step": 5
   }, {
-    "name": "八品师爷",
-    "score": 1000,
+    "name": "秀才",
+    "score": 1500,
     "step": 6
   }, {
-    "name": "七品知县",
-    "score": 1500,
+    "name": "举人",
+    "score": 2500,
     "step": 7
   }, {
-    "name": "从六品",
-    "score": 2000,
+    "name": "进士",
+    "score": 3500,
     "step": 8
   }, {
-    "name": "六品",
-    "score": 20000,
+    "name": "县令",
+    "score": 4500,
     "step": 9
   }, {
-    "name": "从五品",
-    "score": 30000,
+    "name": "知府",
+    "score": 5500,
     "step": 10
   }, {
-    "name": "五品",
-    "score": 42000,
+    "name": "参将",
+    "score": 6500,
     "step": 11
   }, {
-    "name": "从四品",
-    "score": 49000,
+    "name": "御史",
+    "score": 7500,
     "step": 12
   }, {
-    "name": "四品",
-    "score": 56000,
+    "name": "巡抚",
+    "score": 8500,
     "step": 13
   }, {
-    "name": "从三品",
-    "score": 63000,
+    "name": "提督",
+    "score": 9500,
     "step": 14
   }, {
-    "name": "三品",
-    "score": 70000,
+    "name": "太师",
+    "score": 10500,
     "step": 15
   }, {
-    "name": "正三品",
-    "score": 77000,
+    "name": "大将军",
+    "score": 11500,
     "step": 16
   }, {
-    "name": "从二品",
-    "score": 84000,
+    "name": "宰相",
+    "score": 12500,
     "step": 17
   }, {
-    "name": "二品",
-    "score": 98000,
+    "name": "王爷",
+    "score": 13500,
     "step": 18
   }, {
-    "name": "正二品",
-    "score": 112000,
-    "step": 19
-  }, {
-    "name": "从一品",
-    "score": 126000,
-    "step": 20
-  }, {
-    "name": "一品",
-    "score": 140000,
-    "step": 21
-  }, {
-    "name": "正一品",
-    "score": 154000,
-    "step": 22
-  }, {
-    "name": "首辅大臣",
-    "score": 168000,
-    "step": 23
-  }, {
     "name": "皇帝",
-    "score": 180000,
-    "step": 24
+    "score": 17000,
+    "step": 19
   }]
 }
