@@ -123,10 +123,10 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
+    this._game._status=2
   },
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)
-    this._game._status = 2
     this.initCurrentScoreLabel()
     this.mainScoreLabel.string = this.level + 3
     setTimeout(() => {

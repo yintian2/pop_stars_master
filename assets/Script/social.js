@@ -6,7 +6,10 @@
  */
 cc.Class({
   extends: cc.Component,
-  properties: {},
+  properties: {
+    display: cc.Node,
+    _isShow: false
+  },
   init(c) {
     this._controller = c
     this.loadShareData()
@@ -26,6 +29,58 @@ cc.Class({
       title: data.title,
       imageUrl: ''
     })
+  },
+  // ---------------分数上传---------------
+  onGameOver(level, score) {
+    //上传分数
+    //打开开放域
+    let highLevel = 0
+    let score = 0
+    highLevel = wx.getStorageSync('highLevel')
+    if (highLevel) {
+      highLevel = parseInt(highLevel)
+      highLevel = highLevel < level ? level : highLevel
+    } else {
+      highLevel = level
+    }
+    highScore = wx.getStorageSync('highScore')
+    if (highScore) {
+      highScore = parseInt(highScore)
+      highScore = highScore < score ? score : highScore
+    } else {
+      highScore = score
+    }
+    wx.setStorageSync('highLevel', highLevel + '')
+    wx.setStorageSync('highScore', highScore + '')
+    let kvDataList = newArray()
+    kvDataList.push({
+      key: "highLevel",
+      value: highLevel,
+    }, {
+      key: "highScore",
+      value: highScore,
+    })
+    wx.setUserCloudStorage({
+      KVDataList: kvDataList
+    })
+    this.showRank()
+  },
+  showRank() {
+    wx.postMessage({
+      message: 'rankShow'
+    })
+    this._isShow = true
+  },
+  switchRandType() {
+    wx.postMessage({
+      message: 'switchRank'
+    })
+  },
+  closeRand() {
+    wx.postMessage({
+      message: 'rankHide'
+    })
+    this._isShow = false
   },
   // ---------------- 授权 ----------------
   checkAuth() {
@@ -97,5 +152,16 @@ cc.Class({
       sprite.spriteFrame = new cc.SpriteFrame(texture);
     };
     image.src = url;
+  },
+  // -------------- rank 刷新------------------
+  _updateSubDomainCanvas() {
+    this.tex.initWithElement(sharedCanvas);
+    this.tex.handleLoadedTexture();
+    this.display.spriteFrame = new cc.SpriteFrame(this.tex);
+  },
+  update(dt) {
+    if (this._isShow) {
+      this._updateSubDomainCanvas();
+    }
   },
 });
