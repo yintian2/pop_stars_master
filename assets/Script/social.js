@@ -8,7 +8,8 @@ cc.Class({
   extends: cc.Component,
   properties: {
     display: cc.Node,
-    _isShow: false
+    _isShow: false,
+    score: 0
   },
   init(c) {
     this._controller = c
@@ -34,6 +35,7 @@ cc.Class({
   onGameOver(level, score) {
     //上传分数
     //打开开放域
+    this.score = score
     let highLevel = 0
     let score = 0
     highLevel = wx.getStorageSync('highLevel')
@@ -71,12 +73,12 @@ cc.Class({
     })
     this._isShow = true
   },
-  switchRandType() {
+  switchRankType() {
     wx.postMessage({
       message: 'switchRank'
     })
   },
-  closeRand() {
+  closeRank() {
     wx.postMessage({
       message: 'rankHide'
     })
