@@ -87,8 +87,10 @@ cc.Class({
     // 如果有延迟时间就用延迟时间
     if (this.startTime) {
       setTimeout(() => {
-        this.node.runAction(seq)
-      }, this.startTime / (cc.game.getFrameRate() / 60))
+          this.node.runAction(seq)
+        }, this.startTime / 1
+        // (cc.game.getFrameRate() / 60)
+      )
     } else {
       this.node.runAction(seq)
     }

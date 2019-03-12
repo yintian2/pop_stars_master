@@ -10,7 +10,9 @@ cc.Class({
     scoreParticlePrefab: cc.Prefab,
     mainScoreLabel: cc.Label,
     successDialog: require('successDialog'),
-    avatarSpriteArr: [cc.SpriteFrame]
+    avatarSpriteArr: [cc.SpriteFrame],
+    // progressBar: require('progress'),
+    // leftStepLabel: cc.Label,
   },
   init(g) {
     this._game = g
@@ -86,22 +88,24 @@ cc.Class({
     }
     this.initCurrentScoreLabel()
     this.chainTimer = setTimeout(() => {
-      this.onCurrentScoreLabel(this.currentAddedScore, {
-        x: -60,
-        y: 355
-      }, cc.callFunc(() => {
-        this.score += this.currentAddedScore
-        if (this.score >= this.levelData[this.level - 1].score) {
-          //this.score = this.score - this.levelData[this.level - 1].score
-          this.level++
-          this.onLevelUp()
-        }
-        this.progressBar.init(this.score, this.levelData[this.level - 1])
-        this.chain = 1
-        this.currentAddedScore = 0
-        this.mainScoreLabel.node.active = false
-      }, this))
-    }, 300 / (cc.game.getFrameRate() / 60))
+        this.onCurrentScoreLabel(this.currentAddedScore, {
+          x: -60,
+          y: 355
+        }, cc.callFunc(() => {
+          this.score += this.currentAddedScore
+          if (this.score >= this.levelData[this.level - 1].score) {
+            //this.score = this.score - this.levelData[this.level - 1].score
+            this.level++
+            this.onLevelUp()
+          }
+          this.progressBar.init(this.score, this.levelData[this.level - 1])
+          this.chain = 1
+          this.currentAddedScore = 0
+          this.mainScoreLabel.node.active = false
+        }, this))
+      }, 300 / 1
+      // (cc.game.getFrameRate() / 60)
+    )
     this.currentAddedScore += this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain)
     this.mainScoreLabel.string = this.currentAddedScore
     this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
@@ -123,7 +127,7 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
-    this._game._status=2
+    this._game._status = 2
   },
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)

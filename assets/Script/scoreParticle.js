@@ -16,10 +16,12 @@ cc.Class({
     // this.particle.resetSystem()
     this.node.scale = 1
     setTimeout(() => {
-      this.node.active = false
-      this.particle.stopSystem()
-      //  s.scoreParticlePool.put(this.node)
-    }, time / (cc.game.getFrameRate() / 60))
+        this.node.active = false
+        this.particle.stopSystem()
+        //  s.scoreParticlePool.put(this.node)
+      }, time / 1
+      //(cc.game.getFrameRate() / 60)
+    )
   }
 
   // update (dt) {},

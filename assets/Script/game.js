@@ -50,8 +50,10 @@ cc.Class({
         }
       }
       setTimeout(() => {
-        resolve('200 OK');
-      }, self._controller.config.json.startAnimationTime * num / 2 / (cc.game.getFrameRate() / 60))
+          resolve('200 OK');
+        }, self._controller.config.json.startAnimationTime * num / 2 / 1
+        //  (cc.game.getFrameRate() / 60)
+      )
     })
   },
 
@@ -61,10 +63,12 @@ cc.Class({
       clearTimeout(this.checkNeedFallTimer)
     }
     this.checkNeedFallTimer = setTimeout(() => {
-      if (this._status == 5) {
-        this.onFall()
-      }
-    }, 250 / (cc.game.getFrameRate() / 60))
+        if (this._status == 5) {
+          this.onFall()
+        }
+      }, 250 / 1
+      // (cc.game.getFrameRate() / 60)
+    )
   },
   //方块下落
   onFall() {
@@ -107,10 +111,12 @@ cc.Class({
       clearTimeout(this.checkNeedGeneratorTimer)
     }
     this.checkNeedGeneratorTimer = setTimeout(() => {
-      if (this._status == 4) {
-        this.generateNewBlocks()
-      }
-    }, 250 / (cc.game.getFrameRate() / 60))
+        if (this._status == 4) {
+          this.generateNewBlocks()
+        }
+      }, 250 / 1
+      // (cc.game.getFrameRate() / 60)
+    )
   },
   //生成新方块
   generateNewBlocks() {
@@ -135,7 +141,6 @@ cc.Class({
     if (this._controller.social.node.active) {
       // 仅上传分数
       this._controller.social.onGameOver(this._score.score, this._score.level)
-      this._controller.social.showRank()
     }
   },
   restart() {

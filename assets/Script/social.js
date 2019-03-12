@@ -16,6 +16,7 @@ cc.Class({
     this.loadShareData()
     this.display.node.width = window.width
     this.display.node.height = window.height
+    this.tex = new cc.Texture2D();
   },
   // --------------- share ----------------
   loadShareData() {
@@ -40,6 +41,7 @@ cc.Class({
     this.score = score
     let highLevel = 0
     let highScore = 0
+    let self = this
     highLevel = wx.getStorageSync('highLevel')
     if (highLevel) {
       highLevel = parseInt(highLevel)
@@ -56,18 +58,23 @@ cc.Class({
     }
     wx.setStorageSync('highLevel', highLevel + '')
     wx.setStorageSync('highScore', highScore + '')
-    let kvDataList = newArray()
+    var kvDataList = new Array()
     kvDataList.push({
       key: "highLevel",
-      value: highLevel,
+      value: highLevel + '',
     }, {
       key: "highScore",
-      value: highScore,
+      value: highScore + '',
     })
     wx.setUserCloudStorage({
-      KVDataList: kvDataList
+      "KVDataList": kvDataList,
+      success: () => {
+        self.showRank()
+      },
+      fail: (res) => {
+        console.log(res)
+      }
     })
-    //  this.showRank()
   },
   showRank() {
     wx.postMessage({
@@ -159,6 +166,9 @@ cc.Class({
   },
   // -------------- rank 刷新------------------
   _updateSubDomainCanvas() {
+    if (!this.tex) {
+      return;
+    }
     this.tex.initWithElement(sharedCanvas);
     this.tex.handleLoadedTexture();
     this.display.spriteFrame = new cc.SpriteFrame(this.tex);
