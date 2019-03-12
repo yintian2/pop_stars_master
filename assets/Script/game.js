@@ -138,6 +138,7 @@ cc.Class({
     this._status = 3
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(4)
+    this._controller.totalRank.active = false
     if (this._controller.social.node.active) {
       // 仅上传分数
       this._controller.social.onGameOver(this._score.score, this._score.level)

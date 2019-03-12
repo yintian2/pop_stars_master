@@ -10,9 +10,11 @@ cc.Class({
     pageMgr: require('pageMgr'), //页面控制器
     social: require('social'), //排行榜、广告控制器
     config: cc.JsonAsset,
-    scoreMgr: require('score') //分数 特效控制
+    scoreMgr: require('score'), //分数 特效控制
+    totalRank: cc.Node,
   },
   start() {
+    this.totalRank.active = false
     this.game.init(this)
     if (this.social.node.active) {
       this.social.init(this)
@@ -28,14 +30,19 @@ cc.Class({
     this.game.gameStart()
   },
   closeRank() {
+    this.totalRank.active = false
     if (this.social.node.active) {
       this.social.hideRank()
     }
-    
   },
-  switchRankType(){
+  switchRankType() {
+    this.totalRank.active = true
     if (this.social.node.active) {
       this.social.switchRankType()
     }
+  },
+  backRankType() {
+    this.totalRank.active = false
+    this.social.showRank()
   }
 });
