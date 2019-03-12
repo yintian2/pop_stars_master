@@ -94,28 +94,28 @@ cc.Class({
     this._isShow = false
   },
   // ---------------- 授权 ----------------
-  checkAuth() {
-    cc.log('检查用户授权')
-    wx.getSetting({
-      success: (res) => {
-        var authSetting = res.authSetting
-        if (authSetting['scope.userInfo'] === true) {
-          // 用户已授权，可以直接调用相关 API
-          cc.log('用户已经收授权')
-          let userInfo = wx.getStorageSync('userInfo').userInfo
-          //  cc.log('userInfo', userInfo)
-          // 添加头像和名字
-          this.onGetUserInfo(userInfo)
-        } else if (authSetting['scope.userInfo'] === false) {
-          // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
-          cc.log('用户拒绝收授权')
-        } else {
-          // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
-          cc.log('发起用户授权')
-        }
-      }
-    })
-  },
+  // checkAuth() {
+  //   cc.log('检查用户授权')
+  //   wx.getSetting({
+  //     success: (res) => {
+  //       var authSetting = res.authSetting
+  //       if (authSetting['scope.userInfo'] === true) {
+  //         // 用户已授权，可以直接调用相关 API
+  //         cc.log('用户已经收授权')
+  //         let userInfo = wx.getStorageSync('userInfo').userInfo
+  //         //  cc.log('userInfo', userInfo)
+  //         // 添加头像和名字
+  //         this.onGetUserInfo(userInfo)
+  //       } else if (authSetting['scope.userInfo'] === false) {
+  //         // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
+  //         cc.log('用户拒绝收授权')
+  //       } else {
+  //         // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
+  //         cc.log('发起用户授权')
+  //       }
+  //     }
+  //   })
+  // },
   createAuthButton() {
     let self = this
     this.getUserInfobutton = wx.createUserInfoButton({
@@ -151,9 +151,9 @@ cc.Class({
       }
     })
   },
-  onGetUserInfo(userInfo) {
-    // console.log('获取玩家授权', userInfo)
-  },
+  // onGetUserInfo(userInfo) {
+  //   // console.log('获取玩家授权', userInfo)
+  // },
   createImage(sprite, url) {
     let image = wx.createImage();
     image.onload = function () {

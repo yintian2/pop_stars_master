@@ -3535,7 +3535,7 @@
         "__id__": 106
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -3815,7 +3815,7 @@
       "__id__": 89
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
+    "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "观看视频可以加15步数",
@@ -3970,7 +3970,7 @@
       "__id__": 92
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
+    "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "重新开始",
@@ -4247,7 +4247,7 @@
       "__id__": 98
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
+    "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "查看全部排行榜",
@@ -4383,7 +4383,7 @@
       "__id__": 14
     },
     "component": "",
-    "_componentId": "",
+    "_componentId": "feefcb/VXtFp4L+Zqa6CrBZ",
     "handler": "switchRankType",
     "customEventData": ""
   },

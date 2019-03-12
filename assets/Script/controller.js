@@ -31,6 +31,7 @@ cc.Class({
     if (this.social.node.active) {
       this.social.hideRank()
     }
+    
   },
   switchRankType(){
     if (this.social.node.active) {
