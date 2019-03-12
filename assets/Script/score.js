@@ -92,7 +92,7 @@ cc.Class({
       }, cc.callFunc(() => {
         this.score += this.currentAddedScore
         if (this.score >= this.levelData[this.level - 1].score) {
-          this.score = this.score - this.levelData[this.level - 1].score
+          //this.score = this.score - this.levelData[this.level - 1].score
           this.level++
           this.onLevelUp()
         }

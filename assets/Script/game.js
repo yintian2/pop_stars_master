@@ -51,7 +51,7 @@ cc.Class({
       }
       setTimeout(() => {
         resolve('200 OK');
-      }, self._controller.config.json.startAnimationTime * num / 2/ (cc.game.getFrameRate() / 60))
+      }, self._controller.config.json.startAnimationTime * num / 2 / (cc.game.getFrameRate() / 60))
     })
   },
 
@@ -132,6 +132,11 @@ cc.Class({
     this._status = 3
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(4)
+    if (this._controller.social.node.active) {
+      // 仅上传分数
+      this._controller.social.onGameOver(this._score.score, this._score.level)
+      this._controller.social.showRank()
+    }
   },
   restart() {
     this._controller.pageMgr.onOpenPage(1)

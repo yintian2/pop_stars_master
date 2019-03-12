@@ -7,13 +7,15 @@
 cc.Class({
   extends: cc.Component,
   properties: {
-    display: cc.Node,
+    display: cc.Sprite,
     _isShow: false,
-    score: 0
+    // score: 0
   },
   init(c) {
     this._controller = c
     this.loadShareData()
+    this.display.node.width = window.width
+    this.display.node.height = window.height
   },
   // --------------- share ----------------
   loadShareData() {
@@ -37,7 +39,7 @@ cc.Class({
     //打开开放域
     this.score = score
     let highLevel = 0
-    let score = 0
+    let highScore = 0
     highLevel = wx.getStorageSync('highLevel')
     if (highLevel) {
       highLevel = parseInt(highLevel)
@@ -65,7 +67,7 @@ cc.Class({
     wx.setUserCloudStorage({
       KVDataList: kvDataList
     })
-    this.showRank()
+    //  this.showRank()
   },
   showRank() {
     wx.postMessage({

@@ -14,7 +14,9 @@ cc.Class({
   },
   start() {
     this.game.init(this)
-    // this.social.init(this)
+    if (this.social.node.active) {
+      this.social.init(this)
+    }
     this.musicMgr.init()
     this.lateStart()
   },
@@ -25,4 +27,14 @@ cc.Class({
     this.pageMgr.onOpenPage(1)
     this.game.gameStart()
   },
+  closeRank() {
+    if (this.social.node.active) {
+      this.social.hideRank()
+    }
+  },
+  switchRankType(){
+    if (this.social.node.active) {
+      this.social.switchRankType()
+    }
+  }
 });
