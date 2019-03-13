@@ -56,12 +56,13 @@ cc.Class({
     } else {
       highScore = score
     }
+    var highLevelName = this._controller.config.json.levelData[highLevel - 1].name
     wx.setStorageSync('highLevel', highLevel + '')
     wx.setStorageSync('highScore', highScore + '')
     var kvDataList = new Array()
     kvDataList.push({
       key: "highLevel",
-      value: highLevel + '',
+      value: highLevelName,
     }, {
       key: "highScore",
       value: highScore + '',

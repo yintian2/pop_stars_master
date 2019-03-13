@@ -141,7 +141,7 @@ cc.Class({
     this._controller.totalRank.active = false
     if (this._controller.social.node.active) {
       // 仅上传分数
-      this._controller.social.onGameOver(this._score.score, this._score.level)
+      this._controller.social.onGameOver(this._score.level,this._score.score)
     }
   },
   restart() {
