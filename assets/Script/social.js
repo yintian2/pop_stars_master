@@ -39,26 +39,26 @@ cc.Class({
     //上传分数
     //打开开放域
     this.score = score
-    let highLevel = 0
-    let highScore = 0
+    let highLevel = level
+    let highScore = score
     let self = this
-    highLevel = wx.getStorageSync('highLevel')
-    if (highLevel) {
-      highLevel = parseInt(highLevel)
-      highLevel = highLevel < level ? level : highLevel
-    } else {
-      highLevel = level
-    }
-    highScore = wx.getStorageSync('highScore')
-    if (highScore) {
-      highScore = parseInt(highScore)
-      highScore = highScore < score ? score : highScore
-    } else {
-      highScore = score
-    }
+    // highLevel = wx.getStorageSync('highLevel')
+    // if (highLevel) {
+    //   highLevel = parseInt(highLevel)
+    //   highLevel = highLevel < level ? level : highLevel
+    // } else {
+    //   highLevel = level
+    // }
+    // highScore = wx.getStorageSync('highScore')
+    // if (highScore) {
+    //   highScore = parseInt(highScore)
+    //   highScore = highScore < score ? score : highScore
+    // } else {
+    //   highScore = score
+    // }
     var highLevelName = this._controller.config.json.levelData[highLevel - 1].name
-    wx.setStorageSync('highLevel', highLevel + '')
-    wx.setStorageSync('highScore', highScore + '')
+    // wx.setStorageSync('highLevel', highLevel + '')
+    // wx.setStorageSync('highScore', highScore + '')
     var kvDataList = new Array()
     kvDataList.push({
       key: "highLevel",

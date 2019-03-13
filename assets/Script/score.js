@@ -22,7 +22,7 @@ cc.Class({
     this.chain = 1
     this.level = 1
     this.levelData = g._controller.config.json.levelData
-    this.progressBar.init(0, this.levelData[this.level - 1])
+    this.progressBar.init(0, this.levelData[this.level - 1], this.level)
     this.leftStepLabel.string = "剩余步数:" + this.leftStep
     this.scoreTimer = []
     this.currentAddedScore = 0
@@ -98,7 +98,7 @@ cc.Class({
             this.level++
             this.onLevelUp()
           }
-          this.progressBar.init(this.score, this.levelData[this.level - 1])
+          this.progressBar.init(this.score, this.levelData[this.level - 1], this.level)
           this.chain = 1
           this.currentAddedScore = 0
           this.mainScoreLabel.node.active = false
