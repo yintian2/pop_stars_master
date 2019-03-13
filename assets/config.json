@@ -20,59 +20,59 @@
     "step": 5
   }, {
     "name": "秀才",
-    "score": 2000,
+    "score": 3200,
     "step": 6
   }, {
     "name": "举人",
-    "score": 2800,
+    "score": 6000,
     "step": 7
   }, {
     "name": "进士",
-    "score": 3200,
+    "score": 9200,
     "step": 8
   }, {
     "name": "县令",
-    "score": 3600,
+    "score": 12800,
     "step": 9
   }, {
     "name": "知府",
-    "score": 4000,
+    "score": 16800,
     "step": 10
   }, {
     "name": "参将",
-    "score": 4400,
+    "score": 21200,
     "step": 11
   }, {
     "name": "御史",
-    "score": 4800,
+    "score": 26000,
     "step": 12
   }, {
     "name": "巡抚",
-    "score": 5200,
+    "score": 31200,
     "step": 13
   }, {
     "name": "提督",
-    "score": 5600,
+    "score": 36800,
     "step": 14
   }, {
     "name": "太师",
-    "score": 6000,
+    "score": 42800,
     "step": 15
   }, {
     "name": "大将军",
-    "score": 6400,
+    "score": 49200,
     "step": 16
   }, {
     "name": "宰相",
-    "score": 6800,
+    "score": 56000,
     "step": 17
   }, {
     "name": "王爷",
-    "score": 7200,
+    "score": 63200,
     "step": 18
   }, {
     "name": "皇帝",
-    "score": 8000,
+    "score": 70800,
     "step": 19
   }]
 }
