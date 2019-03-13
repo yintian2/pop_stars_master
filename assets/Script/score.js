@@ -23,7 +23,7 @@ cc.Class({
     this.level = 1
     this.levelData = g._controller.config.json.levelData
     this.progressBar.init(0, this.levelData[this.level - 1], this.level)
-    this.leftStepLabel.string = "剩余步数:" + this.leftStep
+    this.leftStepLabel.string = "步数:" + this.leftStep
     this.scoreTimer = []
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false
@@ -79,7 +79,7 @@ cc.Class({
       this.leftStep = 0
       this._game.gameOver()
     }
-    this.leftStepLabel.string = "剩余步数:" + this.leftStep
+    this.leftStepLabel.string = "步数:" + this.leftStep
   },
   addScore(pos) {
     // 一次消除可以叠chain
