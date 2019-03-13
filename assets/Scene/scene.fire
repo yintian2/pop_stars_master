@@ -50,8 +50,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.9701017545836634,
-      "y": 0.9701017545836634,
+      "x": 0.3607805472263868,
+      "y": 0.3607805472263868,
       "z": 1
     },
     "_quat": {
@@ -6142,7 +6142,7 @@
       "__id__": 49
     },
     "component": "",
-    "_componentId": "",
+    "_componentId": "72f7acBwR1I474pejqfLV0j",
     "handler": "onLevelUpButton",
     "customEventData": ""
   },
@@ -6202,7 +6202,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [
       {
