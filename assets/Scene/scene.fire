@@ -50,8 +50,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5278031643091565,
-      "y": 0.5278031643091565,
+      "x": 0.3575477886056972,
+      "y": 0.3575477886056972,
       "z": 1
     },
     "_quat": {
@@ -4654,7 +4654,7 @@
     },
     "component": "",
     "_componentId": "feefcb/VXtFp4L+Zqa6CrBZ",
-    "handler": "switchRankType",
+    "handler": "openRank",
     "customEventData": ""
   },
   {
@@ -4996,7 +4996,7 @@
     },
     "component": "",
     "_componentId": "feefcb/VXtFp4L+Zqa6CrBZ",
-    "handler": "backRankType",
+    "handler": "closeRank",
     "customEventData": ""
   },
   {

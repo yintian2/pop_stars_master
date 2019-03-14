@@ -42,23 +42,23 @@ cc.Class({
     let highLevel = level
     let highScore = score
     let self = this
-    // highLevel = wx.getStorageSync('highLevel')
-    // if (highLevel) {
-    //   highLevel = parseInt(highLevel)
-    //   highLevel = highLevel < level ? level : highLevel
-    // } else {
-    //   highLevel = level
-    // }
-    // highScore = wx.getStorageSync('highScore')
-    // if (highScore) {
-    //   highScore = parseInt(highScore)
-    //   highScore = highScore < score ? score : highScore
-    // } else {
-    //   highScore = score
-    // }
+    highLevel = wx.getStorageSync('highLevel')
+    if (highLevel) {
+      highLevel = parseInt(highLevel)
+      highLevel = highLevel < level ? level : highLevel
+    } else {
+      highLevel = level
+    }
+    highScore = wx.getStorageSync('highScore')
+    if (highScore) {
+      highScore = parseInt(highScore)
+      highScore = highScore < score ? score : highScore
+    } else {
+      highScore = score
+    }
     var highLevelName = this._controller.config.json.levelData[highLevel - 1].name
-    // wx.setStorageSync('highLevel', highLevel + '')
-    // wx.setStorageSync('highScore', highScore + '')
+    wx.setStorageSync('highLevel', highLevel + '')
+    wx.setStorageSync('highScore', highScore + '')
     var kvDataList = new Array()
     kvDataList.push({
       key: "highLevel",
@@ -70,7 +70,7 @@ cc.Class({
     wx.setUserCloudStorage({
       "KVDataList": kvDataList,
       success: () => {
-        self.showRank()
+       // self.showRank()
       },
       fail: (res) => {
         console.log(res)
@@ -79,83 +79,24 @@ cc.Class({
   },
   showRank() {
     wx.postMessage({
-      message: 'rankShow'
+      message: 'Show'
     })
+    this.display.node.active = true
     this._isShow = true
   },
-  switchRankType() {
-    wx.postMessage({
-      message: 'switchRank'
-    })
-    this._isShow = true
-  },
+  // switchRankType() {
+  //   wx.postMessage({
+  //     message: 'switchRank'
+  //   })
+  //   this._isShow = true
+  // },
   closeRank() {
+    this.display.node.active = false
     wx.postMessage({
-      message: 'rankHide'
+      message: 'Hide'
     })
     this._isShow = false
   },
-  // ---------------- 授权 ----------------
-  // checkAuth() {
-  //   cc.log('检查用户授权')
-  //   wx.getSetting({
-  //     success: (res) => {
-  //       var authSetting = res.authSetting
-  //       if (authSetting['scope.userInfo'] === true) {
-  //         // 用户已授权，可以直接调用相关 API
-  //         cc.log('用户已经收授权')
-  //         let userInfo = wx.getStorageSync('userInfo').userInfo
-  //         //  cc.log('userInfo', userInfo)
-  //         // 添加头像和名字
-  //         this.onGetUserInfo(userInfo)
-  //       } else if (authSetting['scope.userInfo'] === false) {
-  //         // 用户已拒绝授权，再调用相关 API 或者 wx.authorize 会失败，需要引导用户到设置页面打开授权开关
-  //         cc.log('用户拒绝收授权')
-  //       } else {
-  //         // 未询问过用户授权，调用相关 API 或者 wx.authorize 会弹窗询问用户
-  //         cc.log('发起用户授权')
-  //       }
-  //     }
-  //   })
-  // },
-  createAuthButton() {
-    let self = this
-    this.getUserInfobutton = wx.createUserInfoButton({
-      type: 'text',
-      text: '',
-      style: {
-        left: 0,
-        top: 0,
-        //width: this.windowWidth,
-        //height: this.windowHeight,
-        lineHeight: 600,
-        backgroundColor: '#FFFFFF00',
-        borderColor: '#FFFFFF',
-        color: '#FFFFFF',
-        textAlign: 'center',
-        fontSize: 40,
-        borderRadius: 4
-      }
-    })
-    this.getUserInfobutton.onTap((res) => {
-      // console.log('button res', res)
-      // 如果授权成功 就保存信息
-      if (res.userInfo) {
-        wx.setStorage({
-          key: 'userInfo',
-          data: {
-            userInfo: res.userInfo,
-          }
-        })
-        self.onGetUserInfo(res.userInfo)
-        this.getUserInfobutton.hide();
-        self._controller.toStartPage()
-      }
-    })
-  },
-  // onGetUserInfo(userInfo) {
-  //   // console.log('获取玩家授权', userInfo)
-  // },
   createImage(sprite, url) {
     let image = wx.createImage();
     image.onload = function () {

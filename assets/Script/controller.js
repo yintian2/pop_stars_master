@@ -35,14 +35,10 @@ cc.Class({
       this.social.hideRank()
     }
   },
-  switchRankType() {
+  openRank() {
     this.totalRank.active = true
     if (this.social.node.active) {
-      this.social.switchRankType()
+      this.social.showRank()
     }
   },
-  backRankType() {
-    this.totalRank.active = false
-    this.social.showRank()
-  }
 });

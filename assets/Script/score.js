@@ -77,7 +77,7 @@ cc.Class({
     this.leftStep += num
     if (this.leftStep < 0) {
       this.leftStep = 0
-      this._game.gameOver()
+      this.onGameOver()
     }
     this.leftStepLabel.string = "步数:" + this.leftStep
   },
@@ -146,4 +146,14 @@ cc.Class({
       }))
     }, 300);
   },
+  onGameOver() {
+    if (this._game._status != 3) {
+      this._game.gameOver()
+      // TODO:绑定分数和其他字
+      if (this._controller.social.node.active) {
+        // 仅上传分数
+        this._controller.social.onGameOver(this.level, this.score)
+      }
+    }
+  }
 });
