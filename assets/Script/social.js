@@ -87,6 +87,7 @@ cc.Class({
     wx.postMessage({
       message: 'switchRank'
     })
+    this._isShow = true
   },
   closeRank() {
     wx.postMessage({
