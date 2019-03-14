@@ -14,9 +14,11 @@ cc.Class({
   init(c) {
     this._controller = c
     this.loadShareData()
-    this.display.node.width = window.width
-    this.display.node.height = window.height
-    this.tex = new cc.Texture2D();
+   // this.display.node.width = window.width
+    //this.display.node.height = window.height
+    //this.display.node.getComponent(cc.WXSubContextView).enabled = false;
+
+    //   this.tex = new cc.Texture2D();
   },
   // --------------- share ----------------
   loadShareData() {
@@ -70,7 +72,7 @@ cc.Class({
     wx.setUserCloudStorage({
       "KVDataList": kvDataList,
       success: () => {
-       // self.showRank()
+        // self.showRank()
       },
       fail: (res) => {
         console.log(res)
@@ -107,18 +109,23 @@ cc.Class({
     };
     image.src = url;
   },
+  update(){
+    if(this._isShow){
+      this.display.node.getComponent(cc.WXSubContextView).update()
+    }
+  },
   // -------------- rank 刷新------------------
-  _updateSubDomainCanvas() {
-    if (!this.tex) {
-      return;
-    }
-    this.tex.initWithElement(sharedCanvas);
-    this.tex.handleLoadedTexture();
-    this.display.spriteFrame = new cc.SpriteFrame(this.tex);
-  },
-  update(dt) {
-    if (this._isShow) {
-      this._updateSubDomainCanvas();
-    }
-  },
+  // _updateSubDomainCanvas() {
+  //   if (!this.tex) {
+  //     return;
+  //   }
+  //   this.tex.initWithElement(sharedCanvas);
+  //   this.tex.handleLoadedTexture();
+  //   this.display.spriteFrame = new cc.SpriteFrame(this.tex);
+  // },
+  // update(dt) {
+  //   if (this._isShow == true) {
+  //     this._updateSubDomainCanvas();
+  //   }
+  // },
 });

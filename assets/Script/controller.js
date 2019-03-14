@@ -32,7 +32,7 @@ cc.Class({
   closeRank() {
     this.totalRank.active = false
     if (this.social.node.active) {
-      this.social.hideRank()
+      this.social.closeRank()
     }
   },
   openRank() {
