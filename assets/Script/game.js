@@ -75,7 +75,6 @@ cc.Class({
     let self = this
     this._status = 4
     let canFall = 0
-    //算法 
     //从每一列的最下面一个开始往上判断
     //如果有空 就判断有几个空 然后让最上方的方块掉落下来
     for (let j = this.rowNum - 1; j >= 0; j--) {

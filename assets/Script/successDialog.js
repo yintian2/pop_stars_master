@@ -14,12 +14,7 @@ cc.Class({
     this.spriteNow.spriteFrame = s.avatarSpriteArr[(level - 1) % 3]
     this.nameLabelBefore.string = data[level - 2].name
     this.nameLabelNow.string = data[level - 1].name
-    this.stepLabel.string = "步数+" + data[level - 2].step
+    this.stepLabel.string = "奖励步数+" + data[level - 2].step
   },
-
-  start() {
-
-  },
-
   // update (dt) {},
 });

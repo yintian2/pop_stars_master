@@ -17,7 +17,6 @@ cc.Class({
    // this.display.node.width = window.width
     //this.display.node.height = window.height
     //this.display.node.getComponent(cc.WXSubContextView).enabled = false;
-
     //   this.tex = new cc.Texture2D();
   },
   // --------------- share ----------------
@@ -26,7 +25,7 @@ cc.Class({
     wx.onShareAppMessage(function () {
       return {
         title: "这是分享信息这是分享信息",
-        imageUrl: 'http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=%E6%BB%91%E7%A8%BD&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2007851869,1311401458&os=2671889377,806813320&simid=3533123488,461696453&pn=11&rn=1&di=30645040800&ln=1881&fr=&fmq=1546669212501_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fimg.dongman.fm%2Fpublic%2F9022d95f1ab7f832bdc02a3d0055f59e.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined'
+        imageUrl: ''
       }
     })
   },

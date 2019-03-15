@@ -1,6 +1,6 @@
 /**
  * @author uu
- * @file 主控制器
+ * @file 开始页面控制
  */
 cc.Class({
   extends: cc.Component,

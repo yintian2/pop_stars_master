@@ -74,7 +74,6 @@ cc.Class({
       this._game.checkNeedGenerator()
     }, this))
     this.node.runAction(seq)
-
   },
   playStartAction() {
     this._status = 0
