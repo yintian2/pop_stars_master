@@ -60,6 +60,7 @@ cc.Class({
     var highLevelName = this._controller.config.json.levelData[highLevel - 1].name
     wx.setStorageSync('highLevel', highLevel + '')
     wx.setStorageSync('highScore', highScore + '')
+    self._controller.scoreMgr.failHighScore.string = "您的最高分:" + (highScore + '')
     var kvDataList = new Array()
     kvDataList.push({
       key: "highLevel",
@@ -71,8 +72,7 @@ cc.Class({
     wx.setUserCloudStorage({
       "KVDataList": kvDataList,
       success: () => {
-        // self.showRank()
-        self._controller.scoreMgr.failHighScore.string = "您的最高分:"+(highScore)
+        //  self.showRank()
       },
       fail: (res) => {
         console.log(res)
