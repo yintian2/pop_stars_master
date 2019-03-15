@@ -10,6 +10,7 @@ cc.Class({
     scoreParticlePrefab: cc.Prefab,
     mainScoreLabel: cc.Label,
     successDialog: require('successDialog'),
+    failDialog: cc.Node,
     avatarSpriteArr: [cc.SpriteFrame],
     // progressBar: require('progress'),
     // leftStepLabel: cc.Label,
@@ -70,6 +71,11 @@ cc.Class({
     this.leftStepLabel = this.node.getChildByName('UI').getChildByName('leftStepNode').getChildByName('Label').getComponent(cc.Label)
     this.progressBar = this.node.getChildByName('UI').getChildByName('scoreNode').getChildByName('progressBar').getComponent('progress')
     this.scoreContainer = this.node.getChildByName('UI').getChildByName('scoreGroup')
+
+    // 失败时更新失败UI
+    this.failScore = this.failDialog.getChildByName('info').getChildByName('score').getComponent(cc.Label)
+    this.failName = this.failDialog.getChildByName('info').getChildByName('level').getComponent(cc.Label)
+    this.failHighScore = this.failDialog.getChildByName('info').getChildByName('highScore').getComponent(cc.Label)
   },
   //--------------------- 分数控制 ---------------------
 
@@ -79,7 +85,7 @@ cc.Class({
       this.leftStep = 0
       this.onGameOver()
     }
-    this.leftStepLabel.string =  this.leftStep
+    this.leftStepLabel.string = this.leftStep
   },
   addScore(pos) {
     // 一次消除可以叠chain
@@ -150,10 +156,16 @@ cc.Class({
     if (this._game._status != 3) {
       this._game.gameOver()
       // TODO:绑定分数和其他字
+      this.updateFailPage()
       if (this._controller.social.node.active) {
         // 仅上传分数
         this._controller.social.onGameOver(this.level, this.score)
       }
     }
+  },
+  updateFailPage() {
+    this.failScore.string = "当前得分:" + (this.score + '')
+    this.failName.string = this.levelData[this.level - 1] - 1
+    this.failHighScore.string = "正在获取您的最高分..."
   }
 });

@@ -14,7 +14,7 @@ cc.Class({
   init(c) {
     this._controller = c
     this.loadShareData()
-   // this.display.node.width = window.width
+    // this.display.node.width = window.width
     //this.display.node.height = window.height
     //this.display.node.getComponent(cc.WXSubContextView).enabled = false;
     //   this.tex = new cc.Texture2D();
@@ -72,6 +72,7 @@ cc.Class({
       "KVDataList": kvDataList,
       success: () => {
         // self.showRank()
+        self._controller.scoreMgr.failHighScore.string = "您的最高分:"+(highScore)
       },
       fail: (res) => {
         console.log(res)
@@ -108,8 +109,8 @@ cc.Class({
     };
     image.src = url;
   },
-  update(){
-    if(this._isShow){
+  update() {
+    if (this._isShow) {
       this.display.node.getComponent(cc.WXSubContextView).update()
     }
   },

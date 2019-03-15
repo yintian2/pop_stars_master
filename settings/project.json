@@ -8,7 +8,6 @@
   "design-resolution-width": 960,
   "excluded-modules": [
     "Dynamic Atlas",
-    "LabelOutline",
     "Mask",
     "Graphics",
     "TiledMap",
@@ -52,6 +51,5 @@
     "width": 960
   },
   "use-customize-simulator": false,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }
