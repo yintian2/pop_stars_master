@@ -78,7 +78,7 @@ cc.Class({
     this.failHighScore = this.failDialog.getChildByName('info').getChildByName('highScore').getComponent(cc.Label)
   },
   //--------------------- 分数控制 ---------------------
-
+  // 增加 减少步数并且刷新UI
   onStep(num) {
     this.leftStep += num
     if (this.leftStep < 0) {
@@ -87,6 +87,7 @@ cc.Class({
     }
     this.leftStepLabel.string = this.leftStep
   },
+  //增加分数总控制 获取连击
   addScore(pos) {
     // 一次消除可以叠chain
     if (this.chainTimer) {
@@ -102,7 +103,7 @@ cc.Class({
           if (this.score >= this.levelData[this.level - 1].score) {
             //this.score = this.score - this.levelData[this.level - 1].score
             this.level++
-            this.onLevelUp()
+            this.level == 15 ? this.levelLimet() : this.onLevelUp()
           }
           this.progressBar.init(this.score, this.levelData[this.level - 1], this.level)
           this.chain = 1
@@ -135,6 +136,10 @@ cc.Class({
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this._game._status = 2
   },
+  levelLimet() {
+    console.log('等级达到上限')
+    
+  },
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
@@ -148,7 +153,6 @@ cc.Class({
         this._game._status = 1
         this.mainScoreLabel.node.active = false
         this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1) % 3]
-        cc.log('升级啦')
       }))
     }, 300);
   },

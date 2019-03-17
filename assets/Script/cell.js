@@ -6,6 +6,7 @@ cc.Class({
   extends: cc.Component,
   properties: {
     _status: 0, //1为可触发点击 2为已经消失
+    _itemType:0,//TODO:新增道具功能 1为双倍倍数 2为炸弹
   },
   init(g, data, width) {
     this._game = g
