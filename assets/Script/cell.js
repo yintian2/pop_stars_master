@@ -6,7 +6,7 @@ cc.Class({
   extends: cc.Component,
   properties: {
     _status: 0, //1为可触发点击 2为已经消失
-    _itemType:0,//TODO:新增道具功能 1为双倍倍数 2为炸弹
+    _itemType: 0, //TODO:新增道具功能 1为双倍倍数 2为炸弹
   },
   init(g, data, width) {
     this._game = g
@@ -27,7 +27,9 @@ cc.Class({
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouched, this)
     this.getComponent(cc.Sprite).spriteFrame = this._game.blockSprite[this.color - 1]
   },
-  onTouched(color) {
+  onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
+    isChain = isChain ? isChain : true
+    isBomb = isBomb ? isBomb : false
     if (color.type) {
       console.log('方块位置', this.iid, this.jid)
       this._game._score.onStep(-1)
