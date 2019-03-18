@@ -12,14 +12,14 @@ cc.Class({
   start() {
     this.bindNode()
     this.generatePool()
-    this.rowNum = c.config.json.rowNum
-    this.gap = c.config.json.gap
-    this.animationSpeed = c.config.json.gap
-    this.blockWidth = (730 - (this.rowNum + 1) * this.gap) / this.rowNum
   },
   init(c) {
     this._controller = c
     this._score = c.scoreMgr
+    this.rowNum = c.config.json.rowNum
+    this.gap = c.config.json.gap
+    this.animationSpeed = c.config.json.gap
+    this.blockWidth = (730 - (this.rowNum + 1) * this.gap) / this.rowNum
   },
   // 动态获取需要动态控制的组件
   bindNode() {
@@ -76,7 +76,23 @@ cc.Class({
   generatePropItem(type) {
     return new Promise((resolve, reject) => {
       // 是否做道具生成动画
+      this.instantiateBlock(this, {
+        x: this.target.jid,
+        y: this.target.iid,
+        width: this.blockWidth,
+        startTime: null
+      }, this.blocksContainer, type)
     })
+  },
+  checkGenerateProp(chain) {
+    // 判断chain的大小查看是否能生成道具
+    let propData = this._controller.config.json.propConfig
+    for (let i = 0; i < propData.length; i++) {
+      if (chain < propData[i].min && chain > propData[i].max) {
+        this.generatePropItem(propData[i].type)
+        return
+      }
+    }
   },
   //方块下落
   onFall() {
