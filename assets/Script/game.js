@@ -9,15 +9,17 @@ cc.Class({
     blockPrefab: cc.Prefab,
     blockSprite: [cc.SpriteFrame] //todo: 换成动态生成
   },
-  init(c) {
-    this._controller = c
+  start() {
     this.bindNode()
     this.generatePool()
-    this._score = c.scoreMgr
     this.rowNum = c.config.json.rowNum
     this.gap = c.config.json.gap
     this.animationSpeed = c.config.json.gap
     this.blockWidth = (730 - (this.rowNum + 1) * this.gap) / this.rowNum
+  },
+  init(c) {
+    this._controller = c
+    this._score = c.scoreMgr
   },
   // 动态获取需要动态控制的组件
   bindNode() {
@@ -46,7 +48,7 @@ cc.Class({
             y: i,
             width: self.blockWidth,
             startTime: (i + j + 1) * self._controller.config.json.startAnimationTime / num * 2
-          }, self.blocksContainer)
+          }, self.blocksContainer, 0)
         }
       }
       setTimeout(() => {
@@ -69,6 +71,12 @@ cc.Class({
       }, 250 / 1
       // (cc.game.getFrameRate() / 60)
     )
+  },
+  // 生成道具 type 1为双倍倍数 2为炸弹
+  generatePropItem(type) {
+    return new Promise((resolve, reject) => {
+      // 是否做道具生成动画
+    })
   },
   //方块下落
   onFall() {
@@ -127,7 +135,7 @@ cc.Class({
             y: i,
             width: this.blockWidth,
             startTime: null
-          }, this.blocksContainer)
+          }, this.blocksContainer, 0)
         }
       }
     }
@@ -144,7 +152,13 @@ cc.Class({
       this.gameStart()
     })
   },
-
+  onUserTouched(iid, jid, itemType) {
+    this.target = {
+      i: iid,
+      j: jid,
+      itemType: itemType
+    }
+  },
   //--------------------- 预制体实例化---------------------
   // 生成对象池
   generatePool() {
@@ -155,7 +169,8 @@ cc.Class({
     }
   },
   // 实例化单个方块
-  instantiateBlock(self, data, parent) {
+  instantiateBlock(self, data, parent, itemType) {
+    itemType = itemType ? itemType : 0
     let block = null
     if (self.blockPool && self.blockPool.size() > 0) {
       block = self.blockPool.get()
@@ -166,7 +181,7 @@ cc.Class({
     block.scale = 1
     block.x = 0
     block.y = 0
-    block.getComponent('cell').init(self, data, this.blockWidth)
+    block.getComponent('cell').init(self, data, this.blockWidth, itemType)
     return block
   },
   // 回收所有节点

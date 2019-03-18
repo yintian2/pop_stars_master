@@ -8,8 +8,9 @@ cc.Class({
     _status: 0, //1为可触发点击 2为已经消失
     _itemType: 0, //TODO:新增道具功能 1为双倍倍数 2为炸弹
   },
-  init(g, data, width) {
+  init(g, data, width, itemType) {
     this._game = g
+    this._itemType = itemType || 0
     this._controller = g._controller
     // 计算宽
     this.node.width = this.node.height = width
@@ -30,41 +31,52 @@ cc.Class({
   onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
     isChain = isChain ? isChain : true
     isBomb = isBomb ? isBomb : false
+    if (isBomb == true) {
+      this.playDieAction().then(() => {
+        this.onBlockPop(color, isChain, isBomb)
+      })
+    }
     if (color.type) {
-      console.log('方块位置', this.iid, this.jid)
+      // 一定是用户主动触发 保存这个坐标给game
+      console.log('方块位置', this.iid, this.jid, this._itemType)
+      this._game.onUserTouched(this.iid, this.jid, this._itemType)
       this._game._score.onStep(-1)
       color = this.color
       if (this._status == 1 && this._game._status == 1 && this.color == color) {
         this.playDieAction().then(() => {
-          this.onBlockPop(color)
+          this.onBlockPop(color, null, null)
         })
       }
     } else {
+      // 其他方块触发
       if (this._status == 1 && this._game._status == 5 && this.color == color) {
         this.playDieAction().then(() => {
-          this.onBlockPop(color)
+          this.onBlockPop(color, null, null)
         })
       }
     }
-
   },
-  onBlockPop(color) {
+  onBlockPop(color, isChain, isBomb) {
     let self = this
+    isChain = isChain ? isChain : true
+    isBomb = isBomb ? isBomb : false
     self._game.checkNeedFall()
     self._game._status = 5
     self._controller.musicMgr.onPlayAudio(self._game._score.chain - 1)
     self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
-    if (self.iid - 1 >= 0) {
-      self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
-    }
-    if (self.iid + 1 < this._game.rowNum) {
-      self._game.map[self.iid + 1][self.jid].getComponent('cell').onTouched(color)
-    }
-    if (self.jid - 1 >= 0) {
-      self._game.map[self.iid][self.jid - 1].getComponent('cell').onTouched(color)
-    }
-    if (self.jid + 1 < this._game.rowNum) {
-      self._game.map[self.iid][self.jid + 1].getComponent('cell').onTouched(color)
+    if (!isBomb && isChain) {
+      if (self.iid - 1 >= 0) {
+        self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
+      }
+      if (self.iid + 1 < this._game.rowNum) {
+        self._game.map[self.iid + 1][self.jid].getComponent('cell').onTouched(color)
+      }
+      if (self.jid - 1 >= 0) {
+        self._game.map[self.iid][self.jid - 1].getComponent('cell').onTouched(color)
+      }
+      if (self.jid + 1 < this._game.rowNum) {
+        self._game.map[self.iid][self.jid + 1].getComponent('cell').onTouched(color)
+      }
     }
   },
   playFallAction(y, data) { //下降了几个格子
