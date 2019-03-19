@@ -121,5 +121,8 @@ cc.Class({
       }, this))
       self.node.runAction(seq)
     });
-  }
+  },
+  generateItem(type) {
+    this._itemType = type
+  },
 });

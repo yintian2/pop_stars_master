@@ -73,23 +73,26 @@ cc.Class({
     )
   },
   // 生成道具 type 1为双倍倍数 2为炸弹
-  generatePropItem(type) {
-    return new Promise((resolve, reject) => {
-      // 是否做道具生成动画
-      this.instantiateBlock(this, {
-        x: this.target.jid,
-        y: this.target.iid,
-        width: this.blockWidth,
-        startTime: null
-      }, this.blocksContainer, type)
-    })
-  },
+  // generatePropItem(type) {
+  //   return new Promise((resolve, reject) => {
+  //     // 是否做道具生成动画
+  //     this.checkNeedFall()
+  //     this.instantiateBlock(this, {
+  //       x: this.target.jid,
+  //       y: this.target.iid,
+  //       width: this.blockWidth,
+  //       startTime: null
+  //     }, this.blocksContainer, type)
+  //   })
+  // },
   checkGenerateProp(chain) {
+    chain--
     // 判断chain的大小查看是否能生成道具
     let propData = this._controller.config.json.propConfig
     for (let i = 0; i < propData.length; i++) {
-      if (chain < propData[i].min && chain > propData[i].max) {
-        this.generatePropItem(propData[i].type)
+      if (chain <= propData[i].max && chain >= propData[i].min) {
+        // this.generatePropItem(propData[i].type)
+        this.map[this.target.i][this.target.j].getComponent('cell').generateItem(propData[i].type)
         return
       }
     }
