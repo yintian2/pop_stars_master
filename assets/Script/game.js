@@ -7,7 +7,8 @@ cc.Class({
   properties: {
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
-    blockSprite: [cc.SpriteFrame] //todo: 换成动态生成
+    blockSprite: [cc.SpriteFrame], //todo: 换成动态生成
+    propSpriteFrame:[cc.SpriteFrame]
   },
   start() {
     this.bindNode()
@@ -76,28 +77,28 @@ cc.Class({
   generatePropItem(type) {
     return new Promise((resolve, reject) => {
       // 是否做道具生成动画
-      this.map[this.target.j][this.target.i]=this.instantiateBlock(this, {
+      this.map[this.target.i][this.target.j] = this.instantiateBlock(this, {
         x: this.target.j,
         y: this.target.i,
         width: this.blockWidth,
         startTime: null
       }, this.blocksContainer, type)
-      setTimeout(()=>{
+      setTimeout(() => {
         resolve()
-      },100)
+      }, 100)
     })
   },
   checkGenerateProp(chain) {
     return new Promise((resolve, reject) => {
       chain--
-    //  console.log(chain)
+      //  console.log(chain)
       // 判断chain的大小查看是否能生成道具
       let propData = this._controller.config.json.propConfig
       for (let i = 0; i < propData.length; i++) {
         if (chain <= propData[i].max && chain >= propData[i].min) {
-           this.generatePropItem(propData[i].type).then(()=>{
-             resolve()
-           })
+          this.generatePropItem(propData[i].type).then(() => {
+            resolve()
+          })
           //this.map[this.target.i][this.target.j].getComponent('cell').generateItem(propData[i].type)
         }
       }
@@ -198,7 +199,11 @@ cc.Class({
   },
   // 实例化单个方块
   instantiateBlock(self, data, parent, itemType) {
+
     itemType = itemType ? itemType : 0
+    if (itemType != 0) {
+      console.log("道具节点数据", data, itemType)
+    }
     let block = null
     if (self.blockPool && self.blockPool.size() > 0) {
       block = self.blockPool.get()
@@ -218,7 +223,7 @@ cc.Class({
       let children = this.blocksContainer.children
       if (children.length != 0) {
         let length = children.length
-     //   console.log(length)
+        //   console.log(length)
         for (let i = 0; i < length; i++) {
           this.blockPool.put(children[0])
         }
