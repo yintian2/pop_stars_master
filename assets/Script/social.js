@@ -75,7 +75,7 @@ cc.Class({
         //  self.showRank()
       },
       fail: (res) => {
-        console.log(res)
+     //   console.log(res)
       }
     })
   },

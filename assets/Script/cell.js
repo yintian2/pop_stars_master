@@ -31,6 +31,9 @@ cc.Class({
   onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
     isChain = isChain ? isChain : true
     isBomb = isBomb ? isBomb : false
+    if(this._itemType!=0){
+      console.log(this._itemType)
+    }
     if (isBomb == true) {
       this.playDieAction().then(() => {
         this.onBlockPop(color, isChain, isBomb)
