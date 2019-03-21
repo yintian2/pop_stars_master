@@ -18,7 +18,7 @@ cc.Class({
   init(current, data, level) {
     if (level <= 16) {
       this.limitNode.active = false
-      this.limitNode.active = true
+      this.usualNode.active = true
       this.maxLabel.string = data.score
       this.currentLabel.string = current
       this.nameLabel.string = data.name
@@ -26,7 +26,7 @@ cc.Class({
       this.levelLabel.string = "lv" + (level + '')
     } else {
       this.limitNode.active = true
-      this.limitNode.active = false
+      this.usualNode.active = false
       this.limitScore.string = current
       this.progress.progress = 1
     }
