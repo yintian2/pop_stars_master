@@ -102,9 +102,8 @@ cc.Class({
         }, cc.callFunc(() => {
           this.score += this.currentAddedScore * this.multiple
           if (this.score >= this.levelData[this.level - 1].score) {
-            //this.score = this.score - this.levelData[this.level - 1].score
             this.level++
-            this.level == 15 ? this.levelLimet() : this.onLevelUp()
+            this.level > (this.levelData.length + 1) ? this.levelLimit() : this.onLevelUp()
           }
           this.progressBar.init(this.score, this.levelData[this.level - 1], this.level)
           this.chain = 1
@@ -153,8 +152,8 @@ cc.Class({
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this._game._status = 2
   },
-  levelLimet() {
-    //   console.log('等级达到上限')
+  levelLimit() {
+    console.log('等级达到上限')
 
   },
   onLevelUpButton() {

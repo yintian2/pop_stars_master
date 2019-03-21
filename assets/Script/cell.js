@@ -23,7 +23,7 @@ cc.Class({
     // console.log('生成方块位置', data.y, data.x)
     this.node.x = -(730 / 2 - g.gap - width / 2) + data.x * (width + g.gap)
     this.node.y = (730 / 2 - g.gap - width / 2) - data.y * (width + g.gap)
-    this.color = Math.ceil(Math.random() * 4)
+    this.color = data.color || Math.ceil(Math.random() * 4)
     this.bindEvent()
     this.playStartAction()
   },
@@ -44,7 +44,7 @@ cc.Class({
     if (color.type) {
       // 一定是用户主动触发 保存这个坐标给game
       console.log('方块位置', this.iid, this.jid, this._itemType)
-      this._game.onUserTouched(this.iid, this.jid, this._itemType)
+      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color)
       this._game._score.onStep(-1)
       color = this.color
       if (this._status == 1 && this._game._status == 1 && this.color == color) {

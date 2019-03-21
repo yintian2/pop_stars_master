@@ -2,22 +2,34 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
+    usualNode: cc.Node,
     currentLabel: cc.Label,
     maxLabel: cc.Label,
     progress: cc.ProgressBar,
     nameLabel: cc.Label,
     levelLabel: cc.Label,
+    limitNode: cc.Node,
+    limitScore: cc.Label
   },
 
   // LIFE-CYCLE CALLBACKS:
 
   // onLoad () {},
   init(current, data, level) {
-    this.currentLabel.string = current // + '/' + max
-    this.maxLabel.string = data.score
-    this.nameLabel.string = data.name
-    this.progress.progress = current / data.score
-    this.levelLabel.string = "lv" + (level + '')
+    if (level <= 16) {
+      this.limitNode.active = false
+      this.limitNode.active = true
+      this.maxLabel.string = data.score
+      this.currentLabel.string = current
+      this.nameLabel.string = data.name
+      this.progress.progress = current / data.score
+      this.levelLabel.string = "lv" + (level + '')
+    } else {
+      this.limitNode.active = true
+      this.limitNode.active = false
+      this.limitScore.string = current
+    }
+
   }
 
   // update (dt) {},

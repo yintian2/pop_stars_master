@@ -148,10 +148,11 @@ cc.Class({
       this.gameStart()
     })
   },
-  onUserTouched(iid, jid, itemType) {
+  onUserTouched(iid, jid, itemType, color) {
     this.target = {
       i: iid,
       j: jid,
+      color: color,
       itemType: itemType
     }
   },
@@ -163,12 +164,13 @@ cc.Class({
       this.map[this.target.i][this.target.j] = this.instantiateBlock(this, {
         x: this.target.j,
         y: this.target.i,
+        color: this.target.color,
         width: this.blockWidth,
         startTime: null
       }, this.blocksContainer, type)
       setTimeout(() => {
         resolve()
-      }, 100)
+      }, 300)
     })
   },
   checkGenerateProp(chain) {
@@ -225,7 +227,6 @@ cc.Class({
   },
   // 实例化单个方块
   instantiateBlock(self, data, parent, itemType) {
-
     itemType = itemType ? itemType : 0
     if (itemType != 0) {
       console.log("道具节点数据", data, itemType)
