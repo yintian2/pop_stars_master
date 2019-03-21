@@ -23,7 +23,7 @@ cc.Class({
     // console.log('生成方块位置', data.y, data.x)
     this.node.x = -(730 / 2 - g.gap - width / 2) + data.x * (width + g.gap)
     this.node.y = (730 / 2 - g.gap - width / 2) - data.y * (width + g.gap)
-    this.color = Math.ceil(Math.random() * 4)
+    this.color = data.color || Math.ceil(Math.random() * 4)
     this.bindEvent()
     this.playStartAction()
   },
@@ -31,21 +31,20 @@ cc.Class({
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouched, this)
     this.getComponent(cc.Sprite).spriteFrame = this._game.blockSprite[this.color - 1]
   },
+  // 用户点击 或者被其他方块触发
   onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
     isChain = isChain ? isChain : true
     isBomb = isBomb ? isBomb : false
-    if (this._itemType != 0) {
-      console.log(this._itemType)
-    }
-    if (isBomb == true) {
+    if (this._status == 1 && isBomb == true) {
       this.playDieAction().then(() => {
         this.onBlockPop(color, isChain, isBomb)
       })
+      return
     }
     if (color.type) {
       // 一定是用户主动触发 保存这个坐标给game
       console.log('方块位置', this.iid, this.jid, this._itemType)
-      this._game.onUserTouched(this.iid, this.jid, this._itemType)
+      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color)
       this._game._score.onStep(-1)
       color = this.color
       if (this._status == 1 && this._game._status == 1 && this.color == color) {
@@ -70,7 +69,12 @@ cc.Class({
     self._game._status = 5
     self._controller.musicMgr.onPlayAudio(self._game._score.chain - 1)
     self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
-    if (!isBomb && isChain) {
+    if (this._itemType != 0) {
+      console.log("触发了道具", this._itemType)
+      self._game.onItem(this._itemType, color)
+    }
+    // 连锁状态
+    if (isChain) {
       if (self.iid - 1 >= 0) {
         self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
       }
