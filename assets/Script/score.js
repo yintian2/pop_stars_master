@@ -22,6 +22,7 @@ cc.Class({
     this.leftStep = this._controller.config.json.originStep
     this.chain = 1
     this.level = 1
+    this.closeMultLabel()
     this.levelData = g._controller.config.json.levelData
     this.progressBar.init(0, this.levelData[this.level - 1], this.level)
     this.leftStepLabel.string = this.leftStep
@@ -71,7 +72,7 @@ cc.Class({
     this.leftStepLabel = this.node.getChildByName('UI').getChildByName('leftStepNode').getChildByName('Label').getComponent(cc.Label)
     this.progressBar = this.node.getChildByName('UI').getChildByName('scoreNode').getChildByName('progressBar').getComponent('progress')
     this.scoreContainer = this.node.getChildByName('UI').getChildByName('scoreGroup')
-
+    this.multLabel = this.mainScoreLabel.node.getChildByName('mult').getComponent(cc.Label)
     // 失败时更新失败UI
     this.failScore = this.failDialog.getChildByName('info').getChildByName('score').getComponent(cc.Label)
     this.failName = this.failDialog.getChildByName('info').getChildByName('level').getComponent(cc.Label)
@@ -99,7 +100,7 @@ cc.Class({
           x: -60,
           y: 355
         }, cc.callFunc(() => {
-          this.score += this.currentAddedScore
+          this.score += this.currentAddedScore * this.multiple
           if (this.score >= this.levelData[this.level - 1].score) {
             //this.score = this.score - this.levelData[this.level - 1].score
             this.level++
@@ -107,6 +108,7 @@ cc.Class({
           }
           this.progressBar.init(this.score, this.levelData[this.level - 1], this.level)
           this.chain = 1
+          this.closeMultLabel()
           this.currentAddedScore = 0
           this.mainScoreLabel.node.active = false
         }, this))
@@ -118,6 +120,21 @@ cc.Class({
     this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
     this.chain++
   },
+  addMult() {
+    if (this.multiple < this._controller.config.json.maxMultiple) {
+      this.multiple *= 2
+      this.showMultLabel()
+    }
+  },
+  closeMultLabel() {
+    this.multiple = 1
+    this.multLabel.node.active = false
+  },
+  showMultLabel() {
+    this.multLabel.string = this.multiple
+    this.multLabel.node.active = true
+  },
+  // 增加分数倍数
   initCurrentScoreLabel() {
     this.mainScoreLabel.node.active = true
     this.mainScoreLabel.node.x = 0
@@ -137,7 +154,7 @@ cc.Class({
     this._game._status = 2
   },
   levelLimet() {
- //   console.log('等级达到上限')
+    //   console.log('等级达到上限')
 
   },
   onLevelUpButton() {

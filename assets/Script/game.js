@@ -8,7 +8,7 @@ cc.Class({
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
     blockSprite: [cc.SpriteFrame], //todo: 换成动态生成
-    propSpriteFrame:[cc.SpriteFrame]
+    propSpriteFrame: [cc.SpriteFrame]
   },
   start() {
     this.bindNode()
@@ -59,7 +59,6 @@ cc.Class({
       )
     })
   },
-
   //防抖动 判断是否需要检测下落
   checkNeedFall() {
     if (this.checkNeedFallTimer) {
@@ -72,38 +71,6 @@ cc.Class({
       }, 250 / 1
       // (cc.game.getFrameRate() / 60)
     )
-  },
-  // 生成道具 type 1为双倍倍数 2为炸弹
-  generatePropItem(type) {
-    return new Promise((resolve, reject) => {
-      // 是否做道具生成动画
-      this.map[this.target.i][this.target.j] = this.instantiateBlock(this, {
-        x: this.target.j,
-        y: this.target.i,
-        width: this.blockWidth,
-        startTime: null
-      }, this.blocksContainer, type)
-      setTimeout(() => {
-        resolve()
-      }, 100)
-    })
-  },
-  checkGenerateProp(chain) {
-    return new Promise((resolve, reject) => {
-      chain--
-      //  console.log(chain)
-      // 判断chain的大小查看是否能生成道具
-      let propData = this._controller.config.json.propConfig
-      for (let i = 0; i < propData.length; i++) {
-        if (chain <= propData[i].max && chain >= propData[i].min) {
-          this.generatePropItem(propData[i].type).then(() => {
-            resolve()
-          })
-          //this.map[this.target.i][this.target.j].getComponent('cell').generateItem(propData[i].type)
-        }
-      }
-      resolve()
-    })
   },
   //方块下落
   onFall() {
@@ -186,6 +153,65 @@ cc.Class({
       i: iid,
       j: jid,
       itemType: itemType
+    }
+  },
+  // -----------------道具相关---------------
+  // 生成道具 type 1为双倍倍数 2为炸弹
+  generatePropItem(type) {
+    return new Promise((resolve, reject) => {
+      // 是否做道具生成动画
+      this.map[this.target.i][this.target.j] = this.instantiateBlock(this, {
+        x: this.target.j,
+        y: this.target.i,
+        width: this.blockWidth,
+        startTime: null
+      }, this.blocksContainer, type)
+      setTimeout(() => {
+        resolve()
+      }, 100)
+    })
+  },
+  checkGenerateProp(chain) {
+    return new Promise((resolve, reject) => {
+      chain--
+      // 判断当前是否是炸弹状态 如果是则把状态还原
+      if (this.isPropChain) {
+        this.isPropChain = false
+        resolve()
+        return
+      }
+      //  console.log(chain)
+      // 判断chain的大小查看是否能生成道具
+      let propData = this._controller.config.json.propConfig
+      for (let i = 0; i < propData.length; i++) {
+        if (chain <= propData[i].max && chain >= propData[i].min) {
+          this.generatePropItem(propData[i].type).then(() => {
+            resolve()
+            return
+          })
+          //this.map[this.target.i][this.target.j].getComponent('cell').generateItem(propData[i].type)
+        }
+      }
+      resolve()
+    })
+  },
+  onItem(type, color) {
+    switch (type) {
+      case 1:
+        // 分数翻倍 最高八倍
+        this._score.addMult()
+        break
+      case 2:
+        // 炸弹 消除同种颜色的
+        this.isPropChain = true
+        for (let i = 0; i < this.rowNum; i++) { //行
+          for (let j = 0; j < this.rowNum; j++) { //列
+            if (this.map[i][j] && this.map[i][j].getComponent('cell').color == color) {
+              this.map[i][j].getComponent('cell').onTouched(color, false, true)
+            }
+          }
+        }
+        break
     }
   },
   //--------------------- 预制体实例化---------------------
