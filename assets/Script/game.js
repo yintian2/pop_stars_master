@@ -2,6 +2,7 @@
  * @author uu
  * @file 游戏控制
  */
+var AC = require('action')
 cc.Class({
   extends: cc.Component,
   properties: {
@@ -205,6 +206,7 @@ cc.Class({
         break
       case 2:
         // 炸弹 消除同种颜色的
+        this.blocksContainer.runAction(AC.shackAction(0.2, 10))
         this.isPropChain = true
         for (let i = 0; i < this.rowNum; i++) { //行
           for (let j = 0; j < this.rowNum; j++) { //列
