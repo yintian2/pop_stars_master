@@ -106,7 +106,6 @@ cc.Class({
             this.level == 15 ? this.levelLimet() : this.onLevelUp()
           }
           this.progressBar.init(this.score, this.levelData[this.level - 1], this.level)
-          this._game.checkGenerateProp(this.chain)
           this.chain = 1
           this.currentAddedScore = 0
           this.mainScoreLabel.node.active = false
@@ -138,7 +137,7 @@ cc.Class({
     this._game._status = 2
   },
   levelLimet() {
-    console.log('等级达到上限')
+ //   console.log('等级达到上限')
 
   },
   onLevelUpButton() {

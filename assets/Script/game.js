@@ -7,7 +7,8 @@ cc.Class({
   properties: {
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
-    blockSprite: [cc.SpriteFrame] //todo: 换成动态生成
+    blockSprite: [cc.SpriteFrame], //todo: 换成动态生成
+    propSpriteFrame:[cc.SpriteFrame]
   },
   start() {
     this.bindNode()
@@ -73,63 +74,72 @@ cc.Class({
     )
   },
   // 生成道具 type 1为双倍倍数 2为炸弹
-  // generatePropItem(type) {
-  //   return new Promise((resolve, reject) => {
-  //     // 是否做道具生成动画
-  //     this.checkNeedFall()
-  //     this.instantiateBlock(this, {
-  //       x: this.target.jid,
-  //       y: this.target.iid,
-  //       width: this.blockWidth,
-  //       startTime: null
-  //     }, this.blocksContainer, type)
-  //   })
-  // },
+  generatePropItem(type) {
+    return new Promise((resolve, reject) => {
+      // 是否做道具生成动画
+      this.map[this.target.i][this.target.j] = this.instantiateBlock(this, {
+        x: this.target.j,
+        y: this.target.i,
+        width: this.blockWidth,
+        startTime: null
+      }, this.blocksContainer, type)
+      setTimeout(() => {
+        resolve()
+      }, 100)
+    })
+  },
   checkGenerateProp(chain) {
-    chain--
-    // 判断chain的大小查看是否能生成道具
-    let propData = this._controller.config.json.propConfig
-    for (let i = 0; i < propData.length; i++) {
-      if (chain <= propData[i].max && chain >= propData[i].min) {
-        // this.generatePropItem(propData[i].type)
-        this.map[this.target.i][this.target.j].getComponent('cell').generateItem(propData[i].type)
-        return
+    return new Promise((resolve, reject) => {
+      chain--
+      //  console.log(chain)
+      // 判断chain的大小查看是否能生成道具
+      let propData = this._controller.config.json.propConfig
+      for (let i = 0; i < propData.length; i++) {
+        if (chain <= propData[i].max && chain >= propData[i].min) {
+          this.generatePropItem(propData[i].type).then(() => {
+            resolve()
+          })
+          //this.map[this.target.i][this.target.j].getComponent('cell').generateItem(propData[i].type)
+        }
       }
-    }
+      resolve()
+    })
   },
   //方块下落
   onFall() {
-    let self = this
-    this._status = 4
-    let canFall = 0
-    //从每一列的最下面一个开始往上判断
-    //如果有空 就判断有几个空 然后让最上方的方块掉落下来
-    for (let j = this.rowNum - 1; j >= 0; j--) {
-      for (let i = this.rowNum - 1; i >= 0; i--) {
-        if (this.map[i][j].getComponent('cell')._status == 2) {
-          this.blockPool.put(this.map[i][j])
-          this.map[i][j] = null
-          canFall++
-        } else {
-          if (canFall != 0) {
-            this.map[i + canFall][j] = this.map[i][j]
+    this.checkGenerateProp(this._score.chain).then(() => {
+      let self = this
+      this._status = 4
+      let canFall = 0
+      //从每一列的最下面一个开始往上判断
+      //如果有空 就判断有几个空 然后让最上方的方块掉落下来
+      for (let j = this.rowNum - 1; j >= 0; j--) {
+        for (let i = this.rowNum - 1; i >= 0; i--) {
+          if (this.map[i][j].getComponent('cell')._status == 2) {
+            this.blockPool.put(this.map[i][j])
             this.map[i][j] = null
-            this.map[i + canFall][j].getComponent('cell').playFallAction(canFall, {
-              x: j,
-              y: i + canFall,
-            })
+            canFall++
+          } else {
+            if (canFall != 0) {
+              this.map[i + canFall][j] = this.map[i][j]
+              this.map[i][j] = null
+              this.map[i + canFall][j].getComponent('cell').playFallAction(canFall, {
+                x: j,
+                y: i + canFall,
+              })
+            }
+          }
+          if (i == 0) {
+            canFall = 0
           }
         }
-        if (i == 0) {
-          canFall = 0
+        if (j == 0) {
+          setTimeout(() => {
+            this.generateNewBlocks()
+          }, 200)
         }
       }
-      if (j == 0) {
-        setTimeout(() => {
-          this.generateNewBlocks()
-        }, 200)
-      }
-    }
+    })
   },
   //防抖动 判断是否需要生成新方块
   checkNeedGenerator() {
@@ -189,7 +199,11 @@ cc.Class({
   },
   // 实例化单个方块
   instantiateBlock(self, data, parent, itemType) {
+
     itemType = itemType ? itemType : 0
+    if (itemType != 0) {
+      console.log("道具节点数据", data, itemType)
+    }
     let block = null
     if (self.blockPool && self.blockPool.size() > 0) {
       block = self.blockPool.get()
@@ -209,7 +223,7 @@ cc.Class({
       let children = this.blocksContainer.children
       if (children.length != 0) {
         let length = children.length
-        console.log(length)
+        //   console.log(length)
         for (let i = 0; i < length; i++) {
           this.blockPool.put(children[0])
         }

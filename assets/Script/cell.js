@@ -7,10 +7,13 @@ cc.Class({
   properties: {
     _status: 0, //1为可触发点击 2为已经消失
     _itemType: 0, //TODO:新增道具功能 1为双倍倍数 2为炸弹
+    propSprite: cc.Sprite
   },
   init(g, data, width, itemType) {
     this._game = g
+    this._status = 1
     this._itemType = itemType || 0
+    this.propSprite.spriteFrame = g.propSpriteFrame[this._itemType - 1] || ''
     this._controller = g._controller
     // 计算宽
     this.node.width = this.node.height = width
@@ -31,6 +34,9 @@ cc.Class({
   onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
     isChain = isChain ? isChain : true
     isBomb = isBomb ? isBomb : false
+    if (this._itemType != 0) {
+      console.log(this._itemType)
+    }
     if (isBomb == true) {
       this.playDieAction().then(() => {
         this.onBlockPop(color, isChain, isBomb)
@@ -91,7 +97,6 @@ cc.Class({
     this.node.runAction(seq)
   },
   playStartAction() {
-    this._status = 0
     this.node.scaleX = 0
     this.node.scaleY = 0
     let action = cc.scaleTo(0.2 / this._game.animationSpeed, 1, 1)
