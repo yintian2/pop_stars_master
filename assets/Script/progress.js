@@ -28,6 +28,7 @@ cc.Class({
       this.limitNode.active = true
       this.limitNode.active = false
       this.limitScore.string = current
+      this.progress.progress = 1
     }
 
   }
