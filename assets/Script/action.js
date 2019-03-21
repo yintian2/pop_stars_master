@@ -3,7 +3,7 @@
  * @file 所有的简单动作集合
  */
 
-// 震动动作
+// 震动动作 0.1效果比较好
 function shackAction(time, range) {
   let action1 = cc.moveBy(time, range, range)
   let action2 = cc.moveBy(time, -range, -range)
@@ -17,6 +17,14 @@ function shackAction(time, range) {
   let action10 = cc.moveBy(time * 0.2, -range * 0.2, -range * 0.2)
   let sq = cc.sequence(action1, action2, action3, action4, action5, action6, action7, action8, action9, action10)
   return sq
+}
+// 弹出效果
+function popOut(time) {
+  return cc.scaleTo(time, 1).easing(cc.easeBackOut(2.0))
+}
+// 收入效果
+function popIn(time) {
+  return cc.scaleTo(time, 0.5).easing(cc.easeBackIn(2.0))
 }
 //翻页效果 前两个传node type传数字 左右旋转的
 function pageTurning(pageUp, pageDown, typeA) {
@@ -73,5 +81,7 @@ module.exports = {
   blinkAction: blinkAction,
   pageTurning: pageTurning,
   getMoveOutofScreenActive: getMoveOutofScreenActive,
+  popOut: popOut,
+  popIn: popIn,
   getMoveInScreenActive: getMoveInScreenActive
 }

@@ -2,6 +2,7 @@
  * @author uu
  * @file  通用页面控制器和适配
  */
+var AC = require('action')
 cc.Class({
   extends: cc.Component,
   properties: {
@@ -51,13 +52,17 @@ cc.Class({
     }
   },
   addPage(num, callFun) {
+    this.pages[num].scale = 0.5
     this.pages[num].active = true
+    this.pages[num].runAction(AC.popOut(0.5))
     if (callFun) {
       this.callFun();
     }
   },
   removePage(num, callFun) {
-    this.pages[num].active = false
+    this.pages[num].runAction(cc.sequence(AC.popIn(0.5),cc.callFunc(()=>{
+      this.pages[num].active = false
+    },this)))
     if (callFun) {
       this.callFun();
     }
