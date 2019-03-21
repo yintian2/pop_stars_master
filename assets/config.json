@@ -31,68 +31,68 @@
   "官员分数配置": "",
   "levelData": [{
     "name": "农民",
-    "score": 1200,
+    "score": 2500,
     "step": 5
   }, {
     "name": "秀才",
-    "score": 3200,
-    "step": 6
+    "score": 5000,
+    "step": 5
   }, {
     "name": "举人",
-    "score": 6000,
-    "step": 7
+    "score": 10000,
+    "step": 5
   }, {
     "name": "进士",
-    "score": 9200,
-    "step": 8
+    "score": 15000,
+    "step": 5
   }, {
     "name": "县令",
-    "score": 12800,
-    "step": 9
+    "score": 25000,
+    "step": 5
   }, {
     "name": "知府",
-    "score": 16800,
-    "step": 10
+    "score": 37500,
+    "step": 5
   }, {
     "name": "参将",
-    "score": 21200,
-    "step": 11
+    "score": 50000,
+    "step": 5
   }, {
     "name": "御史",
-    "score": 26000,
-    "step": 12
+    "score": 62500,
+    "step": 5
   }, {
     "name": "巡抚",
-    "score": 31200,
-    "step": 13
+    "score": 75000,
+    "step": 5
   }, {
     "name": "提督",
-    "score": 36800,
-    "step": 14
+    "score": 87500,
+    "step": 5
   }, {
     "name": "太师",
-    "score": 42800,
-    "step": 15
+    "score": 100000,
+    "step": 5
   }, {
     "name": "大将军",
-    "score": 49200,
-    "step": 16
+    "score": 112500,
+    "step": 5
   }, {
     "name": "宰相",
-    "score": 56000,
-    "step": 17
+    "score": 125000,
+    "step": 5
   }, {
     "name": "王爷",
-    "score": 63200,
-    "step": 18
+    "score": 137500,
+    "step": 5
   }, {
     "name": "皇帝",
-    "score": 70800,
-    "step": 19
+    "score": 150000,
+    "step": 5
   }, {
     "达到上限之后的展示数据":"",
     "name": "皇帝",
-    "score": 999999,
+    "score": 9999999,
     "step": 0
   }]
 }
