@@ -954,7 +954,7 @@
     "_clip": {
       "__uuid__": "6b9aadaf-4781-4249-a30d-f4cd95571f62"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1046,7 +1046,7 @@
     "_clip": {
       "__uuid__": "b5cd6f23-6e07-4283-b8f4-59024bfb19c4"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1138,7 +1138,7 @@
     "_clip": {
       "__uuid__": "30881afa-d77c-4f79-955b-a00a803c29f0"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1230,7 +1230,7 @@
     "_clip": {
       "__uuid__": "8bc1f3fc-17df-4a26-a0fb-7660aaa568ca"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1322,7 +1322,7 @@
     "_clip": {
       "__uuid__": "16ee0254-b761-452a-8b35-7ef23bc6a865"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1414,7 +1414,7 @@
     "_clip": {
       "__uuid__": "86296254-1ab5-4964-9913-62995e9d9cc2"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1506,7 +1506,7 @@
     "_clip": {
       "__uuid__": "d6437f6b-1704-4eb6-b83a-cadee3a9c53e"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1598,7 +1598,7 @@
     "_clip": {
       "__uuid__": "a3fd3259-6ec0-4ef4-ae64-27f6414e577b"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1690,7 +1690,7 @@
     "_clip": {
       "__uuid__": "35ff98a8-1371-4a1c-a847-bcac80606b87"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -1782,7 +1782,7 @@
     "_clip": {
       "__uuid__": "32fb9519-1cf1-4324-be66-b1ba7ab32e5e"
     },
-    "_volume": 1,
+    "_volume": 0.8,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -7930,7 +7930,7 @@
     "_clip": {
       "__uuid__": "8e845931-9319-48d8-a30a-df24ba23474c"
     },
-    "_volume": 0.8,
+    "_volume": 1,
     "_mute": false,
     "_loop": true,
     "playOnLoad": true,
