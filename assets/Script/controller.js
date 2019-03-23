@@ -10,6 +10,7 @@ cc.Class({
     pageMgr: require('pageMgr'), //页面控制器
     social: require('social'), //排行榜、广告控制器
     config: cc.JsonAsset,
+    gameData: cc.JsonAsset,
     scoreMgr: require('score'), //分数 特效控制
     totalRank: cc.Node,
   },

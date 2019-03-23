@@ -23,7 +23,7 @@ cc.Class({
     this.chain = 1
     this.level = 1
     this.closeMultLabel()
-    this.levelData = g._controller.config.json.levelData
+    this.levelData = g._controller.gameData.json.levelData
     this.progressBar.init(0, this.levelData[this.level - 1], this.level)
     this.leftStepLabel.string = this.leftStep
     this.scoreTimer = []
