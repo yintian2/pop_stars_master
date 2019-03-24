@@ -10,6 +10,7 @@ cc.Class({
     audios: [cc.AudioSource],
     audioPrefab: cc.Prefab,
     bgMusic: cc.AudioSource,
+    winAudio:cc.AudioSource,
     //audioSource: cc.AudioSource,
   },
   init() {
@@ -70,4 +71,9 @@ cc.Class({
   start() {
     // this.onPlayAudio(1);
   },
+
+  onWin(){
+    this.winAudio.rewind()
+    this.winAudio.play()
+  }
 });
