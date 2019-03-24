@@ -136,7 +136,15 @@ cc.Class({
         }
       }
     }
-    this._status = 1
+    this.cheakAll.then(() => {
+      this._status = 1
+    })
+  },
+  // 检查当前全部方块
+  cheakAll() {
+    return new Promise((resolve, reject) => {
+
+    })
   },
   gameOver() {
     this._status = 3

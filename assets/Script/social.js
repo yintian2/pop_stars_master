@@ -18,6 +18,8 @@ cc.Class({
     //this.display.node.height = window.height
     //this.display.node.getComponent(cc.WXSubContextView).enabled = false;
     //   this.tex = new cc.Texture2D();
+    //TODO: 微信小游戏导致音乐自动关闭
+    wx.onShow(c.musicMgr.checkBg())
   },
   // --------------- share ----------------
   loadShareData() {
@@ -57,7 +59,7 @@ cc.Class({
     } else {
       highScore = score
     }
-    var highLevelName = this._controller.config.json.levelData[highLevel - 1].name
+    var highLevelName = this._controller.gameData.json.levelData[highLevel - 1].name
     wx.setStorageSync('highLevel', highLevel + '')
     wx.setStorageSync('highScore', highScore + '')
     self._controller.scoreMgr.failHighScore.string = "您的最高分:" + (highScore + '')
@@ -75,7 +77,7 @@ cc.Class({
         //  self.showRank()
       },
       fail: (res) => {
-     //   console.log(res)
+        //   console.log(res)
       }
     })
   },

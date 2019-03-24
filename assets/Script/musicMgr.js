@@ -9,6 +9,7 @@ cc.Class({
     volume: 1,
     audios: [cc.AudioSource],
     audioPrefab: cc.Prefab,
+    bgMusic: cc.AudioSource,
     //audioSource: cc.AudioSource,
   },
   init() {
@@ -17,11 +18,11 @@ cc.Class({
     this.createMusicPool()
   },
   createMusicPool() {
-    this.musicPool = new cc.NodePool()
-    for (let i = 0; i < 20; i++) {
-      let music = cc.instantiate(this.audioPrefab)
-      this.musicPool.put(music)
-    }
+    // this.musicPool = new cc.NodePool()
+    // for (let i = 0; i < 20; i++) {
+    //   let music = cc.instantiate(this.audioPrefab)
+    //   this.musicPool.put(music)
+    // }
   },
   instanceAudio() {
 
@@ -60,6 +61,11 @@ cc.Class({
     //   this.audios[num].rewind()
     //   this.audios[num].play()
     // }
+  },
+  checkBg() {
+    if (!this.bgMusic.isPlaying) {
+      this.bgMusic.play()
+    }
   },
   start() {
     // this.onPlayAudio(1);
