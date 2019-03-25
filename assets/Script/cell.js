@@ -33,26 +33,39 @@ cc.Class({
     this.playStartAction()
   },
   growInit() {
+    this.growType = 0
     this.colorSprite.node.height = this.colorSprite.node.width = this._width
     this.colorSprite.node.y = this.colorSprite.node.x = 0
   },
   grow(type) { //1234 上下左右
     switch (type) {
       case 1:
-        this.colorSprite.node.height += this._game.gap 
-        this.colorSprite.node.y += this._game.gap / 2
+        if (this.growType != 2) {
+          this.colorSprite.node.height += this._game.gap * 2
+          this.colorSprite.node.y += this._game.gap
+          this.growType = 1
+        }
         break
       case 2:
-        this.colorSprite.node.height += this._game.gap 
-        this.colorSprite.node.y -= this._game.gap / 2
+        if (this.growType != 2) {
+          this.colorSprite.node.height += this._game.gap * 2
+          this.colorSprite.node.y -= this._game.gap
+          this.growType = 1
+        }
         break
       case 3:
-        this.colorSprite.node.width += this._game.gap 
-        this.colorSprite.node.x -= this._game.gap / 2
+        if (this.growType != 1) {
+          this.colorSprite.node.width += this._game.gap * 2
+          this.colorSprite.node.x -= this._game.gap
+          this.growType = 2
+        }
         break
       case 4:
-        this.colorSprite.node.width += this._game.gap 
-        this.colorSprite.node.x += this._game.gap / 2
+        if (this.growType != 1) {
+          this.colorSprite.node.width += this._game.gap * 2
+          this.colorSprite.node.x += this._game.gap
+          this.growType = 2
+        }
         break
     }
   },
