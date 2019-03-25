@@ -1,7 +1,0 @@
-{
-  "ver": "1.0.0",
-  "uuid": "a57fb5b0-6e2f-491e-91ae-9d08ea81322b",
-  "atlasJson": "{\"SubTexture\":[{\"x\":204,\"y\":358,\"width\":24,\"name\":\"农名/图层1\",\"height\":30},{\"x\":204,\"y\":320,\"width\":26,\"name\":\"农名/图层2\",\"height\":36},{\"x\":1,\"y\":1,\"width\":246,\"name\":\"农名/图层3\",\"height\":230},{\"x\":167,\"y\":233,\"width\":72,\"name\":\"农名/图层_0\",\"height\":85},{\"x\":167,\"y\":320,\"width\":35,\"name\":\"农名/图层_2\",\"height\":59},{\"x\":1,\"y\":233,\"width\":164,\"name\":\"农名/图层_1\",\"height\":138}],\"imagePath\":\"sanxiao_tex.png\",\"width\":256,\"name\":\"sanxiao\",\"height\":512}",
-  "texture": "fb522836-ac07-430f-9762-50c788acddff",
-  "subMetas": {}
-}
