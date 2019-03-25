@@ -55,6 +55,7 @@ cc.Class({
       }
       setTimeout(() => {
           resolve('200 OK');
+          this.checkAll()
         }, self._controller.config.json.startAnimationTime * num / 2 / 1
         //  (cc.game.getFrameRate() / 60)
       )
@@ -143,8 +144,30 @@ cc.Class({
   // 检查当前全部方块
   checkAll() {
     return new Promise((resolve, reject) => {
+      for (let i = 0; i < this.rowNum; i++) { //行
+        for (let j = 0; j < this.rowNum; j++) { //列
+          this.map[i][j].getComponent('cell').growInit()
+          if (i - 1 >= 0) {
+            this.checkColor(this.map[i][j], this.map[i - 1][j], 1)
+          }
+          if (i + 1 < this.rowNum) {
+            this.checkColor(this.map[i][j], this.map[i + 1][j], 2)
+          }
+          if (j - 1 >= 0) {
+            this.checkColor(this.map[i][j], this.map[i][j - 1], 3)
+          }
+          if (j + 1 < this.rowNum) {
+            this.checkColor(this.map[i][j], this.map[i][j + 1], 4)
+          }
+        }
+      }
       resolve()
     })
+  },
+  checkColor(origin, target, type) {
+    if (origin.getComponent('cell').color == target.getComponent('cell').color) {
+      origin.getComponent('cell').grow(type)
+    }
   },
   gameOver() {
     this._status = 3

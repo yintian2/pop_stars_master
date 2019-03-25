@@ -13,6 +13,13 @@ cc.Class({
     this._game = g
     this._status = 1
     this._itemType = itemType || 0
+    this.bindEvent()
+    this.color = data.color || Math.ceil(Math.random() * 4)
+    this.colorSprite = this.node.getChildByName('color').getComponent(cc.Sprite)
+    this.colorSprite.spriteFrame = this._game.blockSprite[this.color - 1]
+    this.colorSprite.node.width = this.colorSprite.node.height = width
+    this._width = width
+    this.colorSprite.node.x = this.colorSprite.node.y = 0
     this.propSprite.spriteFrame = g.propSpriteFrame[this._itemType - 1] || ''
     this._controller = g._controller
     // 计算宽
@@ -23,13 +30,35 @@ cc.Class({
     // console.log('生成方块位置', data.y, data.x)
     this.node.x = -(730 / 2 - g.gap - width / 2) + data.x * (width + g.gap)
     this.node.y = (730 / 2 - g.gap - width / 2) - data.y * (width + g.gap)
-    this.color = data.color || Math.ceil(Math.random() * 4)
-    this.bindEvent()
     this.playStartAction()
+  },
+  growInit() {
+    this.colorSprite.node.height = this.colorSprite.node.width = this._width
+    this.colorSprite.node.y = this.colorSprite.node.x = 0
+  },
+  grow(type) { //1234 上下左右
+    switch (type) {
+      case 1:
+        this.colorSprite.node.height += this._game.gap 
+        this.colorSprite.node.y += this._game.gap / 2
+        break
+      case 2:
+        this.colorSprite.node.height += this._game.gap 
+        this.colorSprite.node.y -= this._game.gap / 2
+        break
+      case 3:
+        this.colorSprite.node.width += this._game.gap 
+        this.colorSprite.node.x -= this._game.gap / 2
+        break
+      case 4:
+        this.colorSprite.node.width += this._game.gap 
+        this.colorSprite.node.x += this._game.gap / 2
+        break
+    }
   },
   bindEvent() {
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouched, this)
-    this.getComponent(cc.Sprite).spriteFrame = this._game.blockSprite[this.color - 1]
+
   },
   // 用户点击 或者被其他方块触发
   onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
