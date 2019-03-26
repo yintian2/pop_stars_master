@@ -3063,7 +3063,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -165,
+      "x": -96,
       "y": 197,
       "z": 0
     },
@@ -3152,8 +3152,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -163,
-      "y": 193,
+      "x": -94,
+      "y": 198,
       "z": 0
     },
     "_scale": {
@@ -3190,7 +3190,7 @@
     "_useOriginalSize": false,
     "_string": "刘刘",
     "_N$string": "刘刘",
-    "_fontSize": 26,
+    "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3239,7 +3239,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -163,
+      "x": -94,
       "y": 206,
       "z": 0
     },
@@ -4057,7 +4057,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
+      "x": 34,
       "y": -153,
       "z": 0
     },
@@ -7175,7 +7175,7 @@
     "_spriteFrame": {
       "__uuid__": "3c17fbc7-41f2-42f3-ab5b-fa4f427e62b2"
     },
-    "_stopped": false,
+    "_stopped": true,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 40,
