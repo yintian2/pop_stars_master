@@ -6866,8 +6866,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -130,
-      "y": -45.7,
+      "x": -106,
+      "y": -46,
       "z": 0
     },
     "_scale": {
@@ -7044,8 +7044,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 130,
-      "y": -42.4,
+      "x": 117,
+      "y": -42,
       "z": 0
     },
     "_scale": {
@@ -7133,7 +7133,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 121,
+      "x": 112,
       "y": 128,
       "z": 0
     },
@@ -7175,7 +7175,7 @@
     "_spriteFrame": {
       "__uuid__": "3c17fbc7-41f2-42f3-ab5b-fa4f427e62b2"
     },
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 40,
