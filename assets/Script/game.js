@@ -9,7 +9,8 @@ cc.Class({
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
     blockSprite: [cc.SpriteFrame], //todo: 换成动态生成
-    propSpriteFrame: [cc.SpriteFrame]
+    propSpriteFrame: [cc.SpriteFrame],
+    checkMgr: require("check")
   },
   start() {
     this.bindNode()
@@ -166,7 +167,7 @@ cc.Class({
   },
   checkColor(origin, target, type) {
     if (origin.getComponent('cell').color == target.getComponent('cell').color) {
-      origin.getComponent('cell').grow(type)
+    //  origin.getComponent('cell').grow(type)
     }
   },
   gameOver() {
