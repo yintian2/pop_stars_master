@@ -37,7 +37,6 @@ cc.Class({
       console.log('游戏状态改变', result)
       this._status = 1
     })
-
   },
   // 初始化地图
   mapSet(num) {
@@ -55,6 +54,7 @@ cc.Class({
           }, self.blocksContainer, 0)
         }
       }
+      this.checkMgr.init(this)
       setTimeout(() => {
           resolve('200 OK');
           //this.checkAll()
@@ -79,6 +79,7 @@ cc.Class({
   },
   //方块下落
   onFall() {
+    this.checkMgr.init(this)
     this.checkGenerateProp(this._score.chain).then(() => {
       let self = this
       this._status = 4

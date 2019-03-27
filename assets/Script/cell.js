@@ -13,6 +13,7 @@ cc.Class({
     this._game = g
     this._status = 1
     this._itemType = itemType || 0
+    this.isPush = false
     this.bindEvent()
     this.color = data.color || Math.ceil(Math.random() * 4)
     this.colorSprite = this.node.getChildByName('color').getComponent(cc.Sprite)
@@ -31,7 +32,14 @@ cc.Class({
     this.playStartAction()
   },
   onWarning(type) {
+    if (this.itemType) {
+      return
+    }
     this.warningSprite.spriteFrame = this._game.warningSpriteFrame[type - 1] || ''
+  },
+  warningInit() {
+    this.warningSprite.spriteFrame = ''
+    this.isPush = false
   },
   growInit() {
     this.growType = 0
