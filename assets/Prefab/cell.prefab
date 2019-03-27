@@ -218,14 +218,14 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 24.8,
+      "y": 27,
       "z": 0
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.5,
+      "y": 0.5,
       "z": 1
     },
     "_rotationX": 0,
@@ -292,9 +292,6 @@
     "_enabled": true,
     "_status": 0,
     "_itemType": 0,
-    "propSprite": {
-      "__id__": 3
-    },
     "warningSprite": {
       "__id__": 6
     },
