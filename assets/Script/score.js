@@ -185,7 +185,7 @@ cc.Class({
     }
   },
   updateFailPage() {
-    this.failScore.string = "当前得分:" + (this.score + '')
+    this.failScore.string = " " + (this.score + '')
     this.failName.string = this.levelData[this.level - 1].name
     //this.failHighScore.string = "正在获取您的最高分..."
   }
