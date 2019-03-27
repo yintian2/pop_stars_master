@@ -7,7 +7,7 @@ cc.Class({
   properties: {
     _status: 0, //1为可触发点击 2为已经消失
     _itemType: 0, //TODO:新增道具功能 1为双倍倍数 2为炸弹
-    propSprite: cc.Sprite
+    warningSprite: cc.Sprite,
   },
   init(g, data, width, itemType) {
     this._game = g
@@ -16,11 +16,9 @@ cc.Class({
     this.bindEvent()
     this.color = data.color || Math.ceil(Math.random() * 4)
     this.colorSprite = this.node.getChildByName('color').getComponent(cc.Sprite)
-    this.colorSprite.spriteFrame = this._game.blockSprite[this.color - 1]
-    this.colorSprite.node.width = this.colorSprite.node.height = width
+    this.colorSprite.spriteFrame = itemType ? g.propSpriteFrame[(itemType - 1) * 4 + this.color - 1] : this._game.blockSprite[this.color - 1]
+    this.warningSprite.spriteFrame = ''
     this._width = width
-    this.colorSprite.node.x = this.colorSprite.node.y = 0
-    this.propSprite.spriteFrame = g.propSpriteFrame[this._itemType - 1] || ''
     this._controller = g._controller
     // 计算宽
     this.node.width = this.node.height = width
@@ -31,6 +29,9 @@ cc.Class({
     this.node.x = -(730 / 2 - g.gap - width / 2) + data.x * (width + g.gap)
     this.node.y = (730 / 2 - g.gap - width / 2) - data.y * (width + g.gap)
     this.playStartAction()
+  },
+  onWarning(type) {
+    this.warningSprite.spriteFrame = this._game.warningSpriteFrame[type - 1] || ''
   },
   growInit() {
     this.growType = 0
@@ -85,7 +86,7 @@ cc.Class({
     }
     if (color.type) {
       // 一定是用户主动触发 保存这个坐标给game
-      console.log('方块位置', this.iid, this.jid, this._itemType)
+      // console.log('方块位置', this.iid, this.jid, this._itemType)
       this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color)
       this._game._score.onStep(-1)
       color = this.color
@@ -112,21 +113,21 @@ cc.Class({
     self._controller.musicMgr.onPlayAudio(self._game._score.chain - 1)
     self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
     if (this._itemType != 0) {
-      console.log("触发了道具", this._itemType)
+      // console.log("触发了道具", this._itemType)
       self._game.onItem(this._itemType, color)
     }
     // 连锁状态
     if (isChain) {
-      if (self.iid - 1 >= 0) {
+      if ((self.iid - 1) >= 0) {
         self._game.map[self.iid - 1][self.jid].getComponent('cell').onTouched(color)
       }
-      if (self.iid + 1 < this._game.rowNum) {
+      if ((self.iid + 1) < this._game.rowNum) {
         self._game.map[self.iid + 1][self.jid].getComponent('cell').onTouched(color)
       }
-      if (self.jid - 1 >= 0) {
+      if ((self.jid - 1) >= 0) {
         self._game.map[self.iid][self.jid - 1].getComponent('cell').onTouched(color)
       }
-      if (self.jid + 1 < this._game.rowNum) {
+      if ((self.jid + 1) < this._game.rowNum) {
         self._game.map[self.iid][self.jid + 1].getComponent('cell').onTouched(color)
       }
     }
