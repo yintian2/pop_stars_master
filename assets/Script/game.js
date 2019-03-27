@@ -9,7 +9,8 @@ cc.Class({
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
     blockSprite: [cc.SpriteFrame], //todo: 换成动态生成
-    propSpriteFrame: [cc.SpriteFrame],
+    warningSpriteFrame: [cc.SpriteFrame],
+    propSpriteFrame:[cc.SpriteFrame],
     checkMgr: require("check")
   },
   start() {
@@ -56,7 +57,8 @@ cc.Class({
       }
       setTimeout(() => {
           resolve('200 OK');
-          this.checkAll()
+          //this.checkAll()
+          this.checkMgr.check(this)
         }, self._controller.config.json.startAnimationTime * num / 2 / 1
         //  (cc.game.getFrameRate() / 60)
       )
@@ -138,38 +140,41 @@ cc.Class({
         }
       }
     }
-    this.checkAll().then(() => {
-      this._status = 1
-    })
+    this.checkMgr.check(this)
+    this._status = 1
+    // 暂时废弃该检验 改用checkMgr
+    // this.checkAll().then(() => {
+    //   this._status = 1
+    // })
   },
   // 检查当前全部方块
-  checkAll() {
-    return new Promise((resolve, reject) => {
-      for (let i = 0; i < this.rowNum; i++) { //行
-        for (let j = 0; j < this.rowNum; j++) { //列
-          this.map[i][j].getComponent('cell').growInit()
-          if (i - 1 >= 0) {
-            this.checkColor(this.map[i][j], this.map[i - 1][j], 1)
-          }
-          if (i + 1 < this.rowNum) {
-            this.checkColor(this.map[i][j], this.map[i + 1][j], 2)
-          }
-          if (j - 1 >= 0) {
-            this.checkColor(this.map[i][j], this.map[i][j - 1], 3)
-          }
-          if (j + 1 < this.rowNum) {
-            this.checkColor(this.map[i][j], this.map[i][j + 1], 4)
-          }
-        }
-      }
-      resolve()
-    })
-  },
-  checkColor(origin, target, type) {
-    if (origin.getComponent('cell').color == target.getComponent('cell').color) {
-    //  origin.getComponent('cell').grow(type)
-    }
-  },
+  // checkAll() {
+  //   return new Promise((resolve, reject) => {
+  //     for (let i = 0; i < this.rowNum; i++) { //行
+  //       for (let j = 0; j < this.rowNum; j++) { //列
+  //         this.map[i][j].getComponent('cell').growInit()
+  //         if ((i - 1) >= 0) {
+  //           this.checkColor(this.map[i][j], this.map[i - 1][j], 1)
+  //         }
+  //         if ((i + 1) < this.rowNum) {
+  //           this.checkColor(this.map[i][j], this.map[i + 1][j], 2)
+  //         }
+  //         if ((j - 1) >= 0) {
+  //           this.checkColor(this.map[i][j], this.map[i][j - 1], 3)
+  //         }
+  //         if ((j + 1) < this.rowNum) {
+  //           this.checkColor(this.map[i][j], this.map[i][j + 1], 4)
+  //         }
+  //       }
+  //     }
+  //     resolve()
+  //   })
+  // },
+  // checkColor(origin, target, type) {
+  //   if (origin.getComponent('cell').color == target.getComponent('cell').color) {
+  //     //  origin.getComponent('cell').grow(type)
+  //   }
+  // },
   gameOver() {
     this._status = 3
     this._controller.pageMgr.addPage(2)
@@ -181,6 +186,8 @@ cc.Class({
       this.gameStart()
     })
   },
+  // -----------------道具相关---------------
+  // 储存用户点击时的方块 用于生成道具
   onUserTouched(iid, jid, itemType, color) {
     this.target = {
       i: iid,
@@ -189,7 +196,6 @@ cc.Class({
       itemType: itemType
     }
   },
-  // -----------------道具相关---------------
   // 生成道具 type 1为双倍倍数 2为炸弹
   generatePropItem(type) {
     return new Promise((resolve, reject) => {
@@ -263,7 +269,7 @@ cc.Class({
   instantiateBlock(self, data, parent, itemType) {
     itemType = itemType ? itemType : 0
     if (itemType != 0) {
-      console.log("道具节点数据", data, itemType)
+      // console.log("道具节点数据", data, itemType)
     }
     let block = null
     if (self.blockPool && self.blockPool.size() > 0) {

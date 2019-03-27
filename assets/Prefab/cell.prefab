@@ -154,7 +154,7 @@
     "_spriteFrame": {
       "__uuid__": "45f214e9-3fa0-470e-9521-a13edfd2b7c0"
     },
-    "_type": 1,
+    "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -293,6 +293,9 @@
     "_status": 0,
     "_itemType": 0,
     "propSprite": {
+      "__id__": 3
+    },
+    "warningSprite": {
       "__id__": 6
     },
     "_id": ""

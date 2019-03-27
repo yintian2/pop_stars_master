@@ -154,7 +154,7 @@ cc.Class({
     this._game._status = 2
   },
   levelLimit() {
-    console.log('等级达到上限')
+   //console.log('等级达到上限')
 
   },
   onLevelUpButton() {
@@ -166,7 +166,7 @@ cc.Class({
         x: -248,
         y: 630
       }, cc.callFunc(() => {
-        this.onStep(this.level + 3)
+        this.onStep(this.level -1)
         this._game._status = 1
         this.mainScoreLabel.node.active = false
         this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1) % 3]
