@@ -31,7 +31,7 @@ cc.Class({
     this._controller = g._controller
     // 计算宽
     this.lightSprite.node.active = false
-    this.lightSprite.spriteFrame = this._game.blockSprite[this.color - 1]
+    // this.lightSprite.spriteFrame = this._game.blockSprite[this.color - 1]
     this.node.width = this.node.height = width
     this.startTime = data.startTime
     this.iid = data.y
@@ -47,13 +47,13 @@ cc.Class({
       return
     }
     this.warningSprite.spriteFrame = this._game.warningSpriteFrame[type - 1] || ''
-    this.lightSprite.node.active = true
-    let action1 = cc.blink(1, 10)
-    this.lightSprite.node.runAction(action1)
+    // this.lightSprite.node.active = true
+    //  let action1 = cc.blink(1, 10)
+    //  this.lightSprite.node.runAction(action1)
   },
   warningInit() {
     this.warningSprite.spriteFrame = ''
-    this.lightSprite.node.active = false
+    //this.lightSprite.node.active = false
     this.isPush = false
   },
   growInit() {
