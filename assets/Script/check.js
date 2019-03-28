@@ -10,8 +10,7 @@ cc.Class({
     map: [],
     mapLength: 8
   },
-
-  check(g) { //该函数主要用于检测一个区块能否形成道具等
+  init(g) {
     this._game = g
     this.map = g.map
     this.mapLength = g.rowNum
@@ -19,16 +18,31 @@ cc.Class({
       this.groups[i] = []
       for (let j = 0; j < this.mapLength; j++) { //列
         // this.map[i][j].getComponent('cell').growInit() //全部初始化
-        this.map[i][j].getComponent('cell').isPush = false
+        if (!this.map[i][j]) {
+          cc.log('报错x,y:', i, j)
+        }
+        this.map[i][j].getComponent('cell').warningInit()
         this.groups[i][j] = []
       }
     }
+  },
+  check(g) { //该函数主要用于检测一个区块能否形成道具等
+    let propConfig = g._controller.config.json.propConfig
+    this._game = g
+    this.map = g.map
+    this.mapLength = g.rowNum
     for (let i = 0; i < this.mapLength; i++) { //行
       for (let j = 0; j < this.mapLength; j++) { //列
         this.pushPop(this.map[i][j], i, j)
+        if (this.groups[i][j].length >= propConfig[0].min) {
+          for (let z = 0; z < propConfig.length; z++) {
+            if (this.groups[i][j].length <= propConfig[z].max && this.groups[i][j].length >= propConfig[z].min) {
+              this.warning(propConfig[z].type, this.groups[i][j])
+            }
+          }
+        }
       }
     }
-    this.dealGroups()
   },
   pushPop(target, i, j) { //用于判断一个方块四个方向上的方块颜色是否一样 如果一样则加入组 如果组长度小于1则返回false?
     // if (target.getComponent('cell').isPush==true) {
@@ -56,20 +70,6 @@ cc.Class({
     if ((y + 1) < this.mapLength) {
       if (!this.map[x][y + 1].getComponent('cell').isPush && this.map[x][y + 1].getComponent('cell').color == target.getComponent('cell').color) {
         this.pushPop(this.map[x][y + 1], i, j)
-      }
-    }
-  },
-  dealGroups() {
-    let propConfig = this._game._controller.config.json.propConfig
-    cc.log("预判数组 是否能生成道具:", this.groups)
-    for (let i = 0; i < this.mapLength; i++) { //行
-      for (let j = 0; j < this.mapLength; j++) { //列
-        // 判断数组长度是否满足生成道具的长度
-        for (let i = 0; i < propConfig.length; i++) {
-          if (this.groups[i][j].length <= propConfig[i].max && this.groups[i][j].length >= propConfig[i].min) {
-            this.warning(propConfig[i].type, this.groups[i][j])
-          }
-        }
       }
     }
   },

@@ -160,13 +160,14 @@ cc.Class({
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
-    this.mainScoreLabel.string = this.level + 3
+    
+    this.mainScoreLabel.string = this.levelData[this.level - 2].step
     setTimeout(() => {
-      this.onCurrentScoreLabel(this.level + 3, {
+      this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
         x: -248,
         y: 630
       }, cc.callFunc(() => {
-        this.onStep(this.level -1)
+        this.onStep(this.levelData[this.level - 2].step)
         this._game._status = 1
         this.mainScoreLabel.node.active = false
         this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1) % 3]
