@@ -30,6 +30,8 @@ cc.Class({
     this._width = width
     this._controller = g._controller
     // 计算宽
+    this.lightSprite.node.active = false
+    this.lightSprite.spriteFrame = this._game.blockSprite[this.color - 1]
     this.node.width = this.node.height = width
     this.startTime = data.startTime
     this.iid = data.y
@@ -195,9 +197,9 @@ cc.Class({
     return new Promise((resolve, reject) => {
       let action
       if (this.warningSprite.spriteFrame) { //有道具预警
-        let action1 = cc.scaleTo(0.2, 1.1, 1.1)
-        let action2 = cc.moveTo(0.3, this._game.target.x, this._game.target.y)
-        let action3 = cc.scaleTo(0.3, 0, 0)
+        let action1 = cc.scaleTo(0.1, 1.1, 1.1)
+        let action2 = cc.moveTo(0.2, this._game.target.x, this._game.target.y)
+        let action3 = cc.scaleTo(0.2, 0, 0)
         var seq = cc.sequence(action1, cc.callFunc(() => {
           resolve('')
         }, this), cc.spawn(action2, action3))

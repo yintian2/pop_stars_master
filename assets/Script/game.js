@@ -83,6 +83,8 @@ cc.Class({
   },
   //方块下落
   onFall() {
+    this.checkMgr.init(this)
+
     this.checkGenerateProp(this._score.chain).then(() => {
       let self = this
       this._status = 4
@@ -115,13 +117,13 @@ cc.Class({
             startTime: null
           }, this.blocksContainer, '', {
             x: j,
-            y: -k - 1
+            y: -canFall + k
           })
           this.map[k][j].getComponent('cell').playFallAction(canFall, null)
         }
       }
       console.log(this.map)
-      this.checkMgr.init(this)
+      this.checkMgr.check(this)
       this._status = 1
     })
   },
@@ -152,7 +154,6 @@ cc.Class({
         }
       }
     }
-    this.checkMgr.check(this)
     this._status = 1
     // 暂时废弃该检验 改用checkMgr
     // this.checkAll().then(() => {
