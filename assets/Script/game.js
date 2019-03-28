@@ -10,7 +10,7 @@ cc.Class({
     blockPrefab: cc.Prefab,
     blockSprite: [cc.SpriteFrame], //todo: 换成动态生成
     warningSpriteFrame: [cc.SpriteFrame],
-    propSpriteFrame:[cc.SpriteFrame],
+    propSpriteFrame: [cc.SpriteFrame],
     checkMgr: require("check")
   },
   start() {
@@ -18,7 +18,7 @@ cc.Class({
     this.generatePool()
     this.loadRes()
   },
-  loadRes(){
+  loadRes() {
 
   },
   init(c) {
@@ -77,13 +77,12 @@ cc.Class({
         if (this._status == 5) {
           this.onFall()
         }
-      }, 250 / 1
+      }, 300 / 1
       // (cc.game.getFrameRate() / 60)
     )
   },
   //方块下落
   onFall() {
-    this.checkMgr.init(this)
     this.checkGenerateProp(this._score.chain).then(() => {
       let self = this
       this._status = 4
@@ -91,6 +90,7 @@ cc.Class({
       //从每一列的最下面一个开始往上判断
       //如果有空 就判断有几个空 然后让最上方的方块掉落下来
       for (let j = this.rowNum - 1; j >= 0; j--) {
+        canFall = 0
         for (let i = this.rowNum - 1; i >= 0; i--) {
           if (this.map[i][j].getComponent('cell')._status == 2) {
             this.blockPool.put(this.map[i][j])
@@ -106,16 +106,23 @@ cc.Class({
               })
             }
           }
-          if (i == 0) {
-            canFall = 0
-          }
         }
-        if (j == 0) {
-          setTimeout(() => {
-            this.generateNewBlocks()
-          }, 200)
+        for (var k = 0; k < canFall; k++) {
+          this.map[k][j] = this.instantiateBlock(this, {
+            x: j,
+            y: k,
+            width: this.blockWidth,
+            startTime: null
+          }, this.blocksContainer, '', {
+            x: j,
+            y: -k - 1
+          })
+          this.map[k][j].getComponent('cell').playFallAction(canFall, null)
         }
       }
+      console.log(this.map)
+      this.checkMgr.init(this)
+      this._status = 1
     })
   },
   //防抖动 判断是否需要生成新方块
@@ -127,7 +134,7 @@ cc.Class({
         if (this._status == 4) {
           this.generateNewBlocks()
         }
-      }, 250 / 1
+      }, 300 / 1
       // (cc.game.getFrameRate() / 60)
     )
   },
@@ -193,12 +200,14 @@ cc.Class({
   },
   // -----------------道具相关---------------
   // 储存用户点击时的方块 用于生成道具
-  onUserTouched(iid, jid, itemType, color) {
+  onUserTouched(iid, jid, itemType, color, pos) {
     this.target = {
       i: iid,
       j: jid,
       color: color,
-      itemType: itemType
+      itemType: itemType,
+      x: pos.x,
+      y: pos.y
     }
   },
   // 生成道具 type 1为双倍倍数 2为炸弹
@@ -271,7 +280,7 @@ cc.Class({
     }
   },
   // 实例化单个方块
-  instantiateBlock(self, data, parent, itemType) {
+  instantiateBlock(self, data, parent, itemType, pos) {
     itemType = itemType ? itemType : 0
     if (itemType != 0) {
       // console.log("道具节点数据", data, itemType)
@@ -286,7 +295,7 @@ cc.Class({
     block.scale = 1
     block.x = 0
     block.y = 0
-    block.getComponent('cell').init(self, data, this.blockWidth, itemType)
+    block.getComponent('cell').init(self, data, this.blockWidth, itemType, pos)
     return block
   },
   // 回收所有节点

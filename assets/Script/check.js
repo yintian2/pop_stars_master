@@ -18,6 +18,9 @@ cc.Class({
       this.groups[i] = []
       for (let j = 0; j < this.mapLength; j++) { //列
         // this.map[i][j].getComponent('cell').growInit() //全部初始化
+        if (!this.map[i][j]) {
+          cc.log('报错x,y:', i, j)
+        }
         this.map[i][j].getComponent('cell').warningInit()
         this.groups[i][j] = []
       }

@@ -8,10 +8,18 @@ cc.Class({
     _status: 0, //1为可触发点击 2为已经消失
     _itemType: 0, //TODO:新增道具功能 1为双倍倍数 2为炸弹
     warningSprite: cc.Sprite,
+    lightSprite: cc.Sprite,
   },
-  init(g, data, width, itemType) {
+  init(g, data, width, itemType, pos) {
     this._game = g
     this._status = 1
+    if (pos) {
+      cc.log('生成的方块', pos)
+    }
+    pos = pos || {
+      x: data.x,
+      y: data.y
+    }
     this._itemType = itemType || 0
     this.isPush = false
     this.bindEvent()
@@ -27,18 +35,23 @@ cc.Class({
     this.iid = data.y
     this.jid = data.x
     // console.log('生成方块位置', data.y, data.x)
-    this.node.x = -(730 / 2 - g.gap - width / 2) + data.x * (width + g.gap)
-    this.node.y = (730 / 2 - g.gap - width / 2) - data.y * (width + g.gap)
+    this.node.x = -(730 / 2 - g.gap - width / 2) + pos.x * (width + g.gap)
+    this.node.y = (730 / 2 - g.gap - width / 2) - pos.y * (width + g.gap)
+
     this.playStartAction()
   },
   onWarning(type) {
-    if (this.itemType) {
+    if (this.itemType == 0) {
       return
     }
     this.warningSprite.spriteFrame = this._game.warningSpriteFrame[type - 1] || ''
+    this.lightSprite.node.active = true
+    let action1 = cc.blink(1, 10)
+    this.lightSprite.node.runAction(action1)
   },
   warningInit() {
     this.warningSprite.spriteFrame = ''
+    this.lightSprite.node.active = false
     this.isPush = false
   },
   growInit() {
@@ -95,7 +108,10 @@ cc.Class({
     if (color.type) {
       // 一定是用户主动触发 保存这个坐标给game
       // console.log('方块位置', this.iid, this.jid, this._itemType)
-      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color)
+      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color, {
+        x: this.node.x,
+        y: this.node.y
+      })
       this._game._score.onStep(-1)
       color = this.color
       if (this._status == 1 && this._game._status == 1 && this.color == color) {
@@ -142,19 +158,21 @@ cc.Class({
   },
   playFallAction(y, data) { //下降了几个格子
     this._status = 0
-    this.iid = data.y
-    this.jid = data.x
-    let action = cc.moveBy(0.3 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth))
+    if (data) {
+      this.iid = data.y
+      this.jid = data.x
+    }
+    let action = cc.moveBy(1 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth)).easing(cc.easeBounceOut(2.0))
     let seq = cc.sequence(action, cc.callFunc(() => {
       this._status = 1
-      this._game.checkNeedGenerator()
+      //  this._game.checkNeedGenerator()
     }, this))
     this.node.runAction(seq)
   },
   playStartAction() {
     this.node.scaleX = 0
     this.node.scaleY = 0
-    let action = cc.scaleTo(0.2 / this._game.animationSpeed, 1, 1)
+    let action = cc.scaleTo(0.8 / this._game.animationSpeed, 1, 1).easing(cc.easeBackOut())
     let seq = cc.sequence(action, cc.callFunc(() => {
       this._status = 1
     }, this))
@@ -175,12 +193,25 @@ cc.Class({
     this.node.scaleX = 1
     this.node.scaleY = 1
     return new Promise((resolve, reject) => {
-      let action = cc.scaleTo(0.2 / self._game.animationSpeed, 0, 0)
-      let seq = cc.sequence(action, cc.callFunc(() => {
-        resolve('')
-      }, this))
+      let action
+      if (this.warningSprite.spriteFrame) { //有道具预警
+        let action1 = cc.scaleTo(0.2, 1.1, 1.1)
+        let action2 = cc.moveTo(0.3, this._game.target.x, this._game.target.y)
+        let action3 = cc.scaleTo(0.3, 0, 0)
+        var seq = cc.sequence(action1, cc.callFunc(() => {
+          resolve('')
+        }, this), cc.spawn(action2, action3))
+      } else {
+        action = cc.scaleTo(0.2 / self._game.animationSpeed, 0, 0)
+        var seq = cc.sequence(action, cc.callFunc(() => {
+          resolve('')
+        }, this))
+      }
       self.node.runAction(seq)
     });
+  },
+  generatePropAction() {
+
   },
   generateItem(type) {
     this._itemType = type
