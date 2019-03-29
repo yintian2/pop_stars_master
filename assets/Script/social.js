@@ -18,7 +18,7 @@ cc.Class({
     //this.display.node.height = window.height
     //this.display.node.getComponent(cc.WXSubContextView).enabled = false;
     //   this.tex = new cc.Texture2D();
-    //TODO: 微信小游戏导致音乐自动关闭
+    //TODO: 微信小游戏导致音乐自动关闭 优先度 1
     wx.onShow(c.musicMgr.checkBg())
   },
   // --------------- share ----------------
