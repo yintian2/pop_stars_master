@@ -24,14 +24,14 @@ cc.Class({
     this.isPush = false
     this.bindEvent()
     this.color = data.color || Math.ceil(Math.random() * 4)
-    this.colorSprite = this.node.getChildByName('color').getComponent(cc.Sprite)
-    this.colorSprite.spriteFrame = itemType ? g.propSpriteFrame[(itemType - 1) * 4 + this.color - 1] : this._game.blockSprite[this.color - 1]
+   this.colorSprite = this.node.getChildByName('color').getComponent(cc.Sprite)
+   this.colorSprite.spriteFrame = itemType ? g.propSpriteFrame[(itemType - 1) * 4 + this.color - 1] : this._game.blockSprite[this.color - 1]
     this.warningSprite.spriteFrame = ''
     this._width = width
     this._controller = g._controller
     // 计算宽
     this.lightSprite.node.active = false
-    this.lightSprite.spriteFrame = this._game.blockSprite[this.color - 1]
+  //  this.lightSprite.spriteFrame = this._game.blockSprite[this.color - 1]
     this.node.width = this.node.height = width
     this.startTime = data.startTime
     this.iid = data.y
@@ -47,13 +47,13 @@ cc.Class({
       return
     }
     this.warningSprite.spriteFrame = this._game.warningSpriteFrame[type - 1] || ''
-    this.lightSprite.node.active = true
+ //   this.lightSprite.node.active = true
     let action1 = cc.blink(1, 10)
-    this.lightSprite.node.runAction(action1)
+ //   this.lightSprite.node.runAction(action1)
   },
   warningInit() {
     this.warningSprite.spriteFrame = ''
-    this.lightSprite.node.active = false
+  //  this.lightSprite.node.active = false
     this.isPush = false
   },
   growInit() {
@@ -164,7 +164,7 @@ cc.Class({
       this.iid = data.y
       this.jid = data.x
     }
-    let action = cc.moveBy(1 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth)).easing(cc.easeBounceOut(2.0))
+    let action = cc.moveBy(1 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth)).easing(cc.easeBounceOut(2 * y))
     let seq = cc.sequence(action, cc.callFunc(() => {
       this._status = 1
       //  this._game.checkNeedGenerator()
@@ -198,8 +198,8 @@ cc.Class({
       let action
       if (this.warningSprite.spriteFrame) { //有道具预警
         let action1 = cc.scaleTo(0.1, 1.1, 1.1)
-        let action2 = cc.moveTo(0.2, this._game.target.x, this._game.target.y)
-        let action3 = cc.scaleTo(0.2, 0, 0)
+        let action2 = cc.moveTo(0.1, this._game.target.x, this._game.target.y)
+        let action3 = cc.scaleTo(0.1, 0, 0)
         var seq = cc.sequence(action1, cc.callFunc(() => {
           resolve('')
         }, this), cc.spawn(action2, action3))

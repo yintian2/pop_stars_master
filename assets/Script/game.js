@@ -84,7 +84,6 @@ cc.Class({
   //方块下落
   onFall() {
     this.checkMgr.init(this)
-
     this.checkGenerateProp(this._score.chain).then(() => {
       let self = this
       this._status = 4
