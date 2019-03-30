@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3592084286220577,
-      "y": 0.3592084286220577,
+      "x": 0.5253556845383597,
+      "y": 0.5253556845383597,
       "z": 1
     },
     "_quat": {
@@ -261,8 +261,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 184,
-      "y": 321,
+      "x": 565,
+      "y": 367,
       "z": 0
     },
     "_scale": {
@@ -284,7 +284,7 @@
     "_skewY": 0,
     "_zIndex": 0,
     "groupIndex": 0,
-    "_id": "5bF1KPMQBH+bN/fcM+h8/1"
+    "_id": "3fKb78mIZCso/ORrmtuOhI"
   },
   {
     "__type__": "dragonBones.ArmatureDisplay",
@@ -297,19 +297,17 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_armatureName": "Armature",
-    "_animationName": "walk2",
+    "_animationName": "",
     "playTimes": -1,
     "premultipliedAlpha": false,
     "_N$dragonAsset": {
       "__uuid__": "8bbf286a-b464-428b-a884-564c49b304b9"
     },
-    "_N$dragonAtlasAsset": {
-      "__uuid__": "a57fb5b0-6e2f-491e-91ae-9d08ea81322b"
-    },
+    "_N$dragonAtlasAsset": null,
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 2,
+    "_N$_animationIndex": 0,
     "_N$timeScale": 1,
     "_N$debugBones": false,
-    "_id": "89825xictLl6ie5AUP51rB"
+    "_id": "3cATAL8pBC9a9d8jAIGxVQ"
   }
 ]
