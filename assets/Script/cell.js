@@ -6,7 +6,7 @@ cc.Class({
   extends: cc.Component,
   properties: {
     _status: 0, //1为可触发点击 2为已经消失
-    _itemType: 0, //TODO:新增道具功能 1为双倍倍数 2为炸弹
+    _itemType: 0, //新增道具功能 1为双倍倍数 2为炸弹
     warningSprite: cc.Sprite,
     lightSprite: cc.Sprite,
   },
@@ -31,7 +31,7 @@ cc.Class({
     this._controller = g._controller
     // 计算宽
     this.lightSprite.node.active = false
-    this.lightSprite.spriteFrame = this._game.blockSprite[this.color - 1]
+    //  this.lightSprite.spriteFrame = this._game.blockSprite[this.color - 1]
     this.node.width = this.node.height = width
     this.startTime = data.startTime
     this.iid = data.y
@@ -47,13 +47,13 @@ cc.Class({
       return
     }
     this.warningSprite.spriteFrame = this._game.warningSpriteFrame[type - 1] || ''
-    this.lightSprite.node.active = true
+    //   this.lightSprite.node.active = true
     let action1 = cc.blink(1, 10)
-    this.lightSprite.node.runAction(action1)
+    //   this.lightSprite.node.runAction(action1)
   },
   warningInit() {
     this.warningSprite.spriteFrame = ''
-    this.lightSprite.node.active = false
+    //  this.lightSprite.node.active = false
     this.isPush = false
   },
   growInit() {
@@ -140,7 +140,10 @@ cc.Class({
     self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
     if (this._itemType != 0) {
       // console.log("触发了道具", this._itemType)
-      self._game.onItem(this._itemType, color)
+      self._game.onItem(this._itemType, color, {
+        x: this.node.x,
+        y: this.node.y
+      })
     }
     // 连锁状态
     if (isChain) {
@@ -164,7 +167,7 @@ cc.Class({
       this.iid = data.y
       this.jid = data.x
     }
-    let action = cc.moveBy(1 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth)).easing(cc.easeBounceOut(2.0))
+    let action = cc.moveBy(1 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth)).easing(cc.easeBounceOut(5 / y))
     let seq = cc.sequence(action, cc.callFunc(() => {
       this._status = 1
       //  this._game.checkNeedGenerator()
@@ -197,9 +200,9 @@ cc.Class({
     return new Promise((resolve, reject) => {
       let action
       if (this.warningSprite.spriteFrame) { //有道具预警
-        let action1 = cc.scaleTo(0.1, 1.1, 1.1)
-        let action2 = cc.moveTo(0.2, this._game.target.x, this._game.target.y)
-        let action3 = cc.scaleTo(0.2, 0, 0)
+        let action1 = cc.scaleTo(0.2 / self._game.animationSpeed, 1.1)
+        let action2 = cc.moveTo(0.2 / self._game.animationSpeed, this._game.target.x, this._game.target.y)
+        let action3 = cc.scaleTo(0.2, 0)
         var seq = cc.sequence(action1, cc.callFunc(() => {
           resolve('')
         }, this), cc.spawn(action2, action3))

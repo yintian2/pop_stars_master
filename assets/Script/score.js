@@ -130,6 +130,7 @@ cc.Class({
     this.multLabel.node.active = false
   },
   showMultLabel() {
+    //TODO:增加心跳动画 优先处理
     this.multLabel.string = this.multiple
     this.multLabel.node.active = true
   },
@@ -154,13 +155,13 @@ cc.Class({
     this._game._status = 2
   },
   levelLimit() {
-   //console.log('等级达到上限')
+    //console.log('等级达到上限')
 
   },
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
-    
+
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
     setTimeout(() => {
       this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
@@ -173,17 +174,20 @@ cc.Class({
         this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1) % 3]
       }))
     }, 300);
+    this.showNextLevelData()
   },
   onGameOver() {
     if (this._game._status != 3) {
       this._game.gameOver()
-      // TODO:绑定分数和其他字
       this.updateFailPage()
       if (this._controller.social.node.active) {
         // 仅上传分数
         this._controller.social.onGameOver(this.level, this.score)
       }
     }
+  },
+  showNextLevelData() {
+    let nextLevelData = this.levelData[this.level]
   },
   updateFailPage() {
     this.failScore.string = " " + (this.score + '')

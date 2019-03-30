@@ -8,7 +8,7 @@ cc.Class({
   properties: {
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
-    blockSprite: [cc.SpriteFrame], //todo: 换成动态生成
+    blockSprite: [cc.SpriteFrame], //todo: 换成动态生成 优先度 0
     warningSpriteFrame: [cc.SpriteFrame],
     propSpriteFrame: [cc.SpriteFrame],
     checkMgr: require("check")
@@ -84,7 +84,6 @@ cc.Class({
   //方块下落
   onFall() {
     this.checkMgr.init(this)
-
     this.checkGenerateProp(this._score.chain).then(() => {
       let self = this
       this._status = 4
@@ -251,11 +250,12 @@ cc.Class({
       resolve()
     })
   },
-  onItem(type, color) {
+  onItem(type, color, pos) {
     switch (type) {
       case 1:
         // 分数翻倍 最高八倍
         this._score.addMult()
+        //TODO: 在pos的地方生成一个X2的道具图片 飞到X2的地方 再调用addMult 优先处理
         break
       case 2:
         // 炸弹 消除同种颜色的

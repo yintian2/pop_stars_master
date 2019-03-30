@@ -26,6 +26,14 @@ function popOut(time) {
 function popIn(time) {
   return cc.scaleTo(time, 0.5).easing(cc.easeBackIn(2.0))
 }
+
+function heartBeat() {
+  let action1 = cc.scaleTo(0.2, 1.2).easing(cc.easeElasticInOut())
+  let action2 = cc.scaleTo(0.2, 1).easing(cc.easeElasticInOut())
+  let action3 = cc.rotateTo(0.1, 45)
+  let action4 = cc.rotateTo(0.2, -45)
+  let action5 = cc.rotateTo(0.1, 0)
+}
 //翻页效果 前两个传node type传数字 左右旋转的
 function pageTurning(pageUp, pageDown, typeA) {
   switch (typeA) {
@@ -80,6 +88,7 @@ module.exports = {
   shackAction: shackAction,
   blinkAction: blinkAction,
   pageTurning: pageTurning,
+  heartBeat: heartBeat,
   getMoveOutofScreenActive: getMoveOutofScreenActive,
   popOut: popOut,
   popIn: popIn,
