@@ -36,10 +36,13 @@ cc.Class({
   },
   loadAvatarRes() {
     var self = this
-    cc.loader.loadResDir("role", cc.SpriteFrame, (err, spriteFrames) => {
-      this.avatarSpriteArr = spriteFrames
-      console.log('加载图集成功', this.avatarSpriteArr)
-    })
+    for (let i = 0; i < 15; i++) {
+      let name = "role/role" + (i + 1 + '')
+      cc.loader.loadRes(name, cc.SpriteFrame, (err, spriteFrame) => {
+        this.avatarSpriteArr[i] = spriteFrame
+      })
+    }
+
   },
   start() {
     this.generatePool()
