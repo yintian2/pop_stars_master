@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.7016021163024524,
+      "y": 0.7016021163024524,
       "z": 1
     },
     "_quat": {
@@ -4503,9 +4503,6 @@
       },
       {
         "__uuid__": "36a3b79f-6b3f-4d87-8cbc-fb0ca58b7d74"
-      },
-      {
-        "__uuid__": "3079540a-c127-41b6-aab9-1ab054eb3d01"
       }
     ],
     "_id": "c4G/8mhk5NfJaO7Fifmcfl"
@@ -4835,7 +4832,7 @@
         "__id__": 158
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -6320,7 +6317,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Sprite",
+    "_name": "sprite",
     "_objFlags": 0,
     "_parent": {
       "__id__": 132

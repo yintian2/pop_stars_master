@@ -3,6 +3,8 @@
  * @file  UI 分数控制器
  * @todo 
  */
+var AC = require('action')
+
 cc.Class({
   extends: cc.Component,
   properties: {
@@ -30,6 +32,14 @@ cc.Class({
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false
     this.playerSprite.spriteFrame = this.avatarSpriteArr[this.level - 1]
+    this.loadAvatarRes()
+  },
+  loadAvatarRes() {
+    var self = this
+    cc.loader.loadResDir("role", cc.SpriteFrame, (err, spriteFrames) => {
+      this.avatarSpriteArr = spriteFrames
+      console.log('加载图集成功', this.avatarSpriteArr)
+    })
   },
   start() {
     this.generatePool()
@@ -76,6 +86,7 @@ cc.Class({
     // 失败时更新失败UI
     this.failScore = this.failDialog.getChildByName('info').getChildByName('score').getComponent(cc.Label)
     this.failName = this.failDialog.getChildByName('info').getChildByName('level').getComponent(cc.Label)
+    this.failSprite = this.failDialog.getChildByName('info').getChildByName('sprite').getComponent(cc.Sprite)
     this.failHighScore = this.failDialog.getChildByName('info').getChildByName('highScore').getComponent(cc.Label)
   },
   //--------------------- 分数控制 ---------------------
@@ -131,6 +142,8 @@ cc.Class({
   },
   showMultLabel() {
     //TODO:增加心跳动画 优先处理
+    this.multLabel.node.scale = 0.5
+    this.multLabel.node.runAction(AC.popOut(0.5))
     this.multLabel.string = this.multiple
     this.multLabel.node.active = true
   },
@@ -171,7 +184,7 @@ cc.Class({
         this.onStep(this.levelData[this.level - 2].step)
         this._game._status = 1
         this.mainScoreLabel.node.active = false
-        this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1) % 3]
+        this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1)]
       }))
     }, 300);
     this.showNextLevelData()
@@ -191,6 +204,7 @@ cc.Class({
   },
   updateFailPage() {
     this.failScore.string = " " + (this.score + '')
+    this.failSprite.spriteFrame = this.playerSprite.spriteFrame
     this.failName.string = this.levelData[this.level - 1].name
     //this.failHighScore.string = "正在获取您的最高分..."
   }
