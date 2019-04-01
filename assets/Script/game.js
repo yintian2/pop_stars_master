@@ -253,8 +253,7 @@ cc.Class({
     switch (type) {
       case 1:
         // 分数翻倍 最高八倍
-        this._score.addMult()
-        //TODO: 在pos的地方生成一个X2的道具图片 飞到X2的地方 再调用addMult 优先处理
+        this._score.addMult(color,pos)
         break
       case 2:
         // 炸弹 消除同种颜色的

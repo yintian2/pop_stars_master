@@ -14,6 +14,7 @@ cc.Class({
     successDialog: require('successDialog'),
     failDialog: cc.Node,
     avatarSpriteArr: [cc.SpriteFrame],
+    multPropPrefab: cc.Prefab,
     // progressBar: require('progress'),
     // leftStepLabel: cc.Label,
   },
@@ -58,6 +59,11 @@ cc.Class({
     for (let i = 0; i < 20; i++) {
       let scoreParticle = cc.instantiate(this.scoreParticlePrefab)
       this.scoreParticlePool.put(scoreParticle)
+    }
+    this.multPropPool = new cc.NodePool()
+    for (let i = 0; i < 3; i++) {
+      let multProp = cc.instantiate(this.multPropPrefab)
+      this.multPropPool.put(multProp)
     }
   },
   // 实例化单个方块
@@ -133,8 +139,19 @@ cc.Class({
     this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
     this.chain++
   },
-  addMult() {
+  addMult(color, pos) {
+    if (this.multPropPool.size() > 0) {
+      let multProp = this.multPropPool.get()
+      multProp.parent = this.mainScoreLabel.node
+      multProp.x = pos.x
+      multProp.y = pos.y
+      multProp.getComponent(cc.Sprite).spriteFrame = this._game.propSpriteFrame[color - 1]
+      multProp.runAction(cc.sequence(cc.moveTo(0.2, 187, 0), cc.callFunc(() => {
+        this.multPropPool.put(multProp)
+      })))
+    }
     if (this.multiple < this._controller.config.json.maxMultiple) {
+      // 动态生成一个图片 移动到multLabel上
       this.multiple *= 2
       this.showMultLabel()
     }
@@ -146,9 +163,9 @@ cc.Class({
   showMultLabel() {
     //TODO:增加心跳动画 优先处理
     this.multLabel.node.scale = 0.5
-    this.multLabel.node.runAction(AC.popOut(0.5))
     this.multLabel.string = this.multiple
     this.multLabel.node.active = true
+    this.multLabel.node.runAction(AC.popOut(0.3))
   },
   // 增加分数倍数
   initCurrentScoreLabel() {
