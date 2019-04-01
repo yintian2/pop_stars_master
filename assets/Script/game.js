@@ -256,11 +256,13 @@ cc.Class({
       case 1:
         // 分数翻倍 最高八倍
         this._score.addMult(color,pos)
+        this._controller.musicMgr.onDouble()
         break
       case 2:
         // 炸弹 消除同种颜色的
         this.node.runAction(AC.shackAction(0.1, 10))
         this.isPropChain = true
+        this._controller.musicMgr.onBoom()
         for (let i = 0; i < this.rowNum; i++) { //行
           for (let j = 0; j < this.rowNum; j++) { //列
             if (this.map[i][j] && this.map[i][j].getComponent('cell').color == color) {

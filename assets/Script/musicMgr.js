@@ -11,6 +11,8 @@ cc.Class({
     audioPrefab: cc.Prefab,
     bgMusic: cc.AudioSource,
     winAudio:cc.AudioSource,
+    doubleAudio:cc.AudioSource,
+    boomAudio:cc.AudioSource
     //audioSource: cc.AudioSource,
   },
   init() {
@@ -75,5 +77,15 @@ cc.Class({
   onWin(){
     this.winAudio.rewind()
     this.winAudio.play()
+  },
+
+  onDouble(){
+    this.doubleAudio.rewind()
+    this.doubleAudio.play()
+  },
+
+  onBoom(){
+    this.boomAudio.rewind()
+    this.boomAudio.play()
   }
 });
