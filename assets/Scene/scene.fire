@@ -2128,12 +2128,12 @@
       }
     ],
     "_prefab": null,
-    "_opacity": 203.745,
+    "_opacity": 150,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 5,
+      "g": 5,
+      "b": 5,
       "a": 255
     },
     "_contentSize": {
