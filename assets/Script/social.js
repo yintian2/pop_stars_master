@@ -21,8 +21,13 @@ cc.Class({
     //TODO: 微信小游戏导致音乐自动关闭 优先度 1
     // 监听
     wx.onAudioInterruptionEnd(c.musicMgr.checkBg())
-    wx.onShow(c.musicMgr.checkBg())
-    wx.onHide()
+    wx.onShow(() => {
+      cc.director.resume()
+      c.musicMgr.checkBg()
+    })
+    wx.onHide(() => {
+      cc.director.pause()
+    })
   },
   // --------------- share ----------------
   loadShareData() {

@@ -139,6 +139,7 @@ cc.Class({
     this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
     this.chain++
   },
+  // 增加倍数
   addMult(color, pos) {
     if (this.multPropPool.size() > 0) {
       let multProp = this.multPropPool.get()
@@ -156,6 +157,7 @@ cc.Class({
       this.showMultLabel()
     }
   },
+  // 关闭倍数的数字显示
   closeMultLabel() {
     this.multiple = 1
     this.multLabel.node.active = false
@@ -174,12 +176,14 @@ cc.Class({
     this.mainScoreLabel.node.y = 0
     this.mainScoreLabel.node.scale = 1
   },
+  // 生成小的分数节点
   onCurrentScoreLabel(num, pos, callback) {
     this.mainScoreLabel.string = num
     let action = cc.spawn(cc.moveTo(0.2, pos.x, pos.y), cc.scaleTo(0.2, 0.4)).easing(cc.easeBackOut())
     let seq = cc.sequence(action, callback)
     this.mainScoreLabel.node.runAction(seq)
   },
+  // 升级
   onLevelUp() {
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
@@ -187,14 +191,15 @@ cc.Class({
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this._game._status = 2
   },
+  // 等级限制
   levelLimit() {
     //console.log('等级达到上限')
-
+    this.hideNextLevelData()
   },
+  // 点击升级按钮
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
-
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
     setTimeout(() => {
       this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
@@ -209,6 +214,7 @@ cc.Class({
     }, 300);
     this.showNextLevelData()
   },
+  // 游戏结束
   onGameOver() {
     if (this._game._status != 3) {
       this._game.gameOver()
@@ -219,8 +225,13 @@ cc.Class({
       }
     }
   },
+  // 展示下一级的信息
   showNextLevelData() {
     let nextLevelData = this.levelData[this.level]
+  },
+  // 达到最高级之后 隐藏
+  hideNextLevelData(){
+
   },
   updateFailPage() {
     this.failScore.string = " " + (this.score + '')
