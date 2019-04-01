@@ -8,7 +8,7 @@ cc.Class({
   properties: {
     _status: 0, //0 未开始 1 游戏开始 2 游戏暂停 3 游戏结束 4 下落状态 5无法触摸状态
     blockPrefab: cc.Prefab,
-    blockSprite: [cc.SpriteFrame], //todo: 换成动态生成 优先度 0
+    blockSprite: [cc.SpriteFrame], //todo: 换成动态生成 暂不处理
     warningSpriteFrame: [cc.SpriteFrame],
     propSpriteFrame: [cc.SpriteFrame],
     checkMgr: require("check")
@@ -38,7 +38,7 @@ cc.Class({
   gameStart() {
     this._score.init(this)
     this.mapSet(this.rowNum).then((result) => {
-      console.log('游戏状态改变', result)
+     // console.log('游戏状态改变', result)
       this._status = 1
     })
   },
@@ -121,7 +121,6 @@ cc.Class({
           this.map[k][j].getComponent('cell').playFallAction(canFall, null)
         }
       }
-      console.log(this.map)
       this.checkMgr.check(this)
       this._status = 1
     })
@@ -254,8 +253,7 @@ cc.Class({
     switch (type) {
       case 1:
         // 分数翻倍 最高八倍
-        this._score.addMult()
-        //TODO: 在pos的地方生成一个X2的道具图片 飞到X2的地方 再调用addMult 优先处理
+        this._score.addMult(color,pos)
         break
       case 2:
         // 炸弹 消除同种颜色的

@@ -3,6 +3,8 @@
  * @file  UI 分数控制器
  * @todo 
  */
+var AC = require('action')
+
 cc.Class({
   extends: cc.Component,
   properties: {
@@ -12,6 +14,7 @@ cc.Class({
     successDialog: require('successDialog'),
     failDialog: cc.Node,
     avatarSpriteArr: [cc.SpriteFrame],
+    multPropPrefab: cc.Prefab,
     // progressBar: require('progress'),
     // leftStepLabel: cc.Label,
   },
@@ -30,6 +33,17 @@ cc.Class({
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false
     this.playerSprite.spriteFrame = this.avatarSpriteArr[this.level - 1]
+    this.loadAvatarRes()
+  },
+  loadAvatarRes() {
+    var self = this
+    for (let i = 0; i < 15; i++) {
+      let name = "role/role" + (i + 1 + '')
+      cc.loader.loadRes(name, cc.SpriteFrame, (err, spriteFrame) => {
+        this.avatarSpriteArr[i] = spriteFrame
+      })
+    }
+
   },
   start() {
     this.generatePool()
@@ -45,6 +59,11 @@ cc.Class({
     for (let i = 0; i < 20; i++) {
       let scoreParticle = cc.instantiate(this.scoreParticlePrefab)
       this.scoreParticlePool.put(scoreParticle)
+    }
+    this.multPropPool = new cc.NodePool()
+    for (let i = 0; i < 3; i++) {
+      let multProp = cc.instantiate(this.multPropPrefab)
+      this.multPropPool.put(multProp)
     }
   },
   // 实例化单个方块
@@ -76,6 +95,7 @@ cc.Class({
     // 失败时更新失败UI
     this.failScore = this.failDialog.getChildByName('info').getChildByName('score').getComponent(cc.Label)
     this.failName = this.failDialog.getChildByName('info').getChildByName('level').getComponent(cc.Label)
+    this.failSprite = this.failDialog.getChildByName('info').getChildByName('sprite').getComponent(cc.Sprite)
     this.failHighScore = this.failDialog.getChildByName('info').getChildByName('highScore').getComponent(cc.Label)
   },
   //--------------------- 分数控制 ---------------------
@@ -119,20 +139,35 @@ cc.Class({
     this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
     this.chain++
   },
-  addMult() {
+  // 增加倍数
+  addMult(color, pos) {
+    if (this.multPropPool.size() > 0) {
+      let multProp = this.multPropPool.get()
+      multProp.parent = this.mainScoreLabel.node
+      multProp.x = pos.x
+      multProp.y = pos.y
+      multProp.getComponent(cc.Sprite).spriteFrame = this._game.propSpriteFrame[color - 1]
+      multProp.runAction(cc.sequence(cc.moveTo(0.2, 187, 0), cc.callFunc(() => {
+        this.multPropPool.put(multProp)
+      })))
+    }
     if (this.multiple < this._controller.config.json.maxMultiple) {
+      // 动态生成一个图片 移动到multLabel上
       this.multiple *= 2
       this.showMultLabel()
     }
   },
+  // 关闭倍数的数字显示
   closeMultLabel() {
     this.multiple = 1
     this.multLabel.node.active = false
   },
   showMultLabel() {
     //TODO:增加心跳动画 优先处理
+    this.multLabel.node.scale = 0.5
     this.multLabel.string = this.multiple
     this.multLabel.node.active = true
+    this.multLabel.node.runAction(AC.popOut(0.3))
   },
   // 增加分数倍数
   initCurrentScoreLabel() {
@@ -141,12 +176,14 @@ cc.Class({
     this.mainScoreLabel.node.y = 0
     this.mainScoreLabel.node.scale = 1
   },
+  // 生成小的分数节点
   onCurrentScoreLabel(num, pos, callback) {
     this.mainScoreLabel.string = num
     let action = cc.spawn(cc.moveTo(0.2, pos.x, pos.y), cc.scaleTo(0.2, 0.4)).easing(cc.easeBackOut())
     let seq = cc.sequence(action, callback)
     this.mainScoreLabel.node.runAction(seq)
   },
+  // 升级
   onLevelUp() {
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
@@ -154,14 +191,15 @@ cc.Class({
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this._game._status = 2
   },
+  // 等级限制
   levelLimit() {
     //console.log('等级达到上限')
-
+    this.hideNextLevelData()
   },
+  // 点击升级按钮
   onLevelUpButton() {
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
-
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
     setTimeout(() => {
       this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
@@ -171,11 +209,12 @@ cc.Class({
         this.onStep(this.levelData[this.level - 2].step)
         this._game._status = 1
         this.mainScoreLabel.node.active = false
-        this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1) % 3]
+        this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1)]
       }))
     }, 300);
     this.showNextLevelData()
   },
+  // 游戏结束
   onGameOver() {
     if (this._game._status != 3) {
       this._game.gameOver()
@@ -186,11 +225,17 @@ cc.Class({
       }
     }
   },
+  // 展示下一级的信息
   showNextLevelData() {
     let nextLevelData = this.levelData[this.level]
   },
+  // 达到最高级之后 隐藏
+  hideNextLevelData(){
+
+  },
   updateFailPage() {
     this.failScore.string = " " + (this.score + '')
+    this.failSprite.spriteFrame = this.playerSprite.spriteFrame
     this.failName.string = this.levelData[this.level - 1].name
     //this.failHighScore.string = "正在获取您的最高分..."
   }

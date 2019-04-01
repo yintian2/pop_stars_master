@@ -10,8 +10,8 @@ cc.Class({
   },
 
   init(s, level, data) {
-    this.spriteBefore.spriteFrame = s.avatarSpriteArr[(level - 2) % 3]
-    this.spriteNow.spriteFrame = s.avatarSpriteArr[(level - 1) % 3]
+    this.spriteBefore.spriteFrame = s.avatarSpriteArr[(level - 2)]
+    this.spriteNow.spriteFrame = s.avatarSpriteArr[(level - 1)]
     this.nameLabelBefore.string = data[level - 2].name
     this.nameLabelNow.string = data[level - 1].name
     this.stepLabel.string = "奖励步数+" + data[level - 2].step
