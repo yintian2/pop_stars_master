@@ -109,7 +109,8 @@ cc.Class({
     this.leftStepLabel.string = this.leftStep
   },
   //增加分数总控制 获取连击
-  addScore(pos) {
+  addScore(pos, score) {
+    score = score || this._controller.config.json.scoreBase
     // 一次消除可以叠chain
     if (this.chainTimer) {
       clearTimeout(this.chainTimer)
@@ -121,11 +122,7 @@ cc.Class({
           y: 355
         }, cc.callFunc(() => {
           this.score += this.currentAddedScore * this.multiple
-          if (this.score >= this.levelData[this.level - 1].score) {
-            this.level++
-            this.level > (this.levelData.length + 1) ? this.levelLimit() : this.onLevelUp()
-          }
-          this.progressBar.init(this.score, this.levelData[this.level - 1], this.level)
+          this.checkLevelUp()
           this.chain = 1
           this.closeMultLabel()
           this.currentAddedScore = 0
@@ -134,10 +131,17 @@ cc.Class({
       }, 300 / 1
       // (cc.game.getFrameRate() / 60)
     )
-    this.currentAddedScore += this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain)
+    this.currentAddedScore += score * (this.chain > 10 ? 10 : this.chain)
     this.mainScoreLabel.string = this.currentAddedScore
-    this.instantiateScore(this, this._controller.config.json.scoreBase * (this.chain > 10 ? 10 : this.chain), pos)
+    this.instantiateScore(this, score * (this.chain > 10 ? 10 : this.chain), pos)
     this.chain++
+  },
+  checkLevelUp() {
+    if (this.score >= this.levelData[this.level - 1].score) {
+      this.level++
+      this.level > (this.levelData.length + 1) ? this.levelLimit() : this.onLevelUp()
+    }
+    this.progressBar.init(this.score, this.levelData[this.level - 1], this.level)
   },
   // 增加倍数
   addMult(color, pos) {
@@ -190,6 +194,7 @@ cc.Class({
     this._controller.musicMgr.onWin()
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this._game._status = 2
+    this.checkLevelUp()
   },
   // 等级限制
   levelLimit() {
@@ -230,7 +235,7 @@ cc.Class({
     let nextLevelData = this.levelData[this.level]
   },
   // 达到最高级之后 隐藏
-  hideNextLevelData(){
+  hideNextLevelData() {
 
   },
   updateFailPage() {
