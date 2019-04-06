@@ -40,7 +40,7 @@ cc.Class({
   gameStart() {
     this._score.init(this)
     this.mapSet(this.rowNum).then((result) => {
-     // console.log('游戏状态改变', result)
+      // console.log('游戏状态改变', result)
       this._status = 1
     })
   },
@@ -255,8 +255,17 @@ cc.Class({
     switch (type) {
       case 1:
         // 分数翻倍 最高八倍
-        this._score.addMult(color,pos)
+        this._score.addMult(color, pos)
         this._controller.musicMgr.onDouble()
+        for (let i = 0; i < this.rowNum; i++) { //行
+          for (let j = 0; j < this.rowNum; j++) { //列
+            if (this.map[i][j]) {
+              this.map[i][j].getComponent('cell').surfaceAction(
+                Math.sqrt(Math.pow(pos.x - this.map[i][j].x, 2) + Math.pow(pos.y - this.map[i][j].y, 2))
+              )
+            }
+          }
+        }
         break
       case 2:
         // 炸弹 消除同种颜色的
@@ -267,9 +276,13 @@ cc.Class({
           for (let j = 0; j < this.rowNum; j++) { //列
             if (this.map[i][j] && this.map[i][j].getComponent('cell').color == color) {
               this.map[i][j].getComponent('cell').onTouched(color, false, true)
+            } else {
+              this.map[i][j].runAction(AC.rockAction(0.2, 10))
             }
           }
         }
+        // TODO: 增加一个非当前颜色的晃动特效
+
         break
     }
   },

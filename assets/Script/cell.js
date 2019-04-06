@@ -136,7 +136,9 @@ cc.Class({
     isBomb = isBomb ? isBomb : false
     self._game.checkNeedFall()
     self._game._status = 5
-    self._controller.musicMgr.onPlayAudio(self._game._score.chain - 1)
+    self._controller.musicMgr.onPlayAudio(0
+      //self._game._score.chain - 1
+    )
     self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
     if (this._itemType != 0) {
       // console.log("触发了道具", this._itemType)
@@ -194,6 +196,8 @@ cc.Class({
   },
   playDieAction() {
     let self = this
+    clearTimeout(this.surfaceTimer)
+    this.node.stopAllActions()
     this._status = 2
     this.node.scaleX = 1
     this.node.scaleY = 1
@@ -214,6 +218,13 @@ cc.Class({
       }
       self.node.runAction(seq)
     });
+  },
+  surfaceAction(dela) {
+    this.surfaceTimer = setTimeout(() => {
+      let action = cc.scaleTo(0.4 / this._game.animationSpeed, 0.8, 0.8)
+      let action1 = cc.scaleTo(0.4 / this._game.animationSpeed, 1, 1)
+      this.node.runAction(cc.sequence(action, action1))
+    }, dela)
   },
   generatePropAction() {
 
