@@ -18,6 +18,18 @@ function shackAction(time, range) {
   let sq = cc.sequence(action1, action2, action3, action4, action5, action6, action7, action8, action9, action10)
   return sq
 }
+// 晃动动作
+function rockAction(time, range) {
+  let action1 = cc.rotateBy(time, range, range)
+  let action2 = cc.rotateBy(time, -2 * range, -2 * range)
+  let action3 = cc.rotateBy(time * 0.8, 2 * range * 0.8, 2 * range * 0.8)
+  let action6 = cc.rotateBy(time * 0.6, -2 * range * 0.6, -2 * range * 0.6)
+  let action7 = cc.rotateBy(time * 0.4, 2 * range * 0.4, 2 * range * 0.4)
+  let action10 = cc.rotateBy(time * 0.2, -range * 0.2, -range * 0.2)
+  let sq = cc.sequence(action1, action2, action3, action6, action7, action10)
+  return sq
+}
+
 // 弹出效果
 function popOut(time) {
   return cc.scaleTo(time, 1).easing(cc.easeBackOut(2.0))
@@ -92,5 +104,6 @@ module.exports = {
   getMoveOutofScreenActive: getMoveOutofScreenActive,
   popOut: popOut,
   popIn: popIn,
-  getMoveInScreenActive: getMoveInScreenActive
+  getMoveInScreenActive: getMoveInScreenActive,
+  rockAction: rockAction
 }
