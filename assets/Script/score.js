@@ -205,7 +205,6 @@ cc.Class({
         this.onStep(this.levelData[this.level - 2].step)
         this._game._status = 1
         this.mainScoreLabel.node.active = false
-        this.characterMgr.showCharacter(this.level)
       }))
     }, 300);
     this.showNextLevelData()

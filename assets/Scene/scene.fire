@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.7016021163024521,
-      "y": 0.7016021163024521,
+      "x": 0.3606634182908546,
+      "y": 0.3606634182908546,
       "z": 1
     },
     "_quat": {
@@ -3416,17 +3416,17 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_armatureName": "Armature",
-    "_animationName": "walk",
+    "_animationName": "",
     "playTimes": -1,
     "premultipliedAlpha": false,
     "_N$dragonAsset": {
-      "__uuid__": "3d5eed92-34b5-4f2c-82a5-56317e3e593e"
+      "__uuid__": "2dab20ed-6a0d-4b12-8db7-135b21c46924"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "b51b9674-2751-4a8a-9f77-fbbcbce285ff"
+      "__uuid__": "0a40e940-8462-42cf-b9f6-7ffbb600b074"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 1,
+    "_N$_animationIndex": 0,
     "_N$timeScale": 0.5,
     "_N$debugBones": false,
     "_id": "83VQjZ50FHdLWSVLUAJpCD"

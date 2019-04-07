@@ -25,7 +25,7 @@ cc.Class({
         this.textureArr[i] = texture
       })
     }
-    // console.log(this.dbArray, this.textureArr)
+    console.log(this.textureArr)
   },
   onWalk(target) {
     target.playAnimation('walk', -1)
@@ -38,6 +38,8 @@ cc.Class({
     this.showCharacter(level, this.levelUp2)
   },
   onLevelUpBtn(level) {
+    //  this.dbArray[level - 2].destory()
+    //this.dragonAtlasAsset[level - 2].destory()
     this.showCharacter(level, this.character)
   },
   onFail(level) {
@@ -47,10 +49,20 @@ cc.Class({
 
   showCharacter(level, target) {
     target = target || this.character
-    target.dragonAtlasAsset = null
-    target.dragonAsset = null
+    // let data = target.armature().clock;
+    // let nameSke = "db/sanxiao" + (level + '') + "_ske"
+    // let nameTex = "db/sanxiao" + (level + '') + "_tex"
+    // cc.loader.loadRes(nameSke, dragonBones.DragonBonesAsset, (err, assert) => {
+    //   target.dragonAsset = assert
+    // })
+    // cc.loader.loadRes(nameTex, dragonBones.DragonBonesAtlasAsset, (err, texture) => {
+    //   target.dragonAtlasAsset = texture
+    // })
+    // target.armature().clock = data
     target.dragonAsset = this.dbArray[level - 1]
     target.dragonAtlasAsset = this.textureArr[level - 1]
+    target.armatureName = 'Armatrue'
+    target.animationName = 'walk'
     this.onWalk(target)
   },
 });
