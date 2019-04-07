@@ -14,7 +14,7 @@ cc.Class({
     this._game = g
     this._status = 1
     if (pos) {
-     //cc.log('生成的方块', pos)
+      //cc.log('生成的方块', pos)
     }
     pos = pos || {
       x: data.x,
@@ -139,14 +139,15 @@ cc.Class({
     self._controller.musicMgr.onPlayAudio(0
       //self._game._score.chain - 1
     )
-    self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap))
     if (this._itemType != 0) {
-      // console.log("触发了道具", this._itemType)
+       console.log("触发了道具", this._itemType)
       self._game.onItem(this._itemType, color, {
         x: this.node.x,
         y: this.node.y
       })
     }
+    self._game._score.addScore(cc.v2(this.node.x, this.node.y - this.node.width + this._game.gap), this._itemType == 3 ? this._game._controller.config.json.propConfig[2].score : null)
+
     // 连锁状态
     if (isChain) {
       if ((self.iid - 1) >= 0) {
