@@ -12,7 +12,7 @@ cc.Class({
     scoreParticlePrefab: cc.Prefab,
     mainScoreLabel: cc.Label,
     successDialog: require('successDialog'),
-    characterMgr:require('character'),
+    characterMgr: require('character'),
     failDialog: cc.Node,
     multPropPrefab: cc.Prefab,
     // progressBar: require('progress'),
@@ -119,9 +119,10 @@ cc.Class({
       }, 300 / 1
       // (cc.game.getFrameRate() / 60)
     )
-    this.currentAddedScore += score * (this.chain > 10 ? 10 : this.chain)
+    let addScore = score == 10 ? score * (this.chain > 10 ? 10 : this.chain) : score
+    this.currentAddedScore += addScore
     this.mainScoreLabel.string = this.currentAddedScore
-    this.instantiateScore(this, score * (this.chain > 10 ? 10 : this.chain), pos)
+    this.instantiateScore(this, addScore, pos)
     this.chain++
   },
   checkLevelUp() {
@@ -133,18 +134,18 @@ cc.Class({
   },
   // 增加倍数
   addMult(color, pos) {
-    if (this.multPropPool.size() > 0) {
-      let multProp = this.multPropPool.get()
-      multProp.parent = this.mainScoreLabel.node
-      multProp.x = pos.x
-      multProp.y = pos.y
-      multProp.getComponent(cc.Sprite).spriteFrame = this._game.propSpriteFrame[color - 1]
-      multProp.runAction(cc.sequence(cc.moveTo(0.2, 187, 0), cc.callFunc(() => {
-        this.multPropPool.put(multProp)
-      })))
-    }
+    //TODO: 动态生成一个图片 移动到multLabel上 有bug
+    // if (this.multPropPool.size() > 0) {
+    //   let multProp = this.multPropPool.get()
+    //   multProp.parent = this.mainScoreLabel.node
+    //   multProp.x = pos.x
+    //   multProp.y = pos.y
+    //   multProp.getComponent(cc.Sprite).spriteFrame = this._game.propSpriteFrame[color - 1]
+    //   multProp.runAction(cc.sequence(cc.moveTo(0.2, 187, 0), cc.callFunc(() => {
+    //     this.multPropPool.put(multProp)
+    //   })))
+    // }
     if (this.multiple < this._controller.config.json.maxMultiple) {
-      // 动态生成一个图片 移动到multLabel上
       this.multiple *= 2
       this.showMultLabel()
     }
@@ -230,7 +231,7 @@ cc.Class({
   },
   updateFailPage() {
     this.failScore.string = " " + (this.score + '')
-    this.onFail(this.level)
+    this.characterMgr.onFail(this.level)
     this.failName.string = this.levelData[this.level - 1].name
     //this.failHighScore.string = "正在获取您的最高分..."
   }

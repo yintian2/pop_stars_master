@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1.2974224418288798,
-      "y": 1.2974224418288798,
+      "x": 0.2903064032553588,
+      "y": 0.2903064032553588,
       "z": 1
     },
     "_quat": {
@@ -3447,10 +3447,10 @@
     "playTimes": -1,
     "premultipliedAlpha": false,
     "_N$dragonAsset": {
-      "__uuid__": "2dab20ed-6a0d-4b12-8db7-135b21c46924"
+      "__uuid__": "f22f1df4-ac80-4c76-a133-b9af4d9a2581"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "0a40e940-8462-42cf-b9f6-7ffbb600b074"
+      "__uuid__": "b4c5d776-238d-4f11-b97a-89dddcec9b99"
     },
     "_N$_defaultArmatureIndex": 0,
     "_N$_animationIndex": 0,
@@ -6391,10 +6391,10 @@
     "playTimes": -1,
     "premultipliedAlpha": false,
     "_N$dragonAsset": {
-      "__uuid__": "a27565c8-1288-455c-8024-54df16442f72"
+      "__uuid__": "dcfcf95c-6c9c-46f5-a90b-82032ee162bf"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "92c46685-6693-4f44-923e-fb7dc1380e02"
+      "__uuid__": "85fd39ab-7c89-47cb-8beb-ab54e7951263"
     },
     "_N$_defaultArmatureIndex": 0,
     "_N$_animationIndex": 0,
@@ -6567,10 +6567,10 @@
     "playTimes": -1,
     "premultipliedAlpha": false,
     "_N$dragonAsset": {
-      "__uuid__": "ddef4070-51c4-4cd5-8284-91d23b6b8a75"
+      "__uuid__": "b4c95ef6-49f8-44ae-8ccb-20e4124a5ee7"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "df3e5f68-26e6-4a94-bb50-e234d86da4b6"
+      "__uuid__": "dde1501a-4cac-47c4-820d-ea1b54def8cc"
     },
     "_N$_defaultArmatureIndex": 0,
     "_N$_animationIndex": 0,
@@ -7583,7 +7583,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 1,
     "_components": [
       {
