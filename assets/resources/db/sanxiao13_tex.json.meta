@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "2177f0ec-0cb2-4f3b-81c5-85f77d91d2db",
+  "atlasJson": "{\"SubTexture\":[{\"frameHeight\":24,\"y\":173,\"frameWidth\":30,\"frameX\":-1,\"width\":28,\"frameY\":0,\"height\":24,\"name\":\"role13/图层6\",\"x\":179},{\"width\":20,\"y\":173,\"height\":24,\"name\":\"role13/图层7\",\"x\":209},{\"width\":42,\"y\":158,\"height\":73,\"name\":\"role13/图层5\",\"x\":135},{\"width\":132,\"y\":158,\"height\":112,\"name\":\"role13/图层1(2)\",\"x\":1},{\"frameHeight\":81,\"y\":91,\"frameWidth\":42,\"frameX\":0,\"width\":42,\"frameY\":0,\"height\":80,\"name\":\"role13/图层3\",\"x\":192},{\"frameHeight\":88,\"y\":1,\"frameWidth\":47,\"frameX\":0,\"width\":46,\"frameY\":0,\"height\":88,\"name\":\"role13/图层4\",\"x\":192},{\"frameHeight\":156,\"y\":1,\"frameWidth\":189,\"frameX\":0,\"width\":189,\"frameY\":0,\"height\":155,\"name\":\"role13/图层2\",\"x\":1}],\"width\":256,\"imagePath\":\"sanxiao13_tex.png\",\"name\":\"sanxiao13\",\"height\":512}",
+  "texture": "27396807-7beb-4ab0-89ef-577d2dae0e29",
+  "subMetas": {}
+}

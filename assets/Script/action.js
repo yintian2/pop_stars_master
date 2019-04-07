@@ -25,7 +25,7 @@ function rockAction(time, range) {
   let action3 = cc.rotateBy(time * 0.8, 2 * range * 0.8, 2 * range * 0.8)
   let action6 = cc.rotateBy(time * 0.6, -2 * range * 0.6, -2 * range * 0.6)
   let action7 = cc.rotateBy(time * 0.4, 2 * range * 0.4, 2 * range * 0.4)
-  let action10 = cc.rotateBy(time * 0.2, -range * 0.2, -range * 0.2)
+  let action10 = cc.rotateTo(time * 0.2, 0, 0)
   let sq = cc.sequence(action1, action2, action3, action6, action7, action10)
   return sq
 }

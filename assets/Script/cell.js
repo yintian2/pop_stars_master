@@ -14,7 +14,7 @@ cc.Class({
     this._game = g
     this._status = 1
     if (pos) {
-      cc.log('生成的方块', pos)
+     //cc.log('生成的方块', pos)
     }
     pos = pos || {
       x: data.x,

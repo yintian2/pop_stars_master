@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "0a40e940-8462-42cf-b9f6-7ffbb600b074",
+  "atlasJson": "{\"width\":256,\"imagePath\":\"sanxiao12_tex.png\",\"height\":512,\"name\":\"sanxiao12\",\"SubTexture\":[{\"width\":60,\"y\":159,\"height\":55,\"name\":\"role12/图层4\",\"x\":143},{\"y\":75,\"frameX\":0,\"frameHeight\":28,\"frameY\":0,\"width\":21,\"frameWidth\":22,\"height\":28,\"name\":\"role12/图层7\",\"x\":216},{\"width\":23,\"y\":45,\"height\":28,\"name\":\"role12/图层6\",\"x\":216},{\"width\":140,\"y\":159,\"height\":115,\"name\":\"role12/图层1\",\"x\":1},{\"y\":159,\"frameX\":0,\"frameHeight\":65,\"frameY\":0,\"width\":35,\"frameWidth\":35,\"height\":64,\"name\":\"role12/图层3\",\"x\":205},{\"width\":39,\"y\":1,\"height\":42,\"name\":\"role12/图层5\",\"x\":216},{\"width\":213,\"y\":1,\"height\":156,\"name\":\"role12/图层2\",\"x\":1}]}",
+  "texture": "106cff34-465d-4c13-b338-bc407d0407f0",
+  "subMetas": {}
+}

@@ -12,8 +12,8 @@ cc.Class({
     scoreParticlePrefab: cc.Prefab,
     mainScoreLabel: cc.Label,
     successDialog: require('successDialog'),
+    characterMgr:require('character'),
     failDialog: cc.Node,
-    avatarSpriteArr: [cc.SpriteFrame],
     multPropPrefab: cc.Prefab,
     // progressBar: require('progress'),
     // leftStepLabel: cc.Label,
@@ -32,18 +32,7 @@ cc.Class({
     this.scoreTimer = []
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false
-    this.playerSprite.spriteFrame = this.avatarSpriteArr[this.level - 1]
-    this.loadAvatarRes()
-  },
-  loadAvatarRes() {
-    var self = this
-    for (let i = 0; i < 15; i++) {
-      let name = "role/role" + (i + 1 + '')
-      cc.loader.loadRes(name, cc.SpriteFrame, (err, spriteFrame) => {
-        this.avatarSpriteArr[i] = spriteFrame
-      })
-    }
-
+    this.characterMgr.showCharacter(this.level)
   },
   start() {
     this.generatePool()
@@ -87,7 +76,6 @@ cc.Class({
     scoreParticle.getComponent('scoreParticle').init(self, pos, this._controller.config.json.scoreParticleTime)
   },
   bindNode() {
-    this.playerSprite = this.node.getChildByName('UI').getChildByName('playerNode').getChildByName('Sprite').getComponent(cc.Sprite)
     this.leftStepLabel = this.node.getChildByName('UI').getChildByName('leftStepNode').getChildByName('Label').getComponent(cc.Label)
     this.progressBar = this.node.getChildByName('UI').getChildByName('scoreNode').getChildByName('progressBar').getComponent('progress')
     this.scoreContainer = this.node.getChildByName('UI').getChildByName('scoreGroup')
@@ -192,7 +180,9 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
     this._controller.musicMgr.onWin()
+    this.characterMgr.onLevelUp()
     this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
+    this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2
     this.checkLevelUp()
   },
@@ -206,15 +196,15 @@ cc.Class({
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
+    this.characterMgr.onLevelUpBtn(this.level)
     setTimeout(() => {
       this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
         x: -248,
-        y: 630
+        y: 350
       }, cc.callFunc(() => {
         this.onStep(this.levelData[this.level - 2].step)
         this._game._status = 1
         this.mainScoreLabel.node.active = false
-        this.playerSprite.spriteFrame = this.avatarSpriteArr[(this.level - 1)]
       }))
     }, 300);
     this.showNextLevelData()
@@ -240,7 +230,7 @@ cc.Class({
   },
   updateFailPage() {
     this.failScore.string = " " + (this.score + '')
-    this.failSprite.spriteFrame = this.playerSprite.spriteFrame
+    this.onFail(this.level)
     this.failName.string = this.levelData[this.level - 1].name
     //this.failHighScore.string = "正在获取您的最高分..."
   }

@@ -28,8 +28,8 @@ cc.Class({
     this.gap = c.config.json.gap
     this.animationSpeed = c.config.json.gap
     this.blockWidth = (730 - (this.rowNum + 1) * this.gap) / this.rowNum
-    console.log(this.gap)
-    console.log(this.blockWidth)
+    //console.log(this.gap)
+    //console.log(this.blockWidth)
   },
   // 动态获取需要动态控制的组件
   bindNode() {
@@ -270,6 +270,9 @@ cc.Class({
       case 2:
         // 炸弹 消除同种颜色的
         this.node.runAction(AC.shackAction(0.1, 10))
+        if (this._controller.social) {
+          this._controller.social.onShakePhone()
+        }
         this.isPropChain = true
         this._controller.musicMgr.onBoom()
         for (let i = 0; i < this.rowNum; i++) { //行
