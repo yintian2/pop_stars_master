@@ -2,14 +2,55 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    levelUp1:dragonBones,
-    levelUp2:dragonBones,
-    character:dragonBones,
+    levelUp1: dragonBones.ArmatureDisplay,
+    levelUp2: dragonBones.ArmatureDisplay,
+    character: dragonBones.ArmatureDisplay,
+    fail: dragonBones.ArmatureDisplay,
+    dbArray: [dragonBones.DragonBonesAsset],
+    textureArr: [dragonBones.DragonBonesAtlasAsset]
+  },
+  start() {
+    this.loadRes()
+    // this.character.debugBones = true
+  },
+  loadRes() {
+    var self = this
+    for (let i = 0; i < 15; i++) {
+      let nameSke = "db/sanxiao" + (i + 1 + '') + "_ske"
+      let nameTex = "db/sanxiao" + (i + 1 + '') + "_tex"
+      cc.loader.loadRes(nameSke, dragonBones.DragonBonesAsset, (err, assert) => {
+        this.dbArray[i] = assert
+      })
+      cc.loader.loadRes(nameTex, dragonBones.DragonBonesAtlasAsset, (err, texture) => {
+        this.textureArr[i] = texture
+      })
+    }
+    // console.log(this.dbArray, this.textureArr)
+  },
+  onWalk(target) {
+    target.playAnimation('walk', -1)
+  },
+  onLevelUp() {
+    this.character.playAnimation('jump', -1)
+  },
+  onSuccessDialog(level) {
+    this.showCharacter(level - 1, this.levelUp1)
+    this.showCharacter(level, this.levelUp2)
+  },
+  onLevelUpBtn(level) {
+    this.showCharacter(level, this.character)
+  },
+  onFail(level) {
+    this.showCharacter(level, this.fail)
   },
 
 
-
-  showCharacter(target) {
-    let db=target.getComponent()
+  showCharacter(level, target) {
+    target = target || this.character
+    target.dragonAtlasAsset = null
+    target.dragonAsset = null
+    target.dragonAsset = this.dbArray[level - 1]
+    target.dragonAtlasAsset = this.textureArr[level - 1]
+    this.onWalk(target)
   },
 });
