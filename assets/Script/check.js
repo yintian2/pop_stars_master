@@ -31,10 +31,14 @@ cc.Class({
     this._game = g
     this.map = g.map
     this.mapLength = g.rowNum
+    let min = 999
+    for (let i = 0; i < propConfig.length; i++) {
+      min = propConfig[i].min < min ? propConfig[i].min : min
+    }
     for (let i = 0; i < this.mapLength; i++) { //行
       for (let j = 0; j < this.mapLength; j++) { //列
         this.pushPop(this.map[i][j], i, j)
-        if (this.groups[i][j].length >= propConfig[0].min) {
+        if (this.groups[i][j].length >= min) {
           for (let z = 0; z < propConfig.length; z++) {
             if (this.groups[i][j].length <= propConfig[z].max && this.groups[i][j].length >= propConfig[z].min) {
               this.warning(propConfig[z].type, this.groups[i][j])

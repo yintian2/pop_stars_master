@@ -63,7 +63,6 @@ cc.Class({
       this.checkMgr.init(this)
       setTimeout(() => {
           resolve('200 OK');
-          //this.checkAll()
           this.checkMgr.check(this)
         }, self._controller.config.json.startAnimationTime * num / 2 / 1
         //  (cc.game.getFrameRate() / 60)
@@ -85,7 +84,6 @@ cc.Class({
   },
   //方块下落
   onFall() {
-    this.checkMgr.init(this)
     this.checkGenerateProp(this._score.chain).then(() => {
       let self = this
       this._status = 4
@@ -123,7 +121,10 @@ cc.Class({
           this.map[k][j].getComponent('cell').playFallAction(canFall, null)
         }
       }
-      this.checkMgr.check(this)
+      setTimeout(()=>{
+        this.checkMgr.init(this)
+        this.checkMgr.check(this)
+      },200)
       this._status = 1
     })
   },
@@ -253,6 +254,8 @@ cc.Class({
           }
         }
         break
+        case 3://TODO:  500分道具
+        break;
     }
   },
   //--------------------- 预制体实例化---------------------

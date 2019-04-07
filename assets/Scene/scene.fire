@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5278031643091526,
-      "y": 0.5278031643091526,
+      "x": 0.4049030172413793,
+      "y": 0.4049030172413793,
       "z": 1
     },
     "_quat": {
@@ -1298,36 +1298,51 @@
     ],
     "warningSpriteFrame": [
       {
-        "__uuid__": "1f3cd851-f0ee-4cb4-940b-32699a9d3d8c"
+        "__uuid__": "02d8a2b9-b9d9-44f8-a22c-628ea1f165ac"
       },
       {
-        "__uuid__": "ccc9b1b8-8515-40a7-9b43-2775cad3847c"
+        "__uuid__": "fd9d2a8a-afe9-445c-a8cc-1ca3d5f2ae10"
+      },
+      {
+        "__uuid__": "9cabd6c2-1d8e-4045-85d9-fbd7d85c57af"
       }
     ],
     "propSpriteFrame": [
       {
-        "__uuid__": "8f738d6b-2f1d-472a-a2a9-92d5c5a3f455"
+        "__uuid__": "f42026ae-4016-42e1-a9bc-d8b9f705edb1"
       },
       {
-        "__uuid__": "e025e927-111e-426e-b37c-0768e928ff8e"
+        "__uuid__": "6ff4a620-f727-4a6c-84a2-dfe7b324bdf6"
       },
       {
-        "__uuid__": "60308153-3980-4cc5-bdc0-283145fe4ea6"
+        "__uuid__": "b221d77f-7545-47fe-bad0-1e540b5f82b6"
       },
       {
-        "__uuid__": "801a0640-d259-4a93-99ec-a3d24122e383"
+        "__uuid__": "c76df38f-ac58-4abf-9c01-413b42e7751a"
       },
       {
-        "__uuid__": "990176ce-0d20-49ea-b37e-feec04527f87"
+        "__uuid__": "3e5b7d3e-9995-4088-9237-73ea3e0cb941"
       },
       {
-        "__uuid__": "ce3c3162-2f0b-4b62-bf7c-8e9ec9ed0ba2"
+        "__uuid__": "72fd7f95-62f3-4fff-9bfb-df344003d059"
       },
       {
-        "__uuid__": "ded47c45-e3ad-47bd-9e82-92079c777d74"
+        "__uuid__": "79f59b38-59da-450b-9bfd-2cfae65f529c"
       },
       {
-        "__uuid__": "e0d76e46-7f43-4103-9f54-a223dc12d545"
+        "__uuid__": "f751ff59-8e3c-404f-acb8-510e0b415b76"
+      },
+      {
+        "__uuid__": "f984f9dc-3963-4b2c-8e74-b5e8158d4d67"
+      },
+      {
+        "__uuid__": "b081513e-17d2-463c-b781-2edc5f1c695e"
+      },
+      {
+        "__uuid__": "29ce0055-a7d8-4a64-87da-9b59200456d1"
+      },
+      {
+        "__uuid__": "422cc445-e895-4b32-a19c-1a1ce645d48e"
       }
     ],
     "checkMgr": {
@@ -1353,7 +1368,7 @@
         "__id__": 35
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 0,
     "_components": [
       {
