@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "dde1501a-4cac-47c4-820d-ea1b54def8cc",
+  "atlasJson": "{\"SubTexture\":[{\"width\":20,\"y\":1,\"height\":21,\"name\":\"role8/图层6\",\"x\":222},{\"width\":18,\"y\":24,\"height\":19,\"name\":\"role8/图层5\",\"x\":222},{\"width\":36,\"y\":145,\"height\":60,\"name\":\"role8/图层7\",\"x\":142},{\"width\":139,\"y\":145,\"height\":113,\"name\":\"role8/图层1(2)\",\"x\":1},{\"width\":219,\"y\":1,\"height\":142,\"name\":\"role8/图层2\",\"x\":1}],\"width\":256,\"imagePath\":\"sanxiao8_tex.png\",\"name\":\"sanxiao8\",\"height\":512}",
+  "texture": "d5b87e84-0904-4888-9cd8-35fed09f7491",
+  "subMetas": {}
+}

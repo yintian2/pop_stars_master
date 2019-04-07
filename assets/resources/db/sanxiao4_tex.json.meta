@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "aa126b64-3e82-4886-87c3-056cdae06269",
+  "atlasJson": "{\"SubTexture\":[{\"frameHeight\":27,\"y\":126,\"frameWidth\":26,\"frameX\":-4,\"width\":22,\"frameY\":0,\"height\":27,\"name\":\"role42/图层4\",\"x\":165},{\"width\":19,\"y\":126,\"height\":24,\"name\":\"role42/图层3\",\"x\":189},{\"width\":29,\"y\":64,\"height\":60,\"name\":\"role42/图层2\",\"x\":165},{\"width\":32,\"y\":1,\"height\":61,\"name\":\"role42/图层7\",\"x\":165},{\"width\":139,\"y\":160,\"height\":102,\"name\":\"role42/图层1\",\"x\":1},{\"width\":47,\"y\":160,\"height\":70,\"name\":\"role42/图层6\",\"x\":142},{\"width\":162,\"y\":1,\"height\":157,\"name\":\"role42/图层5\",\"x\":1}],\"width\":256,\"imagePath\":\"sanxiao4_tex.png\",\"name\":\"sanxiao4\",\"height\":512}",
+  "texture": "4b50b247-0cef-462b-9d8c-7e704bc6f3ca",
+  "subMetas": {}
+}

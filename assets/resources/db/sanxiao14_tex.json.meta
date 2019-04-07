@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "92c46685-6693-4f44-923e-fb7dc1380e02",
+  "atlasJson": "{\"SubTexture\":[{\"frameHeight\":48,\"y\":97,\"frameWidth\":19,\"frameX\":-1,\"width\":18,\"frameY\":0,\"height\":47,\"name\":\"role14/图层3\",\"x\":236},{\"frameHeight\":95,\"y\":1,\"frameWidth\":42,\"frameX\":0,\"width\":42,\"frameY\":0,\"height\":94,\"name\":\"role14/图层7\",\"x\":193},{\"frameHeight\":23,\"y\":146,\"frameWidth\":22,\"frameX\":-1,\"width\":21,\"frameY\":0,\"height\":23,\"name\":\"role14/图层8\",\"x\":230},{\"width\":19,\"y\":171,\"height\":23,\"name\":\"role14/图层9\",\"x\":230},{\"width\":157,\"y\":179,\"height\":101,\"name\":\"role14/图层1\",\"x\":1},{\"width\":35,\"y\":133,\"height\":28,\"name\":\"role14/图层6\",\"x\":193},{\"width\":50,\"y\":179,\"height\":98,\"name\":\"role14/图层5\",\"x\":160},{\"width\":41,\"y\":97,\"height\":34,\"name\":\"role14/图层4\",\"x\":193},{\"width\":190,\"y\":1,\"height\":176,\"name\":\"role14/图层2\",\"x\":1}],\"width\":256,\"imagePath\":\"sanxiao14_tex.png\",\"name\":\"sanxiao14\",\"height\":512}",
+  "texture": "c8a8bd96-5bec-4c0b-9a00-b4b352ded004",
+  "subMetas": {}
+}

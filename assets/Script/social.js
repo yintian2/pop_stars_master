@@ -29,6 +29,9 @@ cc.Class({
       cc.director.pause()
     })
   },
+  onShakePhone(){
+    wx.vibrateShort()
+  },
   // --------------- share ----------------
   loadShareData() {
     wx.showShareMenu(false)

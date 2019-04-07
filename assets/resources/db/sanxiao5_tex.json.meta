@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "d08f1282-ac35-47d6-92d2-e2b3fcbe8489",
+  "atlasJson": "{\"SubTexture\":[{\"frameHeight\":63,\"y\":68,\"frameWidth\":32,\"frameX\":0,\"width\":32,\"frameY\":0,\"height\":62,\"name\":\"role5/图层4\",\"x\":201},{\"frameHeight\":21,\"y\":68,\"frameWidth\":21,\"frameX\":-1,\"width\":20,\"frameY\":0,\"height\":21,\"name\":\"role5/图层6\",\"x\":235},{\"width\":18,\"y\":91,\"height\":19,\"name\":\"role5/图层5\",\"x\":235},{\"width\":165,\"y\":155,\"height\":142,\"name\":\"role5/图层1\",\"x\":1},{\"frameHeight\":66,\"y\":1,\"frameWidth\":36,\"frameX\":0,\"width\":36,\"frameY\":-1,\"height\":65,\"name\":\"role5/图层3\",\"x\":201},{\"width\":198,\"y\":1,\"height\":152,\"name\":\"role5/图层2\",\"x\":1}],\"width\":256,\"imagePath\":\"sanxiao5_tex.png\",\"name\":\"sanxiao5\",\"height\":512}",
+  "texture": "fc0656b4-4843-4abe-a3e0-9d2a1cf4ce9b",
+  "subMetas": {}
+}

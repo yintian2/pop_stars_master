@@ -43,7 +43,7 @@ cc.Class({
       if (this.audios[num + 1]) {
         self.onPlayAudio(num + 1)
       } else {
-        console.log('创建新的音乐实例')
+        //console.log('创建新的音乐实例')
         let music = null
         if (self.musicPool && self.musicPool.size() > 0) {
           music = self.musicPool.get()
@@ -60,7 +60,7 @@ cc.Class({
     //   this.audios[num].play()
     // }
     } else {
-      console.log('使用旧的音乐')
+     // console.log('使用旧的音乐')
       this.audios[num].rewind()
       this.audios[num].play()
     }
