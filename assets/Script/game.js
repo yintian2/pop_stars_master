@@ -270,6 +270,9 @@ cc.Class({
       case 2:
         // 炸弹 消除同种颜色的
         this.node.runAction(AC.shackAction(0.1, 10))
+        if (this._controller.social) {
+          this._controller.social.onShakePhone()
+        }
         this.isPropChain = true
         this._controller.musicMgr.onBoom()
         for (let i = 0; i < this.rowNum; i++) { //行

@@ -17,7 +17,7 @@ cc.Class({
     var self = this
     for (let i = 0; i < 15; i++) {
       let nameSke = "db/sanxiao" + (i + 1 + '') + "_ske"
-      let nameTex = "db/sanxiao" + (i + 1 + '') + "_tex"
+      let nameTex = "db/sanxiao" + (i + 1 + '') + "_tex.json"
       cc.loader.loadRes(nameSke, dragonBones.DragonBonesAsset, (err, assert) => {
         this.dbArray[i] = assert
       })
@@ -49,16 +49,6 @@ cc.Class({
 
   showCharacter(level, target) {
     target = target || this.character
-    // let data = target.armature().clock;
-    // let nameSke = "db/sanxiao" + (level + '') + "_ske"
-    // let nameTex = "db/sanxiao" + (level + '') + "_tex"
-    // cc.loader.loadRes(nameSke, dragonBones.DragonBonesAsset, (err, assert) => {
-    //   target.dragonAsset = assert
-    // })
-    // cc.loader.loadRes(nameTex, dragonBones.DragonBonesAtlasAsset, (err, texture) => {
-    //   target.dragonAtlasAsset = texture
-    // })
-    // target.armature().clock = data
     target.dragonAsset = this.dbArray[level - 1]
     target.dragonAtlasAsset = this.textureArr[level - 1]
     target.armatureName = 'Armatrue'

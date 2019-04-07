@@ -200,7 +200,7 @@ cc.Class({
     setTimeout(() => {
       this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
         x: -248,
-        y: 630
+        y: 350
       }, cc.callFunc(() => {
         this.onStep(this.levelData[this.level - 2].step)
         this._game._status = 1
