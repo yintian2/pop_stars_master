@@ -155,39 +155,7 @@ cc.Class({
       }
     }
     this._status = 1
-    // 暂时废弃该检验 改用checkMgr
-    // this.checkAll().then(() => {
-    //   this._status = 1
-    // })
   },
-  // 检查当前全部方块
-  // checkAll() {
-  //   return new Promise((resolve, reject) => {
-  //     for (let i = 0; i < this.rowNum; i++) { //行
-  //       for (let j = 0; j < this.rowNum; j++) { //列
-  //         this.map[i][j].getComponent('cell').growInit()
-  //         if ((i - 1) >= 0) {
-  //           this.checkColor(this.map[i][j], this.map[i - 1][j], 1)
-  //         }
-  //         if ((i + 1) < this.rowNum) {
-  //           this.checkColor(this.map[i][j], this.map[i + 1][j], 2)
-  //         }
-  //         if ((j - 1) >= 0) {
-  //           this.checkColor(this.map[i][j], this.map[i][j - 1], 3)
-  //         }
-  //         if ((j + 1) < this.rowNum) {
-  //           this.checkColor(this.map[i][j], this.map[i][j + 1], 4)
-  //         }
-  //       }
-  //     }
-  //     resolve()
-  //   })
-  // },
-  // checkColor(origin, target, type) {
-  //   if (origin.getComponent('cell').color == target.getComponent('cell').color) {
-  //     //  origin.getComponent('cell').grow(type)
-  //   }
-  // },
   gameOver() {
     this._status = 3
     this._controller.pageMgr.addPage(2)
@@ -211,7 +179,7 @@ cc.Class({
       y: pos.y
     }
   },
-  // 生成道具 type 1为双倍倍数 2为炸弹
+  // 生成道具 type 1为双倍倍数 2为炸弹 3为加五百
   generatePropItem(type) {
     return new Promise((resolve, reject) => {
       // 是否做道具生成动画
@@ -284,8 +252,6 @@ cc.Class({
             }
           }
         }
-        // TODO: 增加一个非当前颜色的晃动特效
-
         break
     }
   },
