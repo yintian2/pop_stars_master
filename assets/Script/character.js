@@ -2,22 +2,21 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    levelUp1: dragonBones.ArmatureDisplay,
-    levelUp2: dragonBones.ArmatureDisplay,
-    character: dragonBones.ArmatureDisplay,
-    fail: dragonBones.ArmatureDisplay,
+    levelUp1: cc.Node,
+    levelUp2: cc.Node,
+    character: cc.Node,
+    fail: cc.Node,
     dbArray: [dragonBones.DragonBonesAsset],
     textureArr: [dragonBones.DragonBonesAtlasAsset]
   },
   start() {
     this.loadRes()
-    // this.character.debugBones = true
   },
   loadRes() {
     var self = this
     for (let i = 0; i < 15; i++) {
       let nameSke = "db/sanxiao" + (i + 1 + '') + "_ske"
-      let nameTex = "db/sanxiao" + (i + 1 + '') + "_tex.json"
+      let nameTex = "db/sanxiao" + (i + 1 + '') + "_tex"
       cc.loader.loadRes(nameSke, dragonBones.DragonBonesAsset, (err, assert) => {
         this.dbArray[i] = assert
       })
@@ -31,16 +30,14 @@ cc.Class({
     target.playAnimation('walk', -1)
   },
   onLevelUp() {
-    this.character.playAnimation('jump', -1)
+    this.character.getComponent(dragonBones.ArmatureDisplay).playAnimation('jump', -1)
   },
   onSuccessDialog(level) {
     this.showCharacter(level - 1, this.levelUp1)
     this.showCharacter(level, this.levelUp2)
   },
   onLevelUpBtn(level) {
-    //  this.dbArray[level - 2].destory()
-    //this.dragonAtlasAsset[level - 2].destory()
-    this.showCharacter(level, this.character)
+    this.showCharacter(level)
   },
   onFail(level) {
     this.showCharacter(level, this.fail)
@@ -49,10 +46,16 @@ cc.Class({
 
   showCharacter(level, target) {
     target = target || this.character
-    target.dragonAsset = this.dbArray[level - 1]
-    target.dragonAtlasAsset = this.textureArr[level - 1]
-    target.armatureName = 'Armatrue'
-    target.animationName = 'walk'
-    this.onWalk(target)
+    let assert = target.getComponent(dragonBones.ArmatureDisplay)
+    cc.log("before", assert)
+    assert.destroy()
+
+    let main = target.addComponent(dragonBones.ArmatureDisplay)
+    main.dragonAsset = this.dbArray[level - 1]
+    main.dragonAtlasAsset = this.textureArr[level - 1]
+    main.armatureName = "Armature"
+    main.timeScale = 0.5
+    console.log("after", main)
+    this.onWalk(main)
   },
 });

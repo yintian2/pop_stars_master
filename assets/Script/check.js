@@ -1,7 +1,6 @@
 /**
  * @author uu
  * @file 检测组件
- * @todo 
  */
 cc.Class({
   extends: cc.Component,

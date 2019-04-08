@@ -121,10 +121,10 @@ cc.Class({
           this.map[k][j].getComponent('cell').playFallAction(canFall, null)
         }
       }
-      setTimeout(()=>{
+      setTimeout(() => {
         this.checkMgr.init(this)
         this.checkMgr.check(this)
-      },200)
+      }, 200)
       this._status = 1
     })
   },
@@ -170,14 +170,15 @@ cc.Class({
   },
   // -----------------道具相关---------------
   // 储存用户点击时的方块 用于生成道具
-  onUserTouched(iid, jid, itemType, color, pos) {
+  onUserTouched(iid, jid, itemType, color, warning, pos) {
     this.target = {
       i: iid,
       j: jid,
       color: color,
       itemType: itemType,
       x: pos.x,
-      y: pos.y
+      y: pos.y,
+      warning: warning
     }
   },
   // 生成道具 type 1为双倍倍数 2为炸弹 3为加五百
@@ -198,24 +199,11 @@ cc.Class({
   },
   checkGenerateProp(chain) {
     return new Promise((resolve, reject) => {
-      chain--
-      // 判断当前是否是炸弹状态 如果是则把状态还原
-      if (this.isPropChain) {
-        this.isPropChain = false
-        resolve()
-        return
-      }
-      //  console.log(chain)
-      // 判断chain的大小查看是否能生成道具
-      let propData = this._controller.config.json.propConfig
-      for (let i = 0; i < propData.length; i++) {
-        if (chain <= propData[i].max && chain >= propData[i].min) {
-          this.generatePropItem(propData[i].type).then(() => {
-            resolve()
-            return
-          })
-          //this.map[this.target.i][this.target.j].getComponent('cell').generateItem(propData[i].type)
-        }
+      if (this.target.warning) {
+        this.generatePropItem(this.target.warning).then(() => {
+          resolve()
+          return
+        })
       }
       resolve()
     })
@@ -254,7 +242,7 @@ cc.Class({
           }
         }
         break
-        case 3://TODO:  500分道具
+      case 3: //TODO:  500分道具 暂时屏蔽
         break;
     }
   },

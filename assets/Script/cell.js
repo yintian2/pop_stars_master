@@ -21,6 +21,7 @@ cc.Class({
       y: data.y
     }
     this._itemType = itemType || 0
+    this.warningType = 0
     this.isPush = false
     this.bindEvent()
     this.color = data.color || Math.ceil(Math.random() * 4)
@@ -43,10 +44,8 @@ cc.Class({
     this.playStartAction()
   },
   onWarning(type) {
-    if (this.itemType == 0) {
-      return
-    }
     this.warningSprite.spriteFrame = this._game.warningSpriteFrame[type - 1] || ''
+    this.warningType = type
     //   this.lightSprite.node.active = true
     let action1 = cc.blink(1, 10)
     //   this.lightSprite.node.runAction(action1)
@@ -110,7 +109,7 @@ cc.Class({
     if (color.type) {
       // 一定是用户主动触发 保存这个坐标给game
       // console.log('方块位置', this.iid, this.jid, this._itemType)
-      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color, {
+      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color,this.warningType, {
         x: this.node.x,
         y: this.node.y
       })
@@ -140,7 +139,7 @@ cc.Class({
       //self._game._score.chain - 1
     )
     if (this._itemType != 0) {
-       console.log("触发了道具", this._itemType)
+      console.log("触发了道具", this._itemType)
       self._game.onItem(this._itemType, color, {
         x: this.node.x,
         y: this.node.y

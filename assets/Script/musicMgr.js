@@ -1,7 +1,6 @@
 /**
  * @author uu
  * @file  音乐控制组件
- * @todo 
  */
 cc.Class({
   extends: cc.Component,

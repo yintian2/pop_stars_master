@@ -1,7 +1,6 @@
 /**
  * @author uu
  * @file  UI 分数控制器
- * @todo 
  */
 var AC = require('action')
 
@@ -156,7 +155,6 @@ cc.Class({
     this.multLabel.node.active = false
   },
   showMultLabel() {
-    //TODO:增加心跳动画 优先处理
     this.multLabel.node.scale = 0.5
     this.multLabel.string = this.multiple
     this.multLabel.node.active = true
@@ -171,6 +169,7 @@ cc.Class({
   },
   // 生成小的分数节点
   onCurrentScoreLabel(num, pos, callback) {
+    // TODO: 增加一个撒花特效
     this.mainScoreLabel.string = num
     let action = cc.spawn(cc.moveTo(0.2, pos.x, pos.y), cc.scaleTo(0.2, 0.4)).easing(cc.easeBackOut())
     let seq = cc.sequence(action, callback)
