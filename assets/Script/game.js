@@ -200,7 +200,7 @@ cc.Class({
   checkGenerateProp(chain) {
     return new Promise((resolve, reject) => {
       if (this.target.warning) {
-        this.generatePropItem(this.target.warning - 1).then(() => {
+        this.generatePropItem(this.target.warning).then(() => {
           resolve()
           return
         })
@@ -227,7 +227,7 @@ cc.Class({
       case 2:
         // 炸弹 消除同种颜色的
         this.node.runAction(AC.shackAction(0.1, 10))
-        if (this._controller.social) {
+        if (this._controller.social.node.avtive) {
           this._controller.social.onShakePhone()
         }
         this.isPropChain = true

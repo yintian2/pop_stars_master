@@ -27,5 +27,12 @@
     }
   ],
   "分数翻倍最高倍数": "默认八倍",
-  "maxMultiple": 8
+  "maxMultiple": 8,
+  "连击正反馈": "达到连击之后分数上方显示的文字 最小chain 最大chain 图片ID 文字",
+  "chainConfig": [{
+    "min": 5,
+    "max": 8,
+    "level": 1,
+    "text": "做的棒(๑•̀ㅂ•́)و✧"
+  }]
 }
