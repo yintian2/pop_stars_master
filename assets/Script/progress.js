@@ -21,7 +21,7 @@ cc.Class({
       this.usualNode.active = true
       this.maxLabel.string = data.score
       this.currentLabel.string = current
-      this.nameLabel.string = data.name
+    //  this.nameLabel.string = data.name
       this.progress.progress = current / data.score
       this.levelLabel.string = "lv" + (level + '')
     } else {

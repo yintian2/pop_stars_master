@@ -26,6 +26,7 @@ cc.Class({
     this.level = 1
     this.closeMultLabel()
     this.levelData = g._controller.gameData.json.levelData
+    this.nameLabel.string="农民"
     this.progressBar.init(0, this.levelData[this.level - 1], this.level)
     this.leftStepLabel.string = this.leftStep
     this.scoreTimer = []
@@ -79,6 +80,7 @@ cc.Class({
     this.progressBar = this.node.getChildByName('UI').getChildByName('scoreNode').getChildByName('progressBar').getComponent('progress')
     this.scoreContainer = this.node.getChildByName('UI').getChildByName('scoreGroup')
     this.multLabel = this.mainScoreLabel.node.getChildByName('mult').getComponent(cc.Label)
+    this.nameLabel = this.node.getChildByName('UI').getChildByName('scoreNode').getChildByName('progressBar').getChildByName('name').getComponent(cc.Label)
     // 失败时更新失败UI
     this.failScore = this.failDialog.getChildByName('info').getChildByName('score').getComponent(cc.Label)
     this.failName = this.failDialog.getChildByName('info').getChildByName('level').getComponent(cc.Label)
@@ -180,6 +182,7 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
     this._controller.musicMgr.onWin()
+    this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this.characterMgr.onLevelUp()
     this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2
@@ -194,8 +197,8 @@ cc.Class({
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
-    this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this.characterMgr.onLevelUpBtn(this.level)
+    this.nameLabel.string = this.levelData[this.level - 1].name
     setTimeout(() => {
       this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
         x: -248,

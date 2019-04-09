@@ -200,7 +200,7 @@ cc.Class({
   checkGenerateProp(chain) {
     return new Promise((resolve, reject) => {
       if (this.target.warning) {
-        this.generatePropItem(this.target.warning).then(() => {
+        this.generatePropItem(this.target.warning - 1).then(() => {
           resolve()
           return
         })
