@@ -181,10 +181,8 @@ cc.Class({
     this._controller.pageMgr.addPage(3)
     this._controller.musicMgr.onWin()
     this.characterMgr.onLevelUp()
-    this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2
-    this.checkLevelUp()
   },
   // 等级限制
   levelLimit() {
@@ -196,6 +194,7 @@ cc.Class({
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
+    this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
     this.characterMgr.onLevelUpBtn(this.level)
     setTimeout(() => {
       this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
@@ -208,6 +207,7 @@ cc.Class({
       }))
     }, 300);
     this.showNextLevelData()
+    this.checkLevelUp()
   },
   // 游戏结束
   onGameOver() {
