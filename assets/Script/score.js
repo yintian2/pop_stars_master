@@ -117,7 +117,7 @@ cc.Class({
           this.currentAddedScore = 0
           this.mainScoreLabel.node.active = false
         }, this))
-      }, 1000 / 1
+      }, 500 / 1
       // (cc.game.getFrameRate() / 60)
     )
     let addScore = score == 10 ? score * (this.chain > 10 ? 10 : this.chain) : score
@@ -129,7 +129,7 @@ cc.Class({
   },
   // 判断连击
   checkChain(){
-    
+
   },
   checkLevelUp() {
     if (this.score >= this.levelData[this.level - 1].score) {
