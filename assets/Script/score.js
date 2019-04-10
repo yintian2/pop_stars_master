@@ -129,7 +129,7 @@ cc.Class({
   },
   // 判断连击
   checkChain(){
-
+    
   },
   checkLevelUp() {
     if (this.score >= this.levelData[this.level - 1].score) {
