@@ -38,19 +38,19 @@
   {
     "min": 8,
     "max": 9,
-    "level": 1,
+    "level": 2,
     "text": "机智！"
   },
   {
     "min": 10,
     "max": 13,
-    "level": 1,
+    "level": 3,
     "text": "完美！"
   },
   {
     "min": 14,
     "max": 999,
-    "level": 1,
+    "level": 4,
     "text": "天才！"
   }]
 }
