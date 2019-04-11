@@ -216,7 +216,7 @@ cc.Class({
         this._controller.musicMgr.onDouble()
         for (let i = 0; i < this.rowNum; i++) { //行
           for (let j = 0; j < this.rowNum; j++) { //列
-            if (this.map[i][j]) {
+            if (this.map[i][j]&&this.map[i][j].getComponent('cell')._status == 1) {
               this.map[i][j].getComponent('cell').surfaceAction(
                 Math.sqrt(Math.pow(pos.x - this.map[i][j].x, 2) + Math.pow(pos.y - this.map[i][j].y, 2))
               )
