@@ -30,11 +30,12 @@ cc.Class({
     target.playAnimation('walk', -1)
   },
   onLevelUp() {
-    this.character.getComponent(dragonBones.ArmatureDisplay).playAnimation('jump', -1)
+    //this.levelUp2.getComponent(dragonBones.ArmatureDisplay).playAnimation('jump', -1)
   },
   onSuccessDialog(level) {
-    this.showCharacter(level - 1, this.levelUp1)
-    this.showCharacter(level, this.levelUp2)
+    // this.showCharacter(level - 1, this.levelUp1)
+    this.showCharacter(level, this.levelUp2, true)
+
   },
   onLevelUpBtn(level) {
     this.showCharacter(level)
@@ -44,7 +45,7 @@ cc.Class({
   },
 
 
-  showCharacter(level, target) {
+  showCharacter(level, target, jump) {
     target = target || this.character
     let assert = target.getComponent(dragonBones.ArmatureDisplay)
     cc.log("before", assert)
@@ -56,6 +57,7 @@ cc.Class({
     main.armatureName = "Armature"
     main.timeScale = 0.5
     console.log("after", main)
-    this.onWalk(main)
+    main.playAnimation(jump ? "jump" : "walk", -1)
+    //this.onWalk(main)
   },
 });
