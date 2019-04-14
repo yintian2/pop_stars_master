@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6494405888316855,
-      "y": 0.6494405888316855,
+      "x": 0.3338494244847568,
+      "y": 0.3338494244847568,
       "z": 1
     },
     "_quat": {
@@ -1918,7 +1918,7 @@
       "__id__": 39
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "20",
@@ -1926,8 +1926,10 @@
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 1,
@@ -1962,8 +1964,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 79.72,
-      "height": 40
+      "width": 60.16,
+      "height": 43.75
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2005,7 +2007,7 @@
       "__id__": 41
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "步数:",
@@ -2013,10 +2015,12 @@
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -2538,7 +2542,7 @@
       "__id__": 52
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "刘刘",
@@ -2546,10 +2550,12 @@
     "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -2636,7 +2642,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -2825,8 +2831,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 8.33,
-      "height": 50
+      "width": 10.31,
+      "height": 46.88
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2868,7 +2874,7 @@
       "__id__": 59
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "/",
@@ -2876,10 +2882,12 @@
     "_fontSize": 30,
     "_lineHeight": 50,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -3068,8 +3076,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 47.56,
-      "height": 40
+      "width": 34.38,
+      "height": 25
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3111,7 +3119,7 @@
       "__id__": 64
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "总分:",
@@ -3119,10 +3127,12 @@
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -4572,8 +4582,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 164,
-      "height": 40
+      "width": 125,
+      "height": 50
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -4623,10 +4633,12 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": false,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -5052,8 +5064,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
-      "height": 40
+      "width": 93.75,
+      "height": 37.5
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5103,10 +5115,12 @@
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -5279,10 +5293,12 @@
     "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -5315,8 +5331,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 70,
-      "height": 40
+      "width": 54.69,
+      "height": 43.75
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5366,10 +5382,12 @@
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -5402,8 +5420,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 116.79,
-      "height": 40
+      "width": 97.34,
+      "height": 43.75
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5453,8 +5471,10 @@
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 1,
@@ -5489,8 +5509,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 196.67,
-      "height": 40
+      "width": 151.25,
+      "height": 25
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5540,10 +5560,12 @@
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -5805,8 +5827,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 124,
-      "height": 40
+      "width": 93.75,
+      "height": 50
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -5856,10 +5878,12 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": false,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -7103,8 +7127,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 124,
-      "height": 40
+      "width": 93.75,
+      "height": 37.5
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -7146,7 +7170,7 @@
       "__id__": 153
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "奖励步数",
@@ -7154,10 +7178,12 @@
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -7640,7 +7666,7 @@
       "__id__": 165
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "农民",
@@ -7648,10 +7674,12 @@
     "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -7836,8 +7864,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130.62,
-      "height": 25
+      "width": 104.69,
+      "height": 19.53
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -7879,7 +7907,7 @@
       "__id__": 170
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "分数：3400",
@@ -7887,10 +7915,12 @@
     "_fontSize": 25,
     "_lineHeight": 25,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -8200,8 +8230,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 400,
-      "height": 50
+      "width": 312.5,
+      "height": 78.13
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -8243,7 +8273,7 @@
       "__id__": 180
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "点击屏幕开始游戏",
@@ -8251,10 +8281,12 @@
     "_fontSize": 50,
     "_lineHeight": 50,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -8288,7 +8320,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 560,
-      "height": 70
+      "height": 43.75
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -8330,7 +8362,7 @@
       "__id__": 182
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。 ",
@@ -8338,10 +8370,12 @@
     "_fontSize": 20,
     "_lineHeight": 35,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -8377,8 +8411,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 20
+      "width": 68.13,
+      "height": 12.5
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -8420,7 +8454,7 @@
       "__id__": 184
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "著作权人：",
@@ -8428,10 +8462,12 @@
     "_fontSize": 20,
     "_lineHeight": 20,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "3d791bc6-cb47-4f9b-a7e5-164e9b198520"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_batchAsBitmap": false,
+    "_batchAsBitmap": true,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -8451,9 +8487,9 @@
       "__id__": 2
     },
     "_alignFlags": 9,
-    "_left": 16,
+    "_left": 31.935000000000002,
     "_right": 0,
-    "_top": 17,
+    "_top": 20.75,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
