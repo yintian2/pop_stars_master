@@ -48,16 +48,26 @@ cc.Class({
   mapSet(num) {
     this.map = new Array()
     let self = this
+    // 生成两个随机的对象数组
+    let a = Math.floor(Math.random() * num)
+    let b = Math.floor(Math.random() * num)
+
+    let c = Math.floor(1 + Math.random() * (num - 1)) - 1
+    a == c ? c++ : ''
+    let d = Math.floor(Math.random() * num)
+
+
     return new Promise((resolve, reject) => {
       for (let i = 0; i < num; i++) { //行
         this.map[i] = new Array()
         for (let j = 0; j < num; j++) { //列
+          let itemType = (i == a && j == b) ? 1 : (i == c && j == d) ? 2 : 0
           self.map[i][j] = self.instantiateBlock(self, {
             x: j,
             y: i,
             width: self.blockWidth,
             startTime: (i + j + 1) * self._controller.config.json.startAnimationTime / num * 2
-          }, self.blocksContainer, 0)
+          }, self.blocksContainer, itemType)
         }
       }
       this.checkMgr.init(this)

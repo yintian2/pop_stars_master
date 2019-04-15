@@ -13,6 +13,7 @@ cc.Class({
     gameData: cc.JsonAsset,
     scoreMgr: require('score'), //分数 特效控制
     totalRank: cc.Node,
+    startPage: require('startPage')
   },
   start() {
     this.totalRank.active = false
@@ -27,6 +28,12 @@ cc.Class({
     this.pageMgr.onOpenPage(0)
   },
   onGameStartButton() {
+    // TODO:  增加一个动画
+    this.startPage.showAnimation().then(() => {
+      this.gameStart()
+    })
+  },
+  gameStart() {
     this.pageMgr.onOpenPage(1)
     this.game.gameStart()
   },
