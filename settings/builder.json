@@ -38,5 +38,12 @@
     "host": "",
     "skipRecord": false,
     "recordPath": ""
-  }
+  },
+  "baidugame": {
+    "appid": "testappid",
+    "orientation": "portrait",
+    "REMOTE_SERVER_ROOT": "",
+    "subContext": ""
+  },
+  "appBundle": false
 }

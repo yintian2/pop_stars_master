@@ -1,4 +1,5 @@
 {
+  "assets-sort-type": "name",
   "collision-matrix": [
     [
       true
@@ -15,7 +16,6 @@
     "RichText",
     "MotionStreak",
     "ScrollBar",
-    "ScrollView",
     "Toggle",
     "PageView",
     "PageViewIndicator",
@@ -27,7 +27,7 @@
     "Physics",
     "StudioComponent",
     "Intersection",
-    "Native NetWork"
+    "Native Socket"
   ],
   "facebook": {
     "appID": "",
@@ -44,13 +44,12 @@
   "group-list": [
     "default"
   ],
-  "last-module-event-record-time": 1554453313886,
+  "last-module-event-record-time": 1555289558977,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,
     "width": 960
   },
-  "start-scene": "current",
-  "use-customize-simulator": false,
+  "use-customize-simulator": true,
   "use-project-simulator-setting": false
 }
