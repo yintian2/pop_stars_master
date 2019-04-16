@@ -16,7 +16,7 @@ cc.Class({
     multPropPrefab: cc.Prefab,
     // progressBar: require('progress'),
     // leftStepLabel: cc.Label,
-    chainSpriteFrameArr:[cc.SpriteFrame]
+    chainSpriteFrameArr: [cc.SpriteFrame]
   },
   init(g) {
     this._game = g
@@ -84,7 +84,7 @@ cc.Class({
     this.multLabel = this.mainScoreLabel.node.getChildByName('mult').getComponent(cc.Label)
     this.nameLabel = this.node.getChildByName('UI').getChildByName('scoreNode').getChildByName('progressBar').getChildByName('name').getComponent(cc.Label)
     // 失败时更新失败UI
-    this.chainSprite=this.node.getChildByName('UI').getChildByName('chainSprite').getComponent(cc.Sprite)
+    this.chainSprite = this.node.getChildByName('UI').getChildByName('chainSprite').getComponent(cc.Sprite)
     this.failScore = this.failDialog.getChildByName('info').getChildByName('score').getComponent(cc.Label)
     this.failName = this.failDialog.getChildByName('info').getChildByName('level').getComponent(cc.Label)
     this.failSprite = this.failDialog.getChildByName('info').getChildByName('sprite').getComponent(cc.Sprite)
@@ -124,7 +124,7 @@ cc.Class({
       }, 500 / 1
       // (cc.game.getFrameRate() / 60)
     )
-    let addScore = score == this._controller.config.json.scoreBase ? (score + (this.chain > 16 ? 16 : this.chain) * 10) : score
+    let addScore = score == this._controller.config.json.scoreBase ? (score + (this.chain > 16 ? 16 : (this.chain - 1)) * 10) : score
     // let addScore = score == 10 ? score * (this.chain > 10 ? 10 : this.chain) : score
     this.currentAddedScore += addScore
     this.mainScoreLabel.string = this.currentAddedScore
@@ -148,14 +148,14 @@ cc.Class({
       }
     }, 200)
   },
-  showChainSprite(id){
-    this.chainSprite.spriteFrame=this.chainSpriteFrameArr[id]
-    this.chainSprite.node.scale=0.5
-    this.chainSprite.node.active=true
+  showChainSprite(id) {
+    this.chainSprite.spriteFrame = this.chainSpriteFrameArr[id]
+    this.chainSprite.node.scale = 0.5
+    this.chainSprite.node.active = true
     this.chainSprite.node.runAction(AC.popOut(0.3))
   },
-  hideChainSprite(){
-    this.chainSprite.node.active=false
+  hideChainSprite() {
+    this.chainSprite.node.active = false
   },
   checkLevelUp() {
     if (this.score >= this.levelData[this.level - 1].score) {
