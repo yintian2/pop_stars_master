@@ -253,10 +253,10 @@ cc.Class({
   showStepAni(num) {
     this.stepAniLabel.string = '+' + (num + '')
     this.stepAniLabel.node.x = -248
-    this.stepAniLabel.node.y = 350
-    this.stepAniLabel.node.runAction(cc.sequence(cc.toggleVisibility(), cc.moveBy(0.6, 0, 60)))
-    let action = cc.sequence(cc.scaleTo(0.2, 0.8), AC.popOut(0.8), cc.toggleVisibility())
-    this.leftStepLabel.node.runAction(action)
+    this.stepAniLabel.node.y = 400
+    this.stepAniLabel.node.runAction(cc.sequence(cc.toggleVisibility(), cc.moveBy(0.6, 0, 60),cc.toggleVisibility()))
+    let action = cc.sequence(cc.scaleTo(0.2, 0.8), AC.popOut(0.8))
+    this.leftStepLabel.node.parent.runAction(action)
   },
   // 游戏结束
   onGameOver() {
