@@ -16,7 +16,8 @@ cc.Class({
     multPropPrefab: cc.Prefab,
     // progressBar: require('progress'),
     // leftStepLabel: cc.Label,
-    chainSpriteFrameArr: [cc.SpriteFrame]
+    chainSpriteFrameArr: [cc.SpriteFrame],
+    stepAniLabel: cc.Label
   },
   init(g) {
     this._game = g
@@ -30,6 +31,7 @@ cc.Class({
     this.nameLabel.string = "农民"
     this.progressBar.init(0, this.levelData[this.level - 1], this.level)
     this.leftStepLabel.string = this.leftStep
+    this.stepAniLabel.node.runAction(cc.toggleVisibility())
     this.scoreTimer = []
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false
@@ -99,7 +101,11 @@ cc.Class({
       this.onGameOver()
     }
     this.leftStepLabel.string = this.leftStep
+    if (num > 0) {
+      this.showStepAni(num)
+    }
   },
+
   //增加分数总控制 获取连击
   addScore(pos, score) {
     score = score || this._controller.config.json.scoreBase
@@ -242,6 +248,15 @@ cc.Class({
     }, 300);
     this.showNextLevelData()
     this.checkLevelUp()
+  },
+  // todo: 新增一个 动画 数字上浮和缩放
+  showStepAni(num) {
+    this.stepAniLabel.string = '+' + (num + '')
+    this.stepAniLabel.node.x = -248
+    this.stepAniLabel.node.y = 350
+    this.stepAniLabel.node.runAction(cc.sequence(cc.toggleVisibility(), cc.moveBy(0.6, 0, 60)))
+    let action = cc.sequence(cc.scaleTo(0.2, 0.8), AC.popOut(0.8), cc.toggleVisibility())
+    this.leftStepLabel.node.runAction(action)
   },
   // 游戏结束
   onGameOver() {
