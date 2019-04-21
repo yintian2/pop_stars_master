@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "cell1",
+    "_name": "cell",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -323,14 +323,14 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 43.8,
-      "y": 16.6,
+      "x": 38.1,
+      "y": 20.6,
       "z": 0
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.65,
+      "y": 0.65,
       "z": 1
     },
     "_rotationX": 0,
