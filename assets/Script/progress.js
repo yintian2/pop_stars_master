@@ -16,7 +16,7 @@ cc.Class({
 
   // onLoad () {},
   init(current, data, level) {
-    if (level <= 16) {
+    if (level < 15) {
       this.limitNode.active = false
       this.usualNode.active = true
       this.maxLabel.string = data.score
