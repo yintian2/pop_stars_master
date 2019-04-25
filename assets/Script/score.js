@@ -147,7 +147,7 @@ cc.Class({
       let config = this._controller.config.json.chainConfig
       for (let i = 0; i < config.length; i++) {
         if (this.chain <= config[i].max && this.chain >= config[i].min) {
-          console.log(config[i].text)
+        //  console.log(config[i].text)
           this.showChainSprite(i)
           return
         }

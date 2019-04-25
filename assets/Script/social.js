@@ -19,7 +19,10 @@ cc.Class({
     //   this.tex = new cc.Texture2D();
     //TODO: 微信小游戏导致音乐自动关闭 处理失败
     // 监听
-    wx.onAudioInterruptionEnd(c.musicMgr.checkBg())
+    wx.onAudioInterruptionEnd(() => {
+      c.musicMgr.pauseBg()
+      c.musicMgr.resumeBg()
+    })
     wx.showShareMenu()
     wx.onShow(() => {
       cc.director.resume()
@@ -38,7 +41,7 @@ cc.Class({
     var self = this;
     wx.shareAppMessage()
   },
-  onShakePhone(){
+  onShakePhone() {
     wx.vibrateShort()
   },
   // --------------- share ----------------
