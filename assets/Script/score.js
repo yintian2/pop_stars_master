@@ -147,7 +147,7 @@ cc.Class({
       let config = this._controller.config.json.chainConfig
       for (let i = 0; i < config.length; i++) {
         if (this.chain <= config[i].max && this.chain >= config[i].min) {
-          console.log(config[i].text)
+        //  console.log(config[i].text)
           this.showChainSprite(i)
           return
         }
@@ -219,7 +219,7 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
     this._controller.musicMgr.onWin()
-    this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
+    this.successDialog.init(this, this.level, this.levelData,this.score) //升级之后的等级
     this.characterMgr.onLevelUp()
     this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2

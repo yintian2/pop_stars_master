@@ -24,7 +24,7 @@ cc.Class({
         this.textureArr[i] = texture
       })
     }
-    console.log(this.textureArr)
+   // console.log(this.textureArr)
   },
   onWalk(target) {
     target.playAnimation('walk', -1)
@@ -48,7 +48,7 @@ cc.Class({
   showCharacter(level, target, jump) {
     target = target || this.character
     let assert = target.getComponent(dragonBones.ArmatureDisplay)
-    cc.log("before", assert)
+  //  cc.log("before", assert)
     assert.destroy()
 
     let main = target.addComponent(dragonBones.ArmatureDisplay)
@@ -56,7 +56,7 @@ cc.Class({
     main.dragonAtlasAsset = this.textureArr[level - 1]
     main.armatureName = "Armature"
     main.timeScale = 0.5
-    console.log("after", main)
+   // console.log("after", main)
     main.playAnimation(jump ? "jump" : "walk", -1)
     //this.onWalk(main)
   },

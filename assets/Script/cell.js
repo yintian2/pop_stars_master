@@ -139,7 +139,7 @@ cc.Class({
       //self._game._score.chain - 1
     )
     if (this._itemType != 0) {
-      console.log("触发了道具", this._itemType)
+     // console.log("触发了道具", this._itemType)
       self._game.onItem(this._itemType, color, {
         x: this.node.x,
         y: this.node.y
