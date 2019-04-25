@@ -20,13 +20,23 @@ cc.Class({
     //TODO: 微信小游戏导致音乐自动关闭 处理失败
     // 监听
     wx.onAudioInterruptionEnd(c.musicMgr.checkBg())
+    wx.showShareMenu()
     wx.onShow(() => {
       cc.director.resume()
       c.musicMgr.checkBg()
     })
+    wx.onShareAppMessage(function () {
+      return {
+        title: "升官大挑战~快来挑战最高分",
+      }
+    })
     wx.onHide(() => {
       cc.director.pause()
     })
+  },
+  onShareButton() {
+    var self = this;
+    wx.shareAppMessage()
   },
   onShakePhone(){
     wx.vibrateShort()

@@ -219,7 +219,7 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
     this._controller.musicMgr.onWin()
-    this.successDialog.init(this, this.level, this.levelData) //升级之后的等级
+    this.successDialog.init(this, this.level, this.levelData,this.score) //升级之后的等级
     this.characterMgr.onLevelUp()
     this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2

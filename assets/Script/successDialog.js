@@ -8,11 +8,11 @@ cc.Class({
     scoreLabel: cc.Label,
   },
 
-  init(s, level, data) {
+  init(s, level, data, score) {
     this.nameLabelBefore.string = data[level - 2].name
     this.nameLabelNow.string = data[level - 1].name
     this.stepLabel.string = "+" + data[level - 2].step + "步"
-    this.scoreLabel.string = "分数：" + data[level - 2].score
+    this.scoreLabel.string = "分数：" + score
   },
   // update (dt) {},
 });
