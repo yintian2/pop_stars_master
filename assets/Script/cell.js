@@ -100,16 +100,49 @@ cc.Class({
   onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
     isChain = isChain ? isChain : true
     isBomb = isBomb ? isBomb : false
+    let self = this
+    // 爆炸触发
     if (this._status == 1 && isBomb == true) {
       this.playDieAction().then(() => {
         this.onBlockPop(color, isChain, isBomb)
       })
       return
     }
+
     if (color.type) {
       // 一定是用户主动触发 保存这个坐标给game
+      //阻断 如果四个面的颜色都和这个颜色不一样 就发起阻断
+      var isCan = false
+      if ((self.iid - 1) >= 0 && self._game.map[self.iid - 1][self.jid].getComponent('cell').color ==
+        this.color) {
+        isCan = true
+      }
+      if ((self.iid + 1) < this._game.rowNum && self._game.map[self.iid + 1][self.jid].getComponent('cell').color ==
+        this.color) {
+        isCan = true
+      }
+      if ((self.jid - 1) >= 0 && self._game.map[self.iid][self.jid - 1].getComponent('cell').color ==
+        this.color) {
+        isCan = true
+      }
+      if ((self.jid + 1) < this._game.rowNum && self._game.map[self.iid][self.jid + 1].getComponent('cell').color ==
+        this.color) {
+        isCan = true
+      }
+
+      if (!isCan) {
+        console.log(isCan, '无法消除单个方块')
+        this.node.scale = 1
+        this._game._score.tipBox.init(this._game._score,3)
+        let action1 = cc.scaleTo(0.1, 1.1, 0.9)
+        let action2 = cc.scaleTo(0.3, 1).easing(cc.easeBackOut(2.0))
+        let action = cc.sequence(action1, action2)
+        this.node.runAction(action)
+        return
+      }
       // console.log('方块位置', this.iid, this.jid, this._itemType)
-      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color,this.warningType, {
+
+      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color, this.warningType, {
         x: this.node.x,
         y: this.node.y
       })
@@ -121,7 +154,7 @@ cc.Class({
         })
       }
     } else {
-      // 其他方块触发
+      // 由其他方块触发
       if (this._status == 1 && this._game._status == 5 && this.color == color) {
         this.playDieAction().then(() => {
           this.onBlockPop(color, null, null)
@@ -139,7 +172,7 @@ cc.Class({
       //self._game._score.chain - 1
     )
     if (this._itemType != 0) {
-     // console.log("触发了道具", this._itemType)
+      // console.log("触发了道具", this._itemType)
       self._game.onItem(this._itemType, color, {
         x: this.node.x,
         y: this.node.y
