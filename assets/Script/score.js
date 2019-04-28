@@ -40,7 +40,8 @@ cc.Class({
     this.mainScoreLabel.node.active = false
     this.characterMgr.showCharacter(this.level)
     this.hideChainSprite()
-    this.tipBox.closeTioBox()
+
+    this.tipBox.init(this, 0)
   },
   start() {
     this.generatePool()
@@ -245,6 +246,7 @@ cc.Class({
         x: -248,
         y: 350
       }, cc.callFunc(() => {
+        // this.tipBox.init(this) 每次升级就咏诗
         this.onStep(this.levelData[this.level - 2].step)
         this._game._status = 1
         this.mainScoreLabel.node.active = false

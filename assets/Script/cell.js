@@ -133,6 +133,7 @@ cc.Class({
       if (!isCan) {
         console.log(isCan, '无法消除单个方块')
         this.node.scale = 1
+        this._game._score.tipBox.init(this._game._score,3)
         let action1 = cc.scaleTo(0.1, 1.1, 0.9)
         let action2 = cc.scaleTo(0.3, 1).easing(cc.easeBackOut(2.0))
         let action = cc.sequence(action1, action2)
