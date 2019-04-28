@@ -17,7 +17,10 @@ cc.Class({
     // progressBar: require('progress'),
     // leftStepLabel: cc.Label,
     chainSpriteFrameArr: [cc.SpriteFrame],
-    stepAniLabel: cc.Label
+    stepAniLabel: cc.Label,
+
+    //提示小框
+    tipBox: require('tipBox')
   },
   init(g) {
     this._game = g
@@ -37,6 +40,7 @@ cc.Class({
     this.mainScoreLabel.node.active = false
     this.characterMgr.showCharacter(this.level)
     this.hideChainSprite()
+    this.tipBox.closeTioBox()
   },
   start() {
     this.generatePool()
@@ -147,7 +151,7 @@ cc.Class({
       let config = this._controller.config.json.chainConfig
       for (let i = 0; i < config.length; i++) {
         if (this.chain <= config[i].max && this.chain >= config[i].min) {
-        //  console.log(config[i].text)
+          //  console.log(config[i].text)
           this.showChainSprite(i)
           return
         }
@@ -219,7 +223,7 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(3)
     this._controller.musicMgr.onWin()
-    this.successDialog.init(this, this.level, this.levelData,this.score) //升级之后的等级
+    this.successDialog.init(this, this.level, this.levelData, this.score) //升级之后的等级
     this.characterMgr.onLevelUp()
     this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2
@@ -254,7 +258,7 @@ cc.Class({
     this.stepAniLabel.string = '+' + (num + '')
     this.stepAniLabel.node.x = -248
     this.stepAniLabel.node.y = 400
-    this.stepAniLabel.node.runAction(cc.sequence(cc.toggleVisibility(), cc.moveBy(0.6, 0, 60),cc.toggleVisibility()))
+    this.stepAniLabel.node.runAction(cc.sequence(cc.toggleVisibility(), cc.moveBy(0.6, 0, 60), cc.toggleVisibility()))
     let action = cc.sequence(cc.scaleTo(0.2, 0.8), AC.popOut(0.8))
     this.leftStepLabel.node.parent.runAction(action)
   },
