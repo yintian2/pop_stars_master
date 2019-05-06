@@ -265,15 +265,22 @@ cc.Class({
     this.leftStepLabel.node.parent.runAction(action)
   },
   // 游戏结束
-  onGameOver() {
-    if (this._game._status != 3) {
+  onGameOver(isTrue) {
+    isTrue = isTrue || 0
+    if (this._game._status != 3 && !isTrue) {
       this._game.gameOver()
       this.updateFailPage()
       if (this._controller.social.node.active) {
         // 仅上传分数
         this._controller.social.onGameOver(this.level, this.score)
       }
+    }else if(isTrue){
+      this._game.askRevive()
     }
+  },
+  // todo 复活
+  onRevive() {
+    this.onStep(10)
   },
   // 展示下一级的信息
   showNextLevelData() {

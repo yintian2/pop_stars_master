@@ -172,6 +172,17 @@ cc.Class({
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(4)
   },
+  // todo 复活
+  askRevive() {
+    
+  },
+  onRevive() {
+    this._status = 1
+    this._score.onRevive()
+  },
+  onSkipRevive() {
+    this._score.onGameOver(true)
+  },
   restart() {
     this._controller.pageMgr.onOpenPage(1)
     this.recoveryAllBlocks().then(() => {

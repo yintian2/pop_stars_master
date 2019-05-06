@@ -24,16 +24,12 @@ cc.Class({
       c.musicMgr.resumeBg()
     })
     wx.showShareMenu()
-    wx.onShow(() => {
+    wx.onShow((options) => {
+      if (options.scene == 1044) {
+        console.log(options)
+      }
       cc.director.resume()
       c.musicMgr.checkBg()
-    })
-    wx.onShareAppMessage(function () {
-      return {
-        title: "开局只是个农民，现在已经做到宰相",
-        imageUrlId:oxEwGvClT0uldQ470pM84w,
-        imageUrl:'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
-      }
     })
     wx.onHide(() => {
       cc.director.pause()
@@ -43,8 +39,8 @@ cc.Class({
     var self = this;
     wx.shareAppMessage({
       title: "开局只是个农民，现在已经做到宰相",
-      imageUrlId:oxEwGvClT0uldQ470pM84w,
-      imageUrl:'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
+      imageUrlId: 'oxEwGvClT0uldQ470pM84w',
+      imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
     })
   },
   onShakePhone() {
@@ -52,11 +48,14 @@ cc.Class({
   },
   // --------------- share ----------------
   loadShareData() {
-    wx.showShareMenu(false)
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     wx.onShareAppMessage(function () {
       return {
-        title: "这是分享信息这是分享信息",
-        imageUrl: ''
+        title: "开局只是个农民，现在已经做到宰相",
+        imageUrlId: 'oxEwGvClT0uldQ470pM84w',
+        imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
       }
     })
   },
@@ -145,6 +144,23 @@ cc.Class({
       this.display.node.getComponent(cc.WXSubContextView).update()
     }
   },
+  onReviveButton() {
+    // 广告位
+    let self = this
+    let videoAd = wx.createRewardedVideoAd({
+        adUnitId: 'adunit-19675012c3def3dd'
+    })
+    videoAd.onClose((res) => {
+        console.log('videoAd res:', res)
+        if (res.isEnded) {
+         //   self._controller.player.onRevive()
+        }
+    })
+    videoAd.load()
+        .then(() => videoAd.show())
+        .catch(err => console.log('reviveBanner res:', err.errMsg))
+},
+
   // -------------- rank 刷新------------------
   // _updateSubDomainCanvas() {
   //   if (!this.tex) {
