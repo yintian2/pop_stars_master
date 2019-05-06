@@ -43,7 +43,7 @@ cc.Class({
     }
     this.gapTimer = setInterval(() => {
       this.init(this._score, -1)
-    }, 5000)
+    }, 3000)
   },
   openTipBox() {
     if (!this.isOpen) {
