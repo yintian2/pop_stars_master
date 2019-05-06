@@ -34,7 +34,7 @@ cc.Class({
     this.nameLabel.string = "农民"
     this.progressBar.init(0, this.levelData[this.level - 1], this.level)
     this.leftStepLabel.string = this.leftStep
-    this.stepAniLabel.node.runAction(cc.toggleVisibility())
+    this.stepAniLabel.node.runAction(cc.hide())
     this.scoreTimer = []
     this.currentAddedScore = 0
     this.mainScoreLabel.node.active = false

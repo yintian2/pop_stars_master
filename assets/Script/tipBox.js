@@ -32,7 +32,11 @@ cc.Class({
   },
   init(s, type) { //传type是道具触发 不传是随机触发
     this._score = s
-    this.label.string = type >= 0 ? this.tip[type] : this.otherTip[Math.ceil(Math.random() * this.otherTip.length)]
+    if (this.type > 0) {
+      this.label.string = this.tip[type]
+    } else {
+      this.label.string = this.otherTip[Math.floor(Math.random() * this.otherTip.length)]
+    }
     this.openTipBox()
     if (this.gapTimer) {
       clearInterval(this.gapTimer)
