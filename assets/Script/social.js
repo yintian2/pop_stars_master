@@ -31,6 +31,8 @@ cc.Class({
     wx.onShareAppMessage(function () {
       return {
         title: "开局只是个农民，现在已经做到宰相",
+        imageUrlId:oxEwGvClT0uldQ470pM84w,
+        imageUrl:'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
       }
     })
     wx.onHide(() => {
@@ -39,7 +41,11 @@ cc.Class({
   },
   onShareButton() {
     var self = this;
-    wx.shareAppMessage()
+    wx.shareAppMessage({
+      title: "开局只是个农民，现在已经做到宰相",
+      imageUrlId:oxEwGvClT0uldQ470pM84w,
+      imageUrl:'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
+    })
   },
   onShakePhone() {
     wx.vibrateShort()

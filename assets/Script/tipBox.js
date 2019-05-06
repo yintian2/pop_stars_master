@@ -32,7 +32,7 @@ cc.Class({
   },
   init(s, type) { //传type是道具触发 不传是随机触发
     this._score = s
-    if (this.type > 0) {
+    if (type > 0) {
       this.label.string = this.tip[type]
     } else {
       this.label.string = this.otherTip[Math.floor(Math.random() * this.otherTip.length)]
@@ -43,7 +43,7 @@ cc.Class({
     }
     this.gapTimer = setInterval(() => {
       this.init(this._score, -1)
-    }, 3000)
+    }, 5000)
   },
   openTipBox() {
     if (!this.isOpen) {
@@ -59,7 +59,7 @@ cc.Class({
     }
     this.closeTimer = setTimeout(() => {
       this.closeTioBox()
-    }, 2000)
+    }, 4000)
   },
   closeTioBox() {
     let action = cc.scaleTo(0.3, 0)
