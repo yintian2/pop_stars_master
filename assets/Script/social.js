@@ -30,7 +30,7 @@ cc.Class({
     })
     wx.onShareAppMessage(function () {
       return {
-        title: "升官大挑战~快来挑战最高分",
+        title: "开局只是个农民，现在已经做到宰相",
       }
     })
     wx.onHide(() => {
