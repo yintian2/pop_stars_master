@@ -13,6 +13,7 @@ cc.Class({
     gameData: cc.JsonAsset,
     scoreMgr: require('score'), //分数 特效控制
     totalRank: cc.Node,
+    groupRank:cc.Node,
     startPage: require('startPage')
   },
   start() {
@@ -47,6 +48,20 @@ cc.Class({
     this.totalRank.active = true
     if (this.social.node.active) {
       this.social.showRank()
+    }
+  },
+  openGroupRank(){
+    this.groupRank.active = true
+    if (this.social.node.active) {
+      this.social.showGroupRank()
+      this.pageMgr.addPage(6)
+    }
+  },
+  closeGroupRank() {
+    this.groupRank.active = false
+    if (this.social.node.active) {
+      this.social.closeGroupRank()
+      this.pageMgr.removePage(6)
     }
   },
 });

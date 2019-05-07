@@ -7,6 +7,7 @@ cc.Class({
   extends: cc.Component,
   properties: {
     display: cc.Sprite,
+    groupDisplay: cc.Sprite,
     _isShow: false,
     // score: 0
   },
@@ -39,6 +40,8 @@ cc.Class({
           message: 'group',
           shareTicket: options.shareTicket
         })
+        c.openGroupRank()
+        this.display.node.active = false
       }
       cc.director.resume()
     })
@@ -122,6 +125,26 @@ cc.Class({
     })
     this._isShow = false
   },
+  showGroupRank() {
+    wx.postMessage({
+      message: 'Show'
+    })
+    this.groupDisplay.node.active = true
+    this._isShow = true
+  },
+  // switchRankType() {
+  //   wx.postMessage({
+  //     message: 'switchRank'
+  //   })
+  //   this._isShow = true
+  // },
+  closeGroupRank() {
+    this.groupDisplay.node.active = false
+    wx.postMessage({
+      message: 'Hide'
+    })
+    this._isShow = false
+  },
   createImage(sprite, url) {
     let image = wx.createImage();
     image.onload = function () {
@@ -134,7 +157,12 @@ cc.Class({
   },
   update() {
     if (this._isShow) {
-      this.display.node.getComponent(cc.WXSubContextView).update()
+      if (this.display.node.active) {
+        this.display.node.getComponent(cc.WXSubContextView).update()
+      }
+      if (this.groupDisplay.node.active) {
+        this.groupDisplay.node.getComponent(cc.WXSubContextView).update()
+      }
     }
   },
   onReviveButton() {
