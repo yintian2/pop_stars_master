@@ -12,7 +12,16 @@ cc.Class({
   },
   init(c) {
     this._controller = c
-    this.loadShareData()
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+    wx.onShareAppMessage(function () {
+      return {
+        title: "开局只是个农民，现在已经做到宰相",
+        // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
+        imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
+      }
+    })
     // this.display.node.width = window.width
     //this.display.node.height = window.height
     //this.display.node.getComponent(cc.WXSubContextView).enabled = false;
@@ -23,47 +32,31 @@ cc.Class({
       c.musicMgr.pauseBg()
       c.musicMgr.resumeBg()
     })
-    wx.showShareMenu()
     wx.onShow((options) => {
+      console.log(options)
       if (options.scene == 1044) {
-        console.log(options)
+        wx.postMessage({
+          message: 'group',
+          shareTicket: options.shareTicket
+        })
       }
       cc.director.resume()
-      c.musicMgr.checkBg()
     })
     wx.onHide(() => {
       cc.director.pause()
     })
   },
+  // --------------- share ----------------
   onShareButton() {
     var self = this;
     wx.shareAppMessage({
       title: "开局只是个农民，现在已经做到宰相",
-      imageUrlId: 'oxEwGvClT0uldQ470pM84w',
+      // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
       imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
     })
   },
   onShakePhone() {
     wx.vibrateShort()
-  },
-  // --------------- share ----------------
-  loadShareData() {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
-    wx.onShareAppMessage(function () {
-      return {
-        title: "开局只是个农民，现在已经做到宰相",
-        imageUrlId: 'oxEwGvClT0uldQ470pM84w',
-        imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
-      }
-    })
-  },
-  onShareButton(data) {
-    wx.shareAppMessage({
-      title: data.title,
-      imageUrl: ''
-    })
   },
   // ---------------分数上传---------------
   onGameOver(level, score) {
@@ -148,18 +141,18 @@ cc.Class({
     // 广告位
     let self = this
     let videoAd = wx.createRewardedVideoAd({
-        adUnitId: 'adunit-19675012c3def3dd'
+      adUnitId: 'adunit-19675012c3def3dd'
     })
     videoAd.onClose((res) => {
-        console.log('videoAd res:', res)
-        if (res.isEnded) {
-         //   self._controller.player.onRevive()
-        }
+      console.log('videoAd res:', res)
+      if (res.isEnded) {
+        //   self._controller.player.onRevive()
+      }
     })
     videoAd.load()
-        .then(() => videoAd.show())
-        .catch(err => console.log('reviveBanner res:', err.errMsg))
-},
+      .then(() => videoAd.show())
+      .catch(err => console.log('reviveBanner res:', err.errMsg))
+  },
 
   // -------------- rank 刷新------------------
   // _updateSubDomainCanvas() {

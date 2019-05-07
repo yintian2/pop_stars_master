@@ -73,7 +73,9 @@ cc.Class({
   start() {
     // this.onPlayAudio(1);
   },
-
+  checkBg(){
+    
+  },
   onWin() {
     this.winAudio.rewind()
     this.winAudio.play()
