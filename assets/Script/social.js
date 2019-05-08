@@ -175,7 +175,7 @@ cc.Class({
     videoAd.onClose((res) => {
       console.log('videoAd res:', res)
       if (res.isEnded) {
-        //   self._controller.player.onRevive()
+           self.c.game.showReviveSuccess()
       }
     })
     videoAd.load()

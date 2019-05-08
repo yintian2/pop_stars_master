@@ -146,13 +146,16 @@ cc.Class({
         x: this.node.x,
         y: this.node.y
       })
-      this._game._score.onStep(-1)
-      color = this.color
-      if (this._status == 1 && this._game._status == 1 && this.color == color) {
-        this.playDieAction().then(() => {
-          this.onBlockPop(color, null, null)
-        })
-      }
+      this._game._score.onStep(-1).then((res)=>{
+        if(res){
+          color = this.color
+          if (this._status == 1 && this._game._status == 1 && this.color == color) {
+            this.playDieAction().then(() => {
+              this.onBlockPop(color, null, null)
+            })
+          }
+        }
+      })
     } else {
       // 由其他方块触发
       if (this._status == 1 && this._game._status == 5 && this.color == color) {

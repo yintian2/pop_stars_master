@@ -29,6 +29,7 @@ cc.Class({
     this.leftStep = this._controller.config.json.originStep
     this.chain = 1
     this.level = 1
+    this.reviveTime = 0
     this.closeMultLabel()
     this.levelData = g._controller.gameData.json.levelData
     this.nameLabel.string = "农民"
@@ -101,14 +102,19 @@ cc.Class({
   // 增加 减少步数并且刷新UI
   onStep(num) {
     this.leftStep += num
-    if (this.leftStep < 0) {
-      this.leftStep = 0
-      this.onGameOver()
-    }
-    this.leftStepLabel.string = this.leftStep
-    if (num > 0) {
-      this.showStepAni(num)
-    }
+    return new Promise((resolve, reject) => {
+      if (this.leftStep < 0) {
+        this.leftStep = 0
+        this.onGameOver()
+        resolve(false)
+      } else {
+        resolve(true)
+      }
+      this.leftStepLabel.string = this.leftStep
+      if (num > 0) {
+        this.showStepAni(num)
+      }
+    })
   },
 
   //增加分数总控制 获取连击
@@ -247,7 +253,7 @@ cc.Class({
         y: 350
       }, cc.callFunc(() => {
         // this.tipBox.init(this) 每次升级就咏诗
-        this.onStep(this.levelData[this.level - 2].step)
+        this.onStep(this.levelData[this.level - 2].step).then()
         this._game._status = 1
         this.mainScoreLabel.node.active = false
       }))
@@ -265,22 +271,24 @@ cc.Class({
     this.leftStepLabel.node.parent.runAction(action)
   },
   // 游戏结束
+  // todo 复活
   onGameOver(isTrue) {
     isTrue = isTrue || 0
-    if (this._game._status != 3 && !isTrue) {
+    if (this._game._status != 3 && (isTrue || this.reviveTime > 3)) {
       this._game.gameOver()
       this.updateFailPage()
       if (this._controller.social.node.active) {
         // 仅上传分数
         this._controller.social.onGameOver(this.level, this.score)
       }
-    }else if(isTrue){
+    } else if (!isTrue) {
       this._game.askRevive()
     }
   },
-  // todo 复活
+
   onRevive() {
-    this.onStep(10)
+    this.reviveTime++
+    this.onStep(5).then()
   },
   // 展示下一级的信息
   showNextLevelData() {

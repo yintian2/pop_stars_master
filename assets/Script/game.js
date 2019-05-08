@@ -11,7 +11,8 @@ cc.Class({
     blockSprite: [cc.SpriteFrame], //todo: 换成动态生成 暂不处理
     warningSpriteFrame: [cc.SpriteFrame],
     propSpriteFrame: [cc.SpriteFrame],
-    checkMgr: require("check")
+    checkMgr: require("check"),
+    revivePage: cc.Node,
   },
   start() {
     this.bindNode()
@@ -174,13 +175,36 @@ cc.Class({
   },
   // todo 复活
   askRevive() {
-    
+    this._controller.pageMgr.addPage(2)
+    this._controller.pageMgr.addPage(5)
+    this.revivePage.getChildByName('askRevive').active = true
+    this.revivePage.getChildByName('successRevive').active = false
+    let numLabel = this.revivePage.getChildByName('askRevive').getChildByName('numBg').getChildByName('num').getComponent(cc.Label)
+    numLabel.string = 9
+    this.reviveTimer = setInterval(() => {
+      if (+numLabel.string > 0) {
+        numLabel.string--
+      } else {
+        this.onSkipRevive()
+      }
+    }, 1000)
   },
-  onRevive() {
+  onReviveButton() {
+    clearInterval(this.reviveTimer)
+  },
+  showReviveSuccess() {
+    this.revivePage.getChildByName('askRevive').active = false
+    this.revivePage.getChildByName('successRevive').active = true
+  },
+  onReviveCertainBtn() {
+    this._controller.pageMgr.removePage(2)
+    this._controller.pageMgr.removePage(5)
     this._status = 1
     this._score.onRevive()
   },
   onSkipRevive() {
+    clearInterval(this.reviveTimer)
+    this.revivePage.active = false
     this._score.onGameOver(true)
   },
   restart() {
