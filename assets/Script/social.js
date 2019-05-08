@@ -42,6 +42,7 @@ cc.Class({
         })
         c.openGroupRank()
         this.display.node.active = false
+        
       }
       cc.director.resume()
     })
@@ -70,8 +71,8 @@ cc.Class({
     let highScore = score
     let self = this
     highLevel = wx.getStorageSync('highLevel')
+    highLevel = parseInt(highLevel)
     if (highLevel) {
-      highLevel = parseInt(highLevel)
       highLevel = highLevel < level ? level : highLevel
     } else {
       highLevel = level
