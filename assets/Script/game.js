@@ -29,6 +29,7 @@ cc.Class({
     this.gap = c.config.json.gap
     this.animationSpeed = c.config.json.gap
     this.blockWidth = (730 - (this.rowNum + 1) * this.gap) / this.rowNum
+    this.reviveTimer = null
     //console.log(this.gap)
     //console.log(this.blockWidth)
   },
@@ -179,18 +180,34 @@ cc.Class({
     this._controller.pageMgr.addPage(5)
     this.revivePage.getChildByName('askRevive').active = true
     this.revivePage.getChildByName('successRevive').active = false
+    this.rangeSprite = this.revivePage.getChildByName('askRevive').getChildByName('numBg').getChildByName('sprite').getComponent(cc.Sprite)
+    this.rangeSprite.fillRange = 1
+    this.isRangeAction = true
     let numLabel = this.revivePage.getChildByName('askRevive').getChildByName('numBg').getChildByName('num').getComponent(cc.Label)
     numLabel.string = 9
+    if (this.reviveTimer) {
+      clearInterval(this.reviveTimer)
+    }
     this.reviveTimer = setInterval(() => {
       if (+numLabel.string > 0) {
         numLabel.string--
+        this.rangeSprite.fillRange = 1
       } else {
         this.onSkipRevive()
       }
     }, 1000)
+    if (this._controller.social.node.active) {
+      this._controller.social.openBannerAdv()
+    }
   },
   onReviveButton() {
     clearInterval(this.reviveTimer)
+    this.isRangeAction = false
+    if (this._controller.social.node.active) {
+      this._controller.social.onReviveButton()
+    } else {
+      this.showReviveSuccess()
+    }
   },
   showReviveSuccess() {
     this.revivePage.getChildByName('askRevive').active = false
@@ -201,11 +218,23 @@ cc.Class({
     this._controller.pageMgr.removePage(5)
     this._status = 1
     this._score.onRevive()
+    if (this._controller.social.node.active) {
+      this._controller.social.closeBannerAdv()
+    }
+  },
+  update() {
+    if (this.isRangeAction) {
+      this.rangeSprite.fillRange -= 1 / 60
+    }
   },
   onSkipRevive() {
     clearInterval(this.reviveTimer)
-    this.revivePage.active = false
+    this._controller.pageMgr.pages[5].active = false
     this._score.onGameOver(true)
+    this.isRangeAction = false
+    if (this._controller.social.node.active) {
+      this._controller.social.closeBannerAdv()
+    }
   },
   restart() {
     this._controller.pageMgr.onOpenPage(1)
@@ -258,7 +287,6 @@ cc.Class({
       case 1:
         // 分数翻倍 最高八倍
         this._score.tipBox.init(this._score, 1)
-
         this._score.addMult(color, pos)
         this._controller.musicMgr.onDouble()
         for (let i = 0; i < this.rowNum; i++) { //行
@@ -284,7 +312,7 @@ cc.Class({
         this._controller.musicMgr.onBoom()
         for (let i = 0; i < this.rowNum; i++) { //行
           for (let j = 0; j < this.rowNum; j++) { //列
-            if (this.map[i][j] && this.map[i][j].getComponent('cell').color == color) {
+            if (this.map[i][j] && this.map[i][j].getComponent('cell').color == color && this.map[i][j] && this.map[i][j].getComponent('cell')._status != 2) {
               this.map[i][j].getComponent('cell').onTouched(color, false, true)
             } else {
               this.map[i][j].runAction(AC.rockAction(0.2, 10))
@@ -292,7 +320,38 @@ cc.Class({
           }
         }
         break
-      case 3: //TODO:  500分道具 暂时屏蔽
+      case 3: //TODO:  加步数
+        this._score.tipBox.init(this._score, 4)
+        this._controller.musicMgr.onDouble()
+        for (let i = 0; i < this.rowNum; i++) { //行
+          for (let j = 0; j < this.rowNum; j++) { //列
+            if (this.map[i][j] && this.map[i][j].getComponent('cell')._status == 1) {
+              let distance = Math.sqrt(Math.pow(pos.x - this.map[i][j].x, 2) + Math.pow(pos.y - this.map[i][j].y, 2))
+              if (distance != 0) {
+                this.map[i][j].getComponent('cell').surfaceAction(distance)
+              }
+            }
+          }
+        }
+        this._score.onStep(3).then()
+        break;
+      case 4: // TODO: 消除全部单身的方块
+        this._score.tipBox.init(this._score, 5)
+        this.node.runAction(AC.shackAction(0.1, 10))
+        if (this._controller.social.node.avtive) {
+          this._controller.social.onShakePhone()
+        }
+        this.isPropChain = true
+        this._controller.musicMgr.onBoom()
+        for (let i = 0; i < this.rowNum; i++) { //行
+          for (let j = 0; j < this.rowNum; j++) { //列
+            if (this.map[i][j] && this.map[i][j].getComponent('cell').isSingle && this.map[i][j] && this.map[i][j].getComponent('cell')._status != 2) {
+              this.map[i][j].getComponent('cell').onTouched(color, false, true)
+            } else {
+              this.map[i][j].runAction(AC.rockAction(0.2, 10))
+            }
+          }
+        }
         break;
     }
   },
@@ -343,4 +402,5 @@ cc.Class({
       resolve('')
     })
   },
+
 });

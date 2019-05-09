@@ -103,6 +103,7 @@ cc.Class({
     let self = this
     // 爆炸触发
     if (this._status == 1 && isBomb == true) {
+      this._status = 2
       this.playDieAction().then(() => {
         this.onBlockPop(color, isChain, isBomb)
       })
@@ -146,8 +147,8 @@ cc.Class({
         x: this.node.x,
         y: this.node.y
       })
-      this._game._score.onStep(-1).then((res)=>{
-        if(res){
+      this._game._score.onStep(-1).then((res) => {
+        if (res) {
           color = this.color
           if (this._status == 1 && this._game._status == 1 && this.color == color) {
             this.playDieAction().then(() => {
@@ -176,6 +177,7 @@ cc.Class({
     )
     if (this._itemType != 0) {
       // console.log("触发了道具", this._itemType)
+
       self._game.onItem(this._itemType, color, {
         x: this.node.x,
         y: this.node.y

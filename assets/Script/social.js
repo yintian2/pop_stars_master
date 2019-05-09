@@ -42,7 +42,7 @@ cc.Class({
         })
         c.openGroupRank()
         this.display.node.active = false
-        
+
       }
       cc.director.resume()
     })
@@ -170,19 +170,54 @@ cc.Class({
     // 广告位
     let self = this
     let videoAd = wx.createRewardedVideoAd({
-      adUnitId: 'adunit-19675012c3def3dd'
+      adUnitId: 'adunit-482148cfeb243378'
+    })
+    videoAd.show().catch(() => {
+      // 失败重试
+      videoAd.load()
+        .then(() => videoAd.show())
+        .catch(err => {
+          console.log('激励视频 广告显示失败', err.errMsg)
+          self._controller.game.onSkipRevive()
+        })
+    })
+    videoAd.onError(err => {
+      self._controller.game.onSkipRevive()
     })
     videoAd.onClose((res) => {
-      console.log('videoAd res:', res)
-      if (res.isEnded) {
-           self.c.game.showReviveSuccess()
+      if (res && res.isEnded || res === undefined) {
+        self._controller.game.showReviveSuccess()
+      } else {
+        self._controller.game.askRevive()
       }
     })
-    videoAd.load()
-      .then(() => videoAd.show())
-      .catch(err => console.log('reviveBanner res:', err.errMsg))
   },
 
+  openBannerAdv() {
+    // 创建 Banner 广告实例，提前初始化
+    let screenHeight = wx.getSystemInfoSync().screenHeight - 105
+    if (this.bannerAd) {
+      this.bannerAd.destroy()
+    }
+    this.bannerAd = wx.createBannerAd({
+      adUnitId: 'adunit-4020bb9ea439e6a5',
+      style: {
+        left: 0,
+        top: screenHeight,
+        width: 350,
+      }
+    })
+    // 在适合的场景显示 Banner 广告
+    this.bannerAd.onLoad(() => {
+      console.log('banner 广告加载成功')
+    })
+
+    this.bannerAd.show()
+      .then(() => console.log('banner 广告显示'))
+  },
+  closeBannerAdv() {
+    this.bannerAd.hide()
+  }
   // -------------- rank 刷新------------------
   // _updateSubDomainCanvas() {
   //   if (!this.tex) {

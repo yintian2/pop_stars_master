@@ -274,7 +274,7 @@ cc.Class({
   // todo 复活
   onGameOver(isTrue) {
     isTrue = isTrue || 0
-    if (this._game._status != 3 && (isTrue || this.reviveTime > 3)) {
+    if (this._game._status != 3 && (isTrue || this.reviveTime >= 1)) {
       this._game.gameOver()
       this.updateFailPage()
       if (this._controller.social.node.active) {
@@ -287,7 +287,7 @@ cc.Class({
   },
 
   onRevive() {
-    this.reviveTime++
+    this.reviveTime += 1
     this.onStep(5).then()
   },
   // 展示下一级的信息
@@ -303,5 +303,6 @@ cc.Class({
     this.characterMgr.onFail(this.level)
     this.failName.string = this.levelData[this.level - 1].name
     //this.failHighScore.string = "正在获取您的最高分..."
-  }
+  },
+
 });

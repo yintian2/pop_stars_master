@@ -18,8 +18,9 @@ cc.Class({
       for (let j = 0; j < this.mapLength; j++) { //列
         // this.map[i][j].getComponent('cell').growInit() //全部初始化
         if (!this.map[i][j]) {
-      //    cc.log('报错x,y:', i, j)
+          //    cc.log('报错x,y:', i, j)
         }
+        this.map[i][j].getComponent('cell').isSingle = false
         this.map[i][j].getComponent('cell').warningInit()
         this.groups[i][j] = []
       }
@@ -43,6 +44,8 @@ cc.Class({
               this.warning(propConfig[z].type, this.groups[i][j])
             }
           }
+        } else if (this.groups[i][j].length == 1) {
+          this.map[i][j].getComponent('cell').isSingle = true
         }
       }
     }

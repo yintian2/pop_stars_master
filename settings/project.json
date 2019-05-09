@@ -1,4 +1,5 @@
 {
+  "assets-sort-type": "name",
   "collision-matrix": [
     [
       true
@@ -8,8 +9,6 @@
   "design-resolution-width": 960,
   "excluded-modules": [
     "Dynamic Atlas",
-    "Mask",
-    "Graphics",
     "TiledMap",
     "Spine Skeleton",
     "RichText",
@@ -50,7 +49,5 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current",
-  "assets-sort-type": "name"
+  "use-project-simulator-setting": false
 }
