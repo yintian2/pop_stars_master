@@ -40,7 +40,7 @@ cc.Class({
     // console.log('生成方块位置', data.y, data.x)
     this.node.x = -(730 / 2 - g.gap - width / 2) + pos.x * (width + g.gap)
     this.node.y = (730 / 2 - g.gap - width / 2) - pos.y * (width + g.gap)
-
+    this.node.rotation = 0
     this.playStartAction()
   },
   onWarning(type) {
@@ -112,27 +112,7 @@ cc.Class({
 
     if (color.type) {
       // 一定是用户主动触发 保存这个坐标给game
-      //阻断 如果四个面的颜色都和这个颜色不一样 就发起阻断
-      var isCan = false
-      if ((self.iid - 1) >= 0 && self._game.map[self.iid - 1][self.jid].getComponent('cell').color ==
-        this.color) {
-        isCan = true
-      }
-      if ((self.iid + 1) < this._game.rowNum && self._game.map[self.iid + 1][self.jid].getComponent('cell').color ==
-        this.color) {
-        isCan = true
-      }
-      if ((self.jid - 1) >= 0 && self._game.map[self.iid][self.jid - 1].getComponent('cell').color ==
-        this.color) {
-        isCan = true
-      }
-      if ((self.jid + 1) < this._game.rowNum && self._game.map[self.iid][self.jid + 1].getComponent('cell').color ==
-        this.color) {
-        isCan = true
-      }
-
-      if (!isCan && this._itemType != 2) {
-        console.log(isCan, '无法消除单个方块')
+      if (this.isSingle && this._itemType <= 1) {
         this.node.scale = 1
         this._game._score.tipBox.init(this._game._score, 3)
         let action1 = cc.scaleTo(0.1, 1.1, 0.9)
@@ -142,21 +122,20 @@ cc.Class({
         return
       }
       // console.log('方块位置', this.iid, this.jid, this._itemType)
-
       this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color, this.warningType, {
         x: this.node.x,
         y: this.node.y
       })
-      this._game._score.onStep(-1).then((res) => {
-        if (res) {
-          color = this.color
-          if (this._status == 1 && this._game._status == 1 && this.color == color) {
+      color = this.color
+      if (this._status == 1 && this._game._status == 1 && this.color == color) {
+        this._game._score.onStep(-1).then((res) => {
+          if (res) {
             this.playDieAction().then(() => {
               this.onBlockPop(color, null, null)
             })
           }
-        }
-      })
+        })
+      }
     } else {
       // 由其他方块触发
       if (this._status == 1 && this._game._status == 5 && this.color == color) {

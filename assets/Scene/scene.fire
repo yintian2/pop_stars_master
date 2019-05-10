@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3453886982644411,
-      "y": 0.3453886982644411,
+      "x": 0.7361501204998993,
+      "y": 0.7361501204998993,
       "z": 1
     },
     "_quat": {
@@ -10101,7 +10101,7 @@
     "component": "",
     "_componentId": "72f7acBwR1I474pejqfLV0j",
     "handler": "onLevelUpButton",
-    "customEventData": ""
+    "customEventData": "1"
   },
   {
     "__type__": "cc.Node",

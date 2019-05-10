@@ -242,7 +242,12 @@ cc.Class({
   },
   // 点击升级按钮
   onLevelUpButton(double) {
-    double = double || 1
+    console.log(double)
+    if (double && double.currentTarget) {
+      double = 1
+    } else {
+      double = double || 1
+    }
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
@@ -289,7 +294,7 @@ cc.Class({
   onDoubleStepBtn() {
     if (this._controller.social.node.active) {
       this._controller.social.onAdvDouble()
-    }else{
+    } else {
       this.onLevelUpButton()
     }
   },

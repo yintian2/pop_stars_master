@@ -42,7 +42,7 @@ cc.Class({
         })
         c.openGroupRank()
         this.display.node.active = false
-        this.c.totalRank.active = false
+        c.totalRank.active = false
       }
       cc.director.resume()
     })

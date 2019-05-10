@@ -305,7 +305,7 @@ cc.Class({
         // 炸弹 消除同种颜色的
         this._score.tipBox.init(this._score, 2)
         this.node.runAction(AC.shackAction(0.1, 10))
-        if (this._controller.social.node.avtive) {
+        if (this._controller.social.node.active) {
           this._controller.social.onShakePhone()
         }
         this.isPropChain = true
@@ -320,7 +320,7 @@ cc.Class({
           }
         }
         break
-      case 3: //TODO:  加步数
+      case 3: //:  加步数
         this._score.tipBox.init(this._score, 4)
         this._controller.musicMgr.onDouble()
         for (let i = 0; i < this.rowNum; i++) { //行
@@ -335,10 +335,10 @@ cc.Class({
         }
         this._score.onStep(3).then()
         break;
-      case 4: // TODO: 消除全部单身的方块
+      case 4: // : 消除全部单身的方块
         this._score.tipBox.init(this._score, 5)
         this.node.runAction(AC.shackAction(0.1, 10))
-        if (this._controller.social.node.avtive) {
+        if (this._controller.social.node.active) {
           this._controller.social.onShakePhone()
         }
         this.isPropChain = true
