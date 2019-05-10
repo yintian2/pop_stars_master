@@ -217,7 +217,9 @@ cc.Class({
   },
   openBannerAdv() {
     // 创建 Banner 广告实例，提前初始化
-    let screenHeight = wx.getSystemInfoSync().screenHeight - 105
+    let screenWidth = wx.getStorageSync().screenWidth
+    let bannerHeight = screenWidth / 350 * 105
+    let screenHeight = wx.getSystemInfoSync().screenHeight - bannerHeight
     if (this.bannerAd) {
       this.bannerAd.destroy()
     }
@@ -226,7 +228,7 @@ cc.Class({
       style: {
         left: 0,
         top: screenHeight,
-        width: 350,
+        width: screenWidth,
       }
     })
     // 在适合的场景显示 Banner 广告
