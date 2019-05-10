@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.7361501204998993,
-      "y": 0.7361501204998993,
+      "x": 0.9368156046398678,
+      "y": 0.9368156046398678,
       "z": 1
     },
     "_quat": {
@@ -4269,7 +4269,7 @@
         "__id__": 235
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [
       {
@@ -7638,7 +7638,7 @@
         "__id__": 194
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -7771,7 +7771,7 @@
       }
     ],
     "_prefab": null,
-    "_opacity": 200,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -7782,7 +7782,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 540,
-      "height": 60
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -7827,7 +7827,7 @@
     "_string": "步数用尽，仕途到头",
     "_N$string": "步数用尽，仕途到头",
     "_fontSize": 60,
-    "_lineHeight": 60,
+    "_lineHeight": 70,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -9061,7 +9061,7 @@
     "_string": "视频结束，感谢支持",
     "_N$string": "视频结束，感谢支持",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 50,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
