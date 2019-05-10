@@ -241,7 +241,8 @@ cc.Class({
     this.hideNextLevelData()
   },
   // 点击升级按钮
-  onLevelUpButton() {
+  onLevelUpButton(double) {
+    double = double || 1
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
     this.mainScoreLabel.string = this.levelData[this.level - 2].step
@@ -253,7 +254,7 @@ cc.Class({
         y: 350
       }, cc.callFunc(() => {
         // this.tipBox.init(this) 每次升级就咏诗
-        this.onStep(this.levelData[this.level - 2].step).then()
+        this.onStep(this.levelData[this.level - 2].step * double).then()
         this._game._status = 1
         this.mainScoreLabel.node.active = false
       }))
@@ -285,7 +286,16 @@ cc.Class({
       this._game.askRevive()
     }
   },
-
+  onDoubleStepBtn() {
+    if (this._controller.social.node.active) {
+      this._controller.social.onAdvDouble()
+    }else{
+      this.onLevelUpButton()
+    }
+  },
+  onDoubleStep() {
+    this.onLevelUpButton(2)
+  },
   onRevive() {
     this.reviveTime += 1
     this.onStep(5).then()

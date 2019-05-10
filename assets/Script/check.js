@@ -38,14 +38,39 @@ cc.Class({
     for (let i = 0; i < this.mapLength; i++) { //行
       for (let j = 0; j < this.mapLength; j++) { //列
         this.pushPop(this.map[i][j], i, j)
+        let target = this.map[i][j]
+        let x = target.getComponent('cell').iid
+        let y = target.getComponent('cell').jid
+        let isSingle = true
+        if ((x - 1) >= 0) {
+          if (this.map[x - 1][y].getComponent('cell').color == target.getComponent('cell').color) {
+            isSingle = false
+          }
+        }
+        if ((x + 1) < this.mapLength) {
+          if (this.map[x + 1][y].getComponent('cell').color == target.getComponent('cell').color) {
+            isSingle = false
+          }
+        }
+        if ((y - 1) >= 0) {
+          if (this.map[x][y - 1].getComponent('cell').color == target.getComponent('cell').color) {
+            isSingle = false
+          }
+        }
+        if ((y + 1) < this.mapLength) {
+          if (this.map[x][y + 1].getComponent('cell').color == target.getComponent('cell').color) {
+            isSingle = false
+          }
+        }
+
+        this.map[i][j].getComponent('cell').isSingle = isSingle
+
         if (this.groups[i][j].length >= min) {
           for (let z = 0; z < propConfig.length; z++) {
             if (this.groups[i][j].length <= propConfig[z].max && this.groups[i][j].length >= propConfig[z].min) {
               this.warning(propConfig[z].type, this.groups[i][j])
             }
           }
-        } else if (this.groups[i][j].length == 1) {
-          this.map[i][j].getComponent('cell').isSingle = true
         }
       }
     }
@@ -78,6 +103,9 @@ cc.Class({
         this.pushPop(this.map[x][y + 1], i, j)
       }
     }
+
+    // 判断方块是否单身
+
   },
   warning(type, group) {
     group.map(item => {

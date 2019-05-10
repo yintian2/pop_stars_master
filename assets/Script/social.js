@@ -42,7 +42,7 @@ cc.Class({
         })
         c.openGroupRank()
         this.display.node.active = false
-
+        this.c.totalRank.active = false
       }
       cc.director.resume()
     })
@@ -192,7 +192,29 @@ cc.Class({
       }
     })
   },
-
+  onAdvDouble() {
+    // 广告位
+    let self = this
+    let videoAd = wx.createRewardedVideoAd({
+      adUnitId: 'adunit-2397b0bff501b49b'
+    })
+    videoAd.show().catch(() => {
+      // 失败重试
+      videoAd.load()
+        .then(() => videoAd.show())
+        .catch(err => {
+          self._controller.scoreMgr.onLevelUpButton()
+        })
+    })
+    videoAd.onError(err => {
+      self._controller.scoreMgr.onLevelUpButton()
+    })
+    videoAd.onClose((res) => {
+      if (res && res.isEnded || res === undefined) {
+        self._controller.scoreMgr.onLevelUpButton(2)
+      }
+    })
+  },
   openBannerAdv() {
     // 创建 Banner 广告实例，提前初始化
     let screenHeight = wx.getSystemInfoSync().screenHeight - 105
