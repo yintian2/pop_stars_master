@@ -88,6 +88,7 @@ cc.Class({
     }
     this.checkNeedFallTimer = setTimeout(() => {
         if (this._status == 5) {
+          this._status = 4
           this.onFall()
         }
       }, 300 / 1
@@ -98,7 +99,6 @@ cc.Class({
   onFall() {
     this.checkGenerateProp(this._score.chain).then(() => {
       let self = this
-      this._status = 4
       let canFall = 0
       //从每一列的最下面一个开始往上判断
       //如果有空 就判断有几个空 然后让最上方的方块掉落下来
@@ -136,38 +136,9 @@ cc.Class({
       setTimeout(() => {
         this.checkMgr.init(this)
         this.checkMgr.check(this)
-      }, 200)
-      this._status = 1
+        this._status = 1
+      }, 250)
     })
-  },
-  //防抖动 判断是否需要生成新方块
-  checkNeedGenerator() {
-    if (this.checkNeedGeneratorTimer) {
-      clearTimeout(this.checkNeedGeneratorTimer)
-    }
-    this.checkNeedGeneratorTimer = setTimeout(() => {
-        if (this._status == 4) {
-          this.generateNewBlocks()
-        }
-      }, 300 / 1
-      // (cc.game.getFrameRate() / 60)
-    )
-  },
-  //生成新方块
-  generateNewBlocks() {
-    for (let i = 0; i < this.rowNum; i++) { //行
-      for (let j = 0; j < this.rowNum; j++) { //列
-        if (!this.map[i][j]) {
-          this.map[i][j] = this.instantiateBlock(this, {
-            x: j,
-            y: i,
-            width: this.blockWidth,
-            startTime: null
-          }, this.blocksContainer, 0)
-        }
-      }
-    }
-    this._status = 1
   },
   gameOver() {
     this._status = 3
@@ -178,6 +149,7 @@ cc.Class({
   askRevive() {
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(5)
+    this.revivePage.active = true
     this.revivePage.getChildByName('askRevive').active = true
     this.revivePage.getChildByName('successRevive').active = false
     this.rangeSprite = this.revivePage.getChildByName('askRevive').getChildByName('numBg').getChildByName('sprite').getComponent(cc.Sprite)
@@ -210,12 +182,13 @@ cc.Class({
     }
   },
   showReviveSuccess() {
+    //console.log('打开复活成功页面')
     this.revivePage.getChildByName('askRevive').active = false
     this.revivePage.getChildByName('successRevive').active = true
   },
   onReviveCertainBtn() {
     this._controller.pageMgr.removePage(2)
-    this._controller.pageMgr.removePage(5)
+    this.revivePage.active = false
     this._status = 1
     this._score.onRevive()
     if (this._controller.social.node.active) {

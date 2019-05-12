@@ -20,7 +20,7 @@ cc.Class({
       return {
         title: "开局只是个农民，现在已经做到宰相",
         // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
-        imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
+        imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
       }
     })
     // this.display.node.width = window.width
@@ -34,7 +34,7 @@ cc.Class({
       c.musicMgr.resumeBg()
     })
     wx.onShow((options) => {
-      console.log(options)
+      // console.log(options)
       if (options.scene == 1044) {
         wx.postMessage({
           message: 'group',
@@ -56,7 +56,7 @@ cc.Class({
     wx.shareAppMessage({
       title: "开局只是个农民，现在已经做到宰相",
       // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
-      imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9icErxW6RFibaibf7zckgXNuicVytxTjiaVom2RkuUg5nDw8oC8jhDulBgfD/0'
+      imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
     })
   },
   onShakePhone() {
@@ -169,22 +169,33 @@ cc.Class({
   onReviveButton() {
     // 广告位
     let self = this
-    let videoAd = wx.createRewardedVideoAd({
+    if (this.reviveAd) {
+      this.reviveAd.show().catch(() => {
+        // 失败重试
+        this.reviveAd.load()
+          .then(() => this.reviveAd.show())
+          .catch(err => {
+            console.log('激励视频 广告显示失败', err.errMsg)
+            self._controller.game.onSkipRevive()
+          })
+      })
+      return
+    }
+    this.reviveAd = wx.createRewardedVideoAd({
       adUnitId: 'adunit-482148cfeb243378'
     })
-    videoAd.show().catch(() => {
+    this.reviveAd.show().catch(() => {
       // 失败重试
-      videoAd.load()
-        .then(() => videoAd.show())
+      this.reviveAd.load()
+        .then(() => this.reviveAd.show())
         .catch(err => {
-          console.log('激励视频 广告显示失败', err.errMsg)
           self._controller.game.onSkipRevive()
         })
     })
-    videoAd.onError(err => {
+    this.reviveAd.onError(err => {
       self._controller.game.onSkipRevive()
     })
-    videoAd.onClose((res) => {
+    this.reviveAd.onClose((res) => {
       if (res && res.isEnded || res === undefined) {
         self._controller.game.showReviveSuccess()
       } else {
@@ -195,21 +206,32 @@ cc.Class({
   onAdvDouble() {
     // 广告位
     let self = this
-    let videoAd = wx.createRewardedVideoAd({
+    if (this.doubleAd) {
+      this.doubleAd.show().catch(() => {
+        // 失败重试
+        this.doubleAd.load()
+          .then(() => this.doubleAd.show())
+          .catch(err => {
+            self._controller.scoreMgr.onLevelUpButton()
+          })
+      })
+      return
+    }
+    this.doubleAd = wx.createRewardedVideoAd({
       adUnitId: 'adunit-2397b0bff501b49b'
     })
-    videoAd.show().catch(() => {
+    this.doubleAd.show().catch(() => {
       // 失败重试
-      videoAd.load()
-        .then(() => videoAd.show())
+      this.doubleAd.load()
+        .then(() => this.doubleAd.show())
         .catch(err => {
           self._controller.scoreMgr.onLevelUpButton()
         })
     })
-    videoAd.onError(err => {
+    this.doubleAd.onError(err => {
       self._controller.scoreMgr.onLevelUpButton()
     })
-    videoAd.onClose((res) => {
+    this.doubleAd.onClose((res) => {
       if (res && res.isEnded || res === undefined) {
         self._controller.scoreMgr.onLevelUpButton(2)
       }
@@ -218,13 +240,13 @@ cc.Class({
   openBannerAdv() {
     // 创建 Banner 广告实例，提前初始化
     let screenWidth = wx.getSystemInfoSync().screenWidth
-    let bannerHeight = screenWidth / 350 * 105
+    let bannerHeight = screenWidth / 350 * 120
     let screenHeight = wx.getSystemInfoSync().screenHeight - bannerHeight
     if (this.bannerAd) {
       this.bannerAd.destroy()
     }
     this.bannerAd = wx.createBannerAd({
-      adUnitId: 'adunit-4020bb9ea439e6a5',
+      adUnitId: 'adunit-510a4ec39065ef96',
       style: {
         left: 0,
         top: screenHeight,
@@ -233,11 +255,17 @@ cc.Class({
     })
     // 在适合的场景显示 Banner 广告
     this.bannerAd.onLoad(() => {
-      console.log('banner 广告加载成功')
+     // console.log('banner 广告加载成功')
     })
 
     this.bannerAd.show()
-      .then(() => console.log('banner 广告显示'))
+      .then()
+  },
+  navToMiniprogram(event) {
+    console.log(event)
+    wx.navigateToMiniProgram({
+      appId: 'wxa5ad5989d1fb7089'
+    })
   },
   closeBannerAdv() {
     this.bannerAd.hide()

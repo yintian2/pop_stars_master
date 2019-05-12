@@ -122,12 +122,12 @@ cc.Class({
         return
       }
       // console.log('方块位置', this.iid, this.jid, this._itemType)
-      this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color, this.warningType, {
-        x: this.node.x,
-        y: this.node.y
-      })
       color = this.color
       if (this._status == 1 && this._game._status == 1 && this.color == color) {
+        this._game.onUserTouched(this.iid, this.jid, this._itemType, this.color, this.warningType, {
+          x: this.node.x,
+          y: this.node.y
+        })
         this._game._score.onStep(-1).then((res) => {
           if (res) {
             this.playDieAction().then(() => {
@@ -186,7 +186,7 @@ cc.Class({
       this.iid = data.y
       this.jid = data.x
     }
-    let action = cc.moveBy(1 * y / this._game.animationSpeed, 0, -y * (this._game.gap + this._game.blockWidth)).easing(cc.easeBounceOut(5 / y))
+    let action = cc.moveBy(0.25, 0, -y * (this._game.gap + this._game.blockWidth)).easing(cc.easeBounceOut(5 / y)) //1 * y / this._game.animationSpeed
     let seq = cc.sequence(action, cc.callFunc(() => {
       this._status = 1
       //  this._game.checkNeedGenerator()

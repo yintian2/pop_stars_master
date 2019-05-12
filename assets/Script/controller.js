@@ -13,8 +13,9 @@ cc.Class({
     gameData: cc.JsonAsset,
     scoreMgr: require('score'), //分数 特效控制
     totalRank: cc.Node,
-    groupRank:cc.Node,
-    startPage: require('startPage')
+    groupRank: cc.Node,
+    startPage: require('startPage'),
+    navNode: cc.Node,
   },
   start() {
     this.totalRank.active = false
@@ -40,17 +41,19 @@ cc.Class({
   },
   closeRank() {
     this.totalRank.active = false
+    this.navNode.active = true
     if (this.social.node.active) {
       this.social.closeRank()
     }
   },
   openRank() {
     this.totalRank.active = true
+    this.navNode.active = false
     if (this.social.node.active) {
       this.social.showRank()
     }
   },
-  openGroupRank(){
+  openGroupRank() {
     this.groupRank.active = true
     if (this.social.node.active) {
       this.social.showGroupRank()
@@ -59,6 +62,7 @@ cc.Class({
   },
   closeGroupRank() {
     this.groupRank.active = false
+    this.navNode.active = true
     if (this.social.node.active) {
       this.social.closeGroupRank()
       this.pageMgr.removePage(6)

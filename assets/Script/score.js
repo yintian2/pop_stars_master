@@ -175,7 +175,7 @@ cc.Class({
     this.chainSprite.node.active = false
   },
   checkLevelUp() {
-    if (this.score >= this.levelData[this.level - 1].score) {
+    if (this.level < this.levelData.length && this.score >= this.levelData[this.level - 1].score) {
       this.level++
       this.level > (this.levelData.length + 1) ? this.levelLimit() : this.onLevelUp()
     }
@@ -243,6 +243,14 @@ cc.Class({
   // 点击升级按钮
   onLevelUpButton(double) {
     console.log(double)
+    if (this.isLevelUp) {
+      return
+    } else {
+      this.isLevelUp = true
+    }
+    setTimeout(() => {
+      this.isLevelUp = false
+    }, 500)
     if (double && double.currentTarget) {
       double = 1
     } else {
@@ -250,11 +258,11 @@ cc.Class({
     }
     this._controller.pageMgr.onOpenPage(1)
     this.initCurrentScoreLabel()
-    this.mainScoreLabel.string = this.levelData[this.level - 2].step
+    this.mainScoreLabel.string = this.levelData[this.level - 2].step * double
     this.characterMgr.onLevelUpBtn(this.level)
     this.nameLabel.string = this.levelData[this.level - 1].name
     setTimeout(() => {
-      this.onCurrentScoreLabel(this.levelData[this.level - 2].step, {
+      this.onCurrentScoreLabel(this.levelData[this.level - 2].step * double, {
         x: -248,
         y: 350
       }, cc.callFunc(() => {
@@ -280,7 +288,7 @@ cc.Class({
   // todo 复活
   onGameOver(isTrue) {
     isTrue = isTrue || 0
-    if (this._game._status != 3 && (isTrue || this.reviveTime >= 1)) {
+    if (this._game._status != 3 && (isTrue || this.reviveTime >= 3)) {
       this._game.gameOver()
       this.updateFailPage()
       if (this._controller.social.node.active) {
@@ -295,7 +303,7 @@ cc.Class({
     if (this._controller.social.node.active) {
       this._controller.social.onAdvDouble()
     } else {
-      this.onLevelUpButton()
+      this.onLevelUpButton(2)
     }
   },
   onDoubleStep() {
