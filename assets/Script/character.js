@@ -44,6 +44,9 @@ cc.Class({
     this.showCharacter(level, this.fail)
   },
 
+  initStartPage(){
+
+  },
 
   showCharacter(level, target, jump) {
     target = target || this.character

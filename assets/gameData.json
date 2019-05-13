@@ -28,52 +28,52 @@
     "step": 9
   }, {
     "name": "知府",
-    "score": 91000,
+    "score": 92000,
     "giftStep":10,
     "step": 10
   }, {
     "name": "御史",
-    "score": 120000,
+    "score": 132000,
     "giftStep":10,
     "step": 11
   }, {
     "name": "巡抚",
-    "score": 170000,
+    "score": 223000,
     "giftStep":10,
     "step": 12
   }, {
     "name": "镇守",
-    "score": 250000,
+    "score": 370000,
     "giftStep":10,
     "step": 13
   }, {
     "name": "提督",
-    "score": 310000,
+    "score": 476000,
     "giftStep":10,
     "step": 14
   }, {
     "name": "大将军",
-    "score": 400000,
+    "score": 702000,
     "giftStep":10,
     "step": 15
   }, {
     "name": "太师",
-    "score": 560000,
+    "score": 1060000,
     "giftStep":10,
     "step": 16
   }, {
     "name": "宰相",
-    "score": 640000,
+    "score": 1322000,
     "giftStep":10,
     "step": 17
   }, {
     "name": "王爷",
-    "score": 790000,
+    "score": 2172000,
     "giftStep":10,
     "step": 18
   }, {
     "name": "皇帝",
-    "score": 1050000,
+    "score": 3600000,
     "giftStep":10,
     "step": 20
   }],
