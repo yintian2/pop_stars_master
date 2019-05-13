@@ -11,7 +11,8 @@ cc.Class({
     bgMusic: cc.AudioSource,
     winAudio: cc.AudioSource,
     doubleAudio: cc.AudioSource,
-    boomAudio: cc.AudioSource
+    boomAudio: cc.AudioSource,
+    magicAudio: cc.AudioSource,
     //audioSource: cc.AudioSource,
   },
   init() {
@@ -73,8 +74,8 @@ cc.Class({
   start() {
     // this.onPlayAudio(1);
   },
-  checkBg(){
-    
+  checkBg() {
+
   },
   onWin() {
     this.winAudio.rewind()
@@ -89,5 +90,9 @@ cc.Class({
   onBoom() {
     this.boomAudio.rewind()
     this.boomAudio.play()
-  }
+  },
+  onMagic() {
+    this.magicAudio.rewind()
+    this.magicAudio.play()
+  },
 });
