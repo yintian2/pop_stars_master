@@ -16,9 +16,11 @@ cc.Class({
     groupRank: cc.Node,
     startPage: require('startPage'),
     navNode: cc.Node,
+    pictorial: cc.Node,
   },
   start() {
     this.totalRank.active = false
+    this.pictorial.active = false
     this.game.init(this)
     if (this.social.node.active) {
       this.social.init(this)
@@ -68,4 +70,13 @@ cc.Class({
       this.pageMgr.removePage(6)
     }
   },
+  openPictorial() {
+    this.pictorial.active = true
+  },
+  closePictorial() {
+    this.pictorial.active = false
+  },
+  showHighestLevel(level){
+    console.log('获取最高官阶',level)
+  }
 });

@@ -49,6 +49,12 @@ cc.Class({
     wx.onHide(() => {
       cc.director.pause()
     })
+    // 获取最高官阶
+    this.getHighestLevel()
+  },
+  getHighestLevel(){
+    let highLevel = wx.getStorageSync('highLevel')
+    this._controller.showHighestLevel(highLevel)
   },
   // --------------- share ----------------
   onShareButton() {
