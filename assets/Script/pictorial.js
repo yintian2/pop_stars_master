@@ -14,7 +14,7 @@ cc.Class({
       let highLevel = c.social.getHighestLevel()
       if (highLevel) {
         this.showAvatar(highLevel)
-        this.loadContainer(highLevel)
+        // this.loadContainer(highLevel)
       } else {
         this.avatar.active = false
       }
@@ -24,11 +24,11 @@ cc.Class({
   },
   showAvatar(level) {
     this.avatar.active = true
-    let data = this._controller.gameData.json.levelData[level]
+    let data = this._controller.gameData.json.levelData[+level - 1]
     let heightScore = this._controller.social.getHighestScore()
-    this.avatar.getChildByName('name').getComponent(cc.Label).string = '历史最高:' + data.getChildByName
+    this.avatar.getChildByName('name').getComponent(cc.Label).string = '历史最高:' + data.name
     this.avatar.getChildByName('score').getComponent(cc.Label).string = '分数' + heightScore
-    this._controller.scoreMgr.characterMgr.showCharacter(level, this.avatar.getChildByName('db'), 0)
+    this._controller.scoreMgr.characterMgr.showCharacter(+level, this.avatar.getChildByName('db'), false)
   },
   loadContainer(level) {
     let data = this._controller.gameData.json.levelData

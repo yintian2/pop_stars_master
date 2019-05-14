@@ -28,9 +28,11 @@ cc.Class({
     }
     this.musicMgr.init()
     this.lateStart()
-    //this.pictorial.getComponent('pictorial').init(this)
+    this.pictorial.getComponent('pictorial').init(this)
+    
   },
   lateStart() {
+    this.startPage.bannerNode.scale = 1
     this.pageMgr.onOpenPage(0)
   },
   onGameStartButton() {

@@ -40,6 +40,7 @@ cc.Class({
   //---------------- 游戏控制 ---------------------
   // 游戏开始
   gameStart() {
+    this.recoveryAllBlocks().then()
     this._score.init(this)
     this.mapSet(this.rowNum).then((result) => {
       // console.log('游戏状态改变', result)
