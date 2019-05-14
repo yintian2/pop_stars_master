@@ -5,7 +5,7 @@ cc.Class({
   extends: cc.Component,
   properties: {
     container: cc.Node,
-    avatar: cc.node
+    avatar: cc.Node
   },
   init(c) {
     this._controller = c
@@ -21,11 +21,12 @@ cc.Class({
     }
   },
   showAvatar(level) {
+    this.avatar.active = true
     let data = this._controller.gameData.json.levelData[level]
     let heightScore = this._controller.social.getHighestScore()
     this.avatar.getChildByName('name').getComponent(cc.Label).string = '历史最高:' + data.getChildByName
     this.avatar.getChildByName('score').getComponent(cc.Label).string = '分数' + heightScore
-    this._controller.scoreMgr.characterMgr.showCharacter(level,this.avatar.getChildByName('db'),)
+    this._controller.scoreMgr.characterMgr.showCharacter(level, this.avatar.getChildByName('db'), )
   },
-  
+
 });
