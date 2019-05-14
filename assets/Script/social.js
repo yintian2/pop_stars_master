@@ -52,15 +52,19 @@ cc.Class({
     // 获取最高官阶
     this.getHighestLevel()
   },
-  getHighestLevel(){
+  getHighestLevel() {
     let highLevel = wx.getStorageSync('highLevel')
-    this._controller.showHighestLevel(highLevel)
+    return highLevel
+  },
+  getHighestScore() {
+    let score = wx.getStorageSync('highScore')
+    return score
   },
   // --------------- share ----------------
   onShareButton() {
     var self = this;
     wx.shareAppMessage({
-      title: "开局只是个农民，现在已经做到宰相",
+      title: "我终于当上了" + this._controller.scoreMgr.levelData[this._controller.scoreMgr.level - 1].name + ",不服来战",
       // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
       imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
     })
@@ -172,76 +176,66 @@ cc.Class({
       }
     }
   },
-  onReviveButton() {
+  // 控制打开广告
+  onReviveButton(type) {
     // 广告位
     let self = this
-    if (this.reviveAd) {
-      this.reviveAd.show().catch(() => {
+    this.adType = type //0表示加倍 1表示复活
+    if (this.audioAd) {
+      this.audioAd.show().catch(() => {
         // 失败重试
-        this.reviveAd.load()
-          .then(() => this.reviveAd.show())
+        this.audioAd.load()
+          .then(() => this.audioAd.show())
           .catch(err => {
             console.log('激励视频 广告显示失败', err.errMsg)
-            self._controller.game.onSkipRevive()
+            if (self.adType) {
+              self._controller.game.onSkipRevive()
+            } else {
+              self._controller.scoreMgr.onLevelUpButton()
+            }
           })
       })
       return
     }
-    this.reviveAd = wx.createRewardedVideoAd({
+    this.audioAd = wx.createRewardedVideoAd({
       adUnitId: 'adunit-482148cfeb243378'
     })
-    this.reviveAd.show().catch(() => {
+    this.audioAd.show().catch(() => {
       // 失败重试
-      this.reviveAd.load()
-        .then(() => this.reviveAd.show())
+      this.audioAd.load()
+        .then(() => this.audioAd.show())
         .catch(err => {
-          self._controller.game.onSkipRevive()
+          self.fakeShare()
         })
     })
-    this.reviveAd.onError(err => {
-      self._controller.game.onSkipRevive()
+    this.audioAd.onError(err => {
+      self.fakeShare()
     })
-    this.reviveAd.onClose((res) => {
-      if (res && res.isEnded || res === undefined) {
-        self._controller.game.showReviveSuccess()
+    this.audioAd.onClose((res) => {
+      if (self.adType) {
+        if (res && res.isEnded || res === undefined) {
+          self._controller.game.showReviveSuccess()
+        } else {
+          self._controller.game.askRevive()
+        }
       } else {
-        self._controller.game.askRevive()
+        if (res && res.isEnded || res === undefined) {
+          self._controller.scoreMgr.onLevelUpButton(2)
+        }
       }
     })
   },
-  onAdvDouble() {
-    // 广告位
-    let self = this
-    if (this.doubleAd) {
-      this.doubleAd.show().catch(() => {
-        // 失败重试
-        this.doubleAd.load()
-          .then(() => this.doubleAd.show())
-          .catch(err => {
-            self._controller.scoreMgr.onLevelUpButton()
-          })
-      })
-      return
+  fakeShare() {
+    wx.shareAppMessage({
+      title: "我已经玩到" + this._controller.scoreMgr.score + "分了，邀请你来挑战",
+      // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
+      imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
+    })
+    if (this.adType) {
+      self._controller.game.showReviveSuccess()
+    } else {
+      self._controller.scoreMgr.onLevelUpButton(2)
     }
-    this.doubleAd = wx.createRewardedVideoAd({
-      adUnitId: 'adunit-2397b0bff501b49b'
-    })
-    this.doubleAd.show().catch(() => {
-      // 失败重试
-      this.doubleAd.load()
-        .then(() => this.doubleAd.show())
-        .catch(err => {
-          self._controller.scoreMgr.onLevelUpButton()
-        })
-    })
-    this.doubleAd.onError(err => {
-      self._controller.scoreMgr.onLevelUpButton()
-    })
-    this.doubleAd.onClose((res) => {
-      if (res && res.isEnded || res === undefined) {
-        self._controller.scoreMgr.onLevelUpButton(2)
-      }
-    })
   },
   openBannerAdv() {
     // 创建 Banner 广告实例，提前初始化
@@ -261,7 +255,7 @@ cc.Class({
     })
     // 在适合的场景显示 Banner 广告
     this.bannerAd.onLoad(() => {
-     // console.log('banner 广告加载成功')
+      // console.log('banner 广告加载成功')
     })
 
     this.bannerAd.show()

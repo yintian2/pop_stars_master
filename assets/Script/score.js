@@ -301,7 +301,7 @@ cc.Class({
   },
   onDoubleStepBtn() {
     if (this._controller.social.node.active) {
-      this._controller.social.onAdvDouble()
+      this._controller.social.onReviveButton(0)
     } else {
       this.onLevelUpButton(2)
     }

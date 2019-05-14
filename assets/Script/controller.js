@@ -27,6 +27,7 @@ cc.Class({
     }
     this.musicMgr.init()
     this.lateStart()
+    //this.pictorial.getComponent('pictorial').init(this)
   },
   lateStart() {
     this.pageMgr.onOpenPage(0)
@@ -76,7 +77,5 @@ cc.Class({
   closePictorial() {
     this.pictorial.active = false
   },
-  showHighestLevel(level){
-    console.log('获取最高官阶',level)
-  }
+
 });

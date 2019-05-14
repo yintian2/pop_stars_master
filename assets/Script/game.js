@@ -176,7 +176,7 @@ cc.Class({
     clearInterval(this.reviveTimer)
     this.isRangeAction = false
     if (this._controller.social.node.active) {
-      this._controller.social.onReviveButton()
+      this._controller.social.onReviveButton(1)
     } else {
       this.showReviveSuccess()
     }
