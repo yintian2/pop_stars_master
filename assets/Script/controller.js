@@ -17,6 +17,7 @@ cc.Class({
     startPage: require('startPage'),
     navNode: cc.Node,
     pictorial: cc.Node,
+    helpPage: cc.Node,
   },
   start() {
     this.totalRank.active = false
@@ -77,5 +78,10 @@ cc.Class({
   closePictorial() {
     this.pictorial.active = false
   },
-
+  openHelpPage() {
+    this.helpPage.active = true
+  },
+  closeHelpPage() {
+    this.helpPage.active = false
+  }
 });
