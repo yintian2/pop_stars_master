@@ -3,79 +3,79 @@
   "levelData": [
     {
     "name": "农民",
-    "score": 5500,
+    "score": 6000,
     "giftStep":1,
-    "step": 5
+    "step": 1
   }, {
     "name": "秀才",
-    "score": 16000,
+    "score": 9600,
     "giftStep":2,
-    "step": 6
+    "step": 2
   }, {
     "name": "举人",
-    "score": 31000,
+    "score": 16000,
     "giftStep":3,
-    "step": 7
+    "step": 3
   }, {
     "name": "进士",
-    "score": 43000,
+    "score": 22000,
     "giftStep":4,
-    "step": 8
+    "step": 4
   }, {
     "name": "县令",
-    "score": 67000,
+    "score": 35000,
     "giftStep":5,
-    "step": 9
+    "step": 5
   }, {
     "name": "知府",
-    "score": 100000,
+    "score": 55000,
     "giftStep":6,
-    "step": 10
+    "step": 6
   }, {
     "name": "御史",
-    "score": 130000,
+    "score": 78000,
     "giftStep":7,
-    "step": 10
+    "step": 7
   }, {
     "name": "巡抚",
-    "score": 200000,
+    "score": 131000,
     "giftStep":8,
-    "step": 11
+    "step": 8
   }, {
     "name": "镇守",
-    "score": 350000,
+    "score": 250000,
     "giftStep":9,
-    "step": 11
+    "step": 9
   }, {
     "name": "提督",
-    "score": 420000,
+    "score": 310000,
     "giftStep":10,
-    "step": 11
+    "step": 10
   }, {
     "name": "大将军",
-    "score": 580000,
+    "score": 440000,
     "giftStep":11,
-    "step": 12
+    "step": 10
   }, {
     "name": "太师",
-    "score": 1210000,
+    "score": 970000,
     "giftStep":12,
-    "step": 12
+    "step": 10
   }, {
     "name": "宰相",
-    "score": 1370000,
+    "score": 1110000,
     "giftStep":13,
-    "step": 12
+    "step": 10
   }, {
     "name": "王爷",
-    "score": 1720000,
+    "score": 1370000,
     "giftStep":14,
-    "step": 13
+    "step": 10
   }, {
     "name": "皇帝",
-    "score": 4470000,
+    "score": 3500000,
     "giftStep":15,
-    "step": 13
+    "step": 10
   }],
   "buildingData":[{
     "name":"通天塔"
