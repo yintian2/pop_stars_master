@@ -28,13 +28,12 @@ cc.Class({
     }
     this.musicMgr.init()
     this.lateStart()
-    this.pictorial.getComponent('pictorial').init(this)
-
   },
   lateStart() {
     if (this.social.node.active) {
       this.social.closeBannerAdv()
     }
+    this.pictorial.getComponent('pictorial').init(this)
     this.startPage.bannerNode.scale = 1
     this.pageMgr.onOpenPage(0)
   },

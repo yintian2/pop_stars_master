@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.40243159670164835,
-      "y": 0.40243159670164835,
+      "x": 0.28853445002885936,
+      "y": 0.28853445002885936,
       "z": 1
     },
     "_quat": {
@@ -632,7 +632,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 371,
+      "y": 427,
       "z": 0
     },
     "_scale": {
@@ -1313,7 +1313,7 @@
     "_clip": {
       "__uuid__": "2a001d46-5521-4e16-9723-68382834620f"
     },
-    "_volume": 1,
+    "_volume": 0.7,
     "_mute": false,
     "_loop": false,
     "playOnLoad": false,
@@ -11705,7 +11705,7 @@
         "__id__": 270
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 1,
     "_components": [
       {
@@ -11855,7 +11855,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 550,
-      "height": 550
+      "height": 750
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -11925,7 +11925,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 288,
+      "y": 353,
       "z": 0
     },
     "_scale": {
@@ -12005,7 +12005,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "c6f13935-51e6-471e-831f-3e9689a493f7"
+      "__uuid__": "cf9c9465-34b6-4be3-a935-368066e9491e"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -12515,7 +12515,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 97.87,
-      "height": 40
+      "height": 45
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -12525,7 +12525,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 239,
+      "y": 287,
       "z": 0
     },
     "_scale": {
@@ -12560,7 +12560,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 45,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -12600,7 +12600,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 97.87,
-      "height": 40
+      "height": 45
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -12610,7 +12610,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 185,
+      "y": 233,
       "z": 0
     },
     "_scale": {
@@ -12645,7 +12645,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 45,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

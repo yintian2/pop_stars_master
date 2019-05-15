@@ -46,7 +46,7 @@ cc.Class({
       // console.log('游戏状态改变', result)
       this._status = 1
     })
-    
+
   },
   // 初始化地图
   mapSet(num) {
@@ -312,9 +312,8 @@ cc.Class({
         for (let i = 0; i < this.rowNum; i++) { //行
           for (let j = 0; j < this.rowNum; j++) { //列
             if (this.map[i][j] && this.map[i][j].getComponent('cell').isSingle && this.map[i][j] && this.map[i][j].getComponent('cell')._status != 2) {
-              this.map[i][j].getComponent('cell').onTouched(color, false, true)
-            } else {
-              this.map[i][j].runAction(AC.rockAction(0.2, 10))
+              let distance = Math.sqrt(Math.pow(pos.x - this.map[i][j].x, 2) + Math.pow(pos.y - this.map[i][j].y, 2))
+              this.map[i][j].getComponent('cell').onTouched(color, false, true, distance)
             }
           }
         }
