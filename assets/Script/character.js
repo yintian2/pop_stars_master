@@ -24,7 +24,7 @@ cc.Class({
         this.textureArr[i] = texture
       })
     }
-    // console.log(this.textureArr)
+     console.log('数据加载完毕')
   },
   onWalk(target) {
     target.playAnimation('walk', -1)

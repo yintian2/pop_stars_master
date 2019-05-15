@@ -29,14 +29,20 @@ cc.Class({
     this.musicMgr.init()
     this.lateStart()
     this.pictorial.getComponent('pictorial').init(this)
-    
+
   },
   lateStart() {
+    if (this.social.node.active) {
+      this.social.closeBannerAdv()
+    }
     this.startPage.bannerNode.scale = 1
     this.pageMgr.onOpenPage(0)
   },
   onGameStartButton() {
     // TODO:  增加一个动画
+    if (this.social.node.active) {
+      this.social.openBannerAdv()
+    }
     this.startPage.showAnimation().then(() => {
       this.gameStart()
     })

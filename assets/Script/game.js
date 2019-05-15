@@ -46,6 +46,7 @@ cc.Class({
       // console.log('游戏状态改变', result)
       this._status = 1
     })
+    
   },
   // 初始化地图
   mapSet(num) {
@@ -145,6 +146,9 @@ cc.Class({
     this._status = 3
     this._controller.pageMgr.addPage(2)
     this._controller.pageMgr.addPage(4)
+    if (this._controller.social.node.active) {
+      this._controller.social.closeBannerAdv()
+    }
   },
   // todo 复活
   askRevive() {
@@ -169,9 +173,7 @@ cc.Class({
         this.onSkipRevive()
       }
     }, 1000)
-    if (this._controller.social.node.active) {
-      this._controller.social.openBannerAdv()
-    }
+
   },
   onReviveButton() {
     clearInterval(this.reviveTimer)
@@ -192,9 +194,6 @@ cc.Class({
     this.revivePage.active = false
     this._status = 1
     this._score.onRevive()
-    if (this._controller.social.node.active) {
-      this._controller.social.closeBannerAdv()
-    }
   },
   update() {
     if (this.isRangeAction) {
@@ -206,9 +205,6 @@ cc.Class({
     this._controller.pageMgr.pages[5].active = false
     this._score.onGameOver(true)
     this.isRangeAction = false
-    if (this._controller.social.node.active) {
-      this._controller.social.closeBannerAdv()
-    }
   },
   restart() {
     this._controller.pageMgr.onOpenPage(1)

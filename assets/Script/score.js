@@ -43,6 +43,8 @@ cc.Class({
     this.hideChainSprite()
 
     this.tipBox.init(this, 0)
+
+    
   },
   start() {
     this.generatePool()
@@ -234,6 +236,9 @@ cc.Class({
     this.characterMgr.onLevelUp()
     this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2
+    if(this._controller.social.node.active){
+      this._controller.social.openBannerAdv()
+    }
   },
   // 等级限制
   levelLimit() {
