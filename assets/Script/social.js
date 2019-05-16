@@ -69,6 +69,13 @@ cc.Class({
       imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
     })
   },
+  onUsualShareButton(){
+    wx.shareAppMessage({
+      title: "开局只是个农民，现在已经做到宰相",
+      // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
+      imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
+    })
+  },
   onShakePhone() {
     wx.vibrateShort()
   },
@@ -262,6 +269,9 @@ cc.Class({
     this.bannerAd.onLoad(() => {
       // console.log('banner 广告加载成功')
     })
+    this.bannerAd.onError((e) => {
+      console.log('banner 广告加载失败', e)
+    })
     this.bannerAd.show()
       .then()
   },
@@ -272,7 +282,7 @@ cc.Class({
     })
   },
   closeBannerAdv() {
-    if(this.bannerAd){
+    if (this.bannerAd) {
       this.bannerAd.hide()
 
     }

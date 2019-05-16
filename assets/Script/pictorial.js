@@ -35,6 +35,7 @@ cc.Class({
   },
   loadContainer(level) {
     let data = this._controller.gameData.json.levelData
+    this.clearContainer()
     setTimeout(() => {
       for (let i = 0; i < +level; i++) {
         let card = cc.instantiate(this.prefab)
@@ -42,6 +43,11 @@ cc.Class({
         this.initCard(card, data[i], i)
       }
     }, 500)
+  },
+  clearContainer(){
+    this.container.children.map(item=>{
+      item.destroy()
+    })
   },
   initCard(card, info, level) {
     card.getChildByName('name').getComponent(cc.Label).string = info.name
