@@ -17,6 +17,7 @@ cc.Class({
     startPage: require('startPage'),
     navNode: cc.Node,
     pictorial: cc.Node,
+    helpPage: cc.Node,
   },
   start() {
     this.totalRank.active = false
@@ -27,13 +28,20 @@ cc.Class({
     }
     this.musicMgr.init()
     this.lateStart()
-    //this.pictorial.getComponent('pictorial').init(this)
   },
   lateStart() {
+    if (this.social.node.active) {
+      this.social.closeBannerAdv()
+    }
+    this.pictorial.getComponent('pictorial').init(this)
+    this.startPage.bannerNode.scale = 1
     this.pageMgr.onOpenPage(0)
   },
   onGameStartButton() {
     // TODO:  增加一个动画
+    if (this.social.node.active) {
+      this.social.openBannerAdv()
+    }
     this.startPage.showAnimation().then(() => {
       this.gameStart()
     })
@@ -77,5 +85,10 @@ cc.Class({
   closePictorial() {
     this.pictorial.active = false
   },
-
+  openHelpPage() {
+    this.helpPage.active = true
+  },
+  closeHelpPage() {
+    this.helpPage.active = false
+  }
 });

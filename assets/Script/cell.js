@@ -97,7 +97,13 @@ cc.Class({
 
   },
   // 用户点击 或者被其他方块触发
-  onTouched(color, isChain, isBomb) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
+  onTouched(color, isChain, isBomb, time) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
+    if (time) {
+      setTimeout(() => {
+        this.onTouched(color, isChain, isBomb)
+      }, time)
+      return
+    }
     isChain = isChain ? isChain : true
     isBomb = isBomb ? isBomb : false
     let self = this

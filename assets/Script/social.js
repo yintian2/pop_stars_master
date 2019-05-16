@@ -239,25 +239,29 @@ cc.Class({
   },
   openBannerAdv() {
     // 创建 Banner 广告实例，提前初始化
-    let screenWidth = wx.getSystemInfoSync().screenWidth
-    let bannerHeight = screenWidth / 350 * 120
-    let screenHeight = wx.getSystemInfoSync().screenHeight - bannerHeight
+    // let screenWidth = wx.getSystemInfoSync().screenWidth
+    // let bannerHeight = screenWidth / 350 * 120
+    let screenHeight = wx.getSystemInfoSync().screenHeight - 108
+    let adUnitIds = [
+      'adunit-510a4ec39065ef96',
+      'adunit-29b0fa7a2db8e8cb',
+      'adunit-4020bb9ea439e6a5'
+    ]
     if (this.bannerAd) {
       this.bannerAd.destroy()
     }
     this.bannerAd = wx.createBannerAd({
-      adUnitId: 'adunit-510a4ec39065ef96',
+      adUnitId: adUnitIds[Math.floor(Math.random() * 3)],
       style: {
         left: 0,
         top: screenHeight,
-        width: screenWidth,
+        width: 620,
       }
     })
     // 在适合的场景显示 Banner 广告
     this.bannerAd.onLoad(() => {
       // console.log('banner 广告加载成功')
     })
-
     this.bannerAd.show()
       .then()
   },
@@ -268,20 +272,9 @@ cc.Class({
     })
   },
   closeBannerAdv() {
-    this.bannerAd.hide()
+    if(this.bannerAd){
+      this.bannerAd.hide()
+
+    }
   }
-  // -------------- rank 刷新------------------
-  // _updateSubDomainCanvas() {
-  //   if (!this.tex) {
-  //     return;
-  //   }
-  //   this.tex.initWithElement(sharedCanvas);
-  //   this.tex.handleLoadedTexture();
-  //   this.display.spriteFrame = new cc.SpriteFrame(this.tex);
-  // },
-  // update(dt) {
-  //   if (this._isShow == true) {
-  //     this._updateSubDomainCanvas();
-  //   }
-  // },
 });

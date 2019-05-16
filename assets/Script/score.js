@@ -43,6 +43,10 @@ cc.Class({
     this.hideChainSprite()
 
     this.tipBox.init(this, 0)
+    if (this._controller.social.node.active) {
+      let height = this._controller.social.getHighestLevel()
+      this.onStep(this.levelData[+height - 1].giftStep)
+    }
   },
   start() {
     this.generatePool()
@@ -234,6 +238,9 @@ cc.Class({
     this.characterMgr.onLevelUp()
     this.characterMgr.onSuccessDialog(this.level)
     this._game._status = 2
+    if (this._controller.social.node.active) {
+      this._controller.social.openBannerAdv()
+    }
   },
   // 等级限制
   levelLimit() {
