@@ -276,16 +276,15 @@ cc.Class({
     // this.bannerAd.show()
     //   .then()
   },
-  navToMiniprogram(event) {
-    console.log(event)
+  navToMiniprogram(event,custom) {
+    console.log(custom)
     wx.navigateToMiniProgram({
-      appId: 'wxa5ad5989d1fb7089'
+      appId: custom
     })
   },
   closeBannerAdv() {
     if (this.bannerAd) {
       this.bannerAd.hide()
-
     }
   }
 });
