@@ -45,7 +45,9 @@ cc.Class({
     this.tipBox.init(this, 0)
     if (this._controller.social.node.active) {
       let height = this._controller.social.getHighestLevel()
-      this.onStep(this.levelData[+height - 1].giftStep)
+      if (height) {
+        this.onStep(this.levelData[+height - 1].giftStep)
+      }
     }
   },
   start() {

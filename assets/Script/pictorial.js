@@ -18,6 +18,7 @@ cc.Class({
         this.loadContainer(+highLevel)
       } else {
         this.avatar.active = false
+        this.loadContainer(1)
       }
     } else {
       this.avatar.active = false
@@ -31,22 +32,35 @@ cc.Class({
     this.avatar.getChildByName('score').getComponent(cc.Label).string = '分数' + heightScore
     setTimeout(() => {
       this._controller.scoreMgr.characterMgr.showCharacter(+level, this.avatar.getChildByName('db'), false)
-    }, 500)
+    }, 1000)
   },
   loadContainer(level) {
     let data = this._controller.gameData.json.levelData
+    this.clearContainer()
     setTimeout(() => {
-      for (let i = 0; i < +level; i++) {
+      for (let i = 0; i < data.length; i++) {
         let card = cc.instantiate(this.prefab)
         card.parent = this.container
-        this.initCard(card, data[i], i)
+        this.initCard(card, data[i], i, level)
       }
-    }, 500)
+    }, 1000)
   },
-  initCard(card, info, level) {
-    card.getChildByName('name').getComponent(cc.Label).string = info.name
-    //card.getChildByName('score').getComponent(cc.Label).string = "得分:" + info.score
-    card.getChildByName('giftStep').getComponent(cc.Label).string = "开局奖励" + info.giftStep + "步"
-    this._controller.scoreMgr.characterMgr.showCharacter(level+1, card.getChildByName('db'), 0)
+  clearContainer() {
+    this.container.children.map(item => {
+      item.destroy()
+    })
+  },
+  initCard(card, info, level, selfLevel) {
+    if (level < selfLevel) {
+      card.getChildByName('name').getComponent(cc.Label).string = info.name
+      //card.getChildByName('score').getComponent(cc.Label).string = "得分:" + info.score
+      card.getChildByName('db').color = cc.Color.WHITE
+      card.getChildByName('giftStep').getComponent(cc.Label).string = "开局奖励" + info.giftStep + "步"
+    } else {
+      card.getChildByName('name').getComponent(cc.Label).string = '???'
+      card.getChildByName('giftStep').getComponent(cc.Label).string = "开局奖励???步"
+      card.getChildByName('db').color = cc.Color.BLACK
+    }
+    this._controller.scoreMgr.characterMgr.showCharacter(level + 1, card.getChildByName('db'), 0)
   }
 });

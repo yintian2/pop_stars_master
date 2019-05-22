@@ -69,6 +69,13 @@ cc.Class({
       imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
     })
   },
+  onUsualShareButton() {
+    wx.shareAppMessage({
+      title: "开局只是个农民，现在已经做到宰相",
+      // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
+      imageUrl: 'https://mmocgame.qpic.cn/wechatgame/LtJZOjH6Z9ibiaMlpqzldsOf46Q7TZiaysI1fwc4Oj1L3CkbCaJMAMoicibbHu2HUQkOib/0'
+    })
+  },
   onShakePhone() {
     wx.vibrateShort()
   },
@@ -226,6 +233,7 @@ cc.Class({
     })
   },
   fakeShare() {
+    let self = this
     wx.shareAppMessage({
       title: "我已经玩到" + this._controller.scoreMgr.score + "分了，邀请你来挑战",
       // imageUrlId: 'oxEwGvClT0uldQ470pM84w',
@@ -241,40 +249,42 @@ cc.Class({
     // 创建 Banner 广告实例，提前初始化
     // let screenWidth = wx.getSystemInfoSync().screenWidth
     // let bannerHeight = screenWidth / 350 * 120
-    let screenHeight = wx.getSystemInfoSync().screenHeight - 108
-    let adUnitIds = [
-      'adunit-510a4ec39065ef96',
-      'adunit-29b0fa7a2db8e8cb',
-      'adunit-4020bb9ea439e6a5'
-    ]
-    if (this.bannerAd) {
-      this.bannerAd.destroy()
-    }
-    this.bannerAd = wx.createBannerAd({
-      adUnitId: adUnitIds[Math.floor(Math.random() * 3)],
-      style: {
-        left: 0,
-        top: screenHeight,
-        width: 620,
-      }
-    })
-    // 在适合的场景显示 Banner 广告
-    this.bannerAd.onLoad(() => {
-      // console.log('banner 广告加载成功')
-    })
-    this.bannerAd.show()
-      .then()
+    // let screenHeight = wx.getSystemInfoSync().screenHeight - 108
+    // let adUnitIds = [
+    //   'adunit-510a4ec39065ef96',
+    //   'adunit-29b0fa7a2db8e8cb',
+    //   'adunit-4020bb9ea439e6a5'
+    // ]
+    // if (this.bannerAd) {
+    //   this.bannerAd.destroy()
+    // }
+    // this.bannerAd = wx.createBannerAd({
+    //   adUnitId: adUnitIds[Math.floor(Math.random() * 3)],
+    //   style: {
+    //     left: 0,
+    //     top: screenHeight,
+    //     width: 620,
+    //   }
+    // })
+    // // 在适合的场景显示 Banner 广告
+    // this.bannerAd.onLoad(() => {
+    //   // console.log('banner 广告加载成功')
+    // })
+    // this.bannerAd.onError((e) => {
+    //   console.log('banner 广告加载失败', e)
+    // })
+    // this.bannerAd.show()
+    //   .then()
   },
-  navToMiniprogram(event) {
-    console.log(event)
+  navToMiniprogram(event,custom) {
+    console.log(custom)
     wx.navigateToMiniProgram({
-      appId: 'wxa5ad5989d1fb7089'
+      appId: custom
     })
   },
   closeBannerAdv() {
-    if(this.bannerAd){
+    if (this.bannerAd) {
       this.bannerAd.hide()
-
     }
   }
 });
