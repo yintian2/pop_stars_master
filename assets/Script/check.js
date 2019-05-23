@@ -42,29 +42,21 @@ cc.Class({
         let x = target.getComponent('cell').iid
         let y = target.getComponent('cell').jid
         let isSingle = true
-        if ((x - 1) >= 0) {
-          if (this.map[x - 1][y].getComponent('cell').color == target.getComponent('cell').color) {
-            isSingle = false
-          }
+        if ((x - 1) >= 0 && this.map[x - 1][y].getComponent('cell').color == target.getComponent('cell').color) {
+          isSingle = false
         }
-        if ((x + 1) < this.mapLength) {
-          if (this.map[x + 1][y].getComponent('cell').color == target.getComponent('cell').color) {
-            isSingle = false
-          }
-        }
-        if ((y - 1) >= 0) {
-          if (this.map[x][y - 1].getComponent('cell').color == target.getComponent('cell').color) {
-            isSingle = false
-          }
-        }
-        if ((y + 1) < this.mapLength) {
-          if (this.map[x][y + 1].getComponent('cell').color == target.getComponent('cell').color) {
-            isSingle = false
-          }
+        if ((x + 1) < this.mapLength && this.map[x + 1][y].getComponent('cell').color == target.getComponent('cell').color) {
+          isSingle = false
         }
 
+        if ((y - 1) >= 0 && this.map[x][y - 1].getComponent('cell').color == target.getComponent('cell').color) {
+          isSingle = false
+        }
+        if ((y + 1) < this.mapLength && this.map[x][y + 1].getComponent('cell').color == target.getComponent('cell').color) {
+          isSingle = false
+        }
         this.map[i][j].getComponent('cell').isSingle = isSingle
-
+        console.log(i, j, this.map[i][j].getComponent('cell').isSingle, this.map[i][j].getComponent('cell').color)
         if (this.groups[i][j].length >= min) {
           for (let z = 0; z < propConfig.length; z++) {
             if (this.groups[i][j].length <= propConfig[z].max && this.groups[i][j].length >= propConfig[z].min) {

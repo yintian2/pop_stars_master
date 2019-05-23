@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.46412340704647675,
-      "y": 0.46412340704647675,
+      "x": 0.40243159670164913,
+      "y": 0.40243159670164913,
       "z": 1
     },
     "_quat": {
@@ -4731,7 +4731,7 @@
         "__id__": 262
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [
       {
@@ -5458,9 +5458,7 @@
     "_N$hoverSprite": null,
     "hoverSprite": null,
     "_N$disabledSprite": null,
-    "_N$target": {
-      "__id__": 113
-    },
+    "_N$target": null,
     "_id": "87EjlpwtpAY7hZFWmt9Wq7"
   },
   {
@@ -5721,9 +5719,7 @@
     "_N$hoverSprite": null,
     "hoverSprite": null,
     "_N$disabledSprite": null,
-    "_N$target": {
-      "__id__": 119
-    },
+    "_N$target": null,
     "_id": "34yT2NQjxFLI/MK5FtA4W+"
   },
   {
@@ -5744,7 +5740,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 1,
     "_components": [
       {
@@ -7387,9 +7383,7 @@
     "_N$disabledSprite": {
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
-    "_N$target": {
-      "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
-    },
+    "_N$target": null,
     "_id": "bfKPr3wT5Gh5ZCtsInYhkj"
   },
   {
@@ -11314,9 +11308,7 @@
     "_N$disabledSprite": {
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
-    "_N$target": {
-      "__id__": 245
-    },
+    "_N$target": null,
     "_id": "93aTdKALJIW7ZZWp/O0BUN"
   },
   {

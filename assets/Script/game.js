@@ -314,6 +314,7 @@ cc.Class({
             if (this.map[i][j] && this.map[i][j].getComponent('cell').isSingle && this.map[i][j] && this.map[i][j].getComponent('cell')._status != 2) {
               let distance = Math.sqrt(Math.pow(pos.x - this.map[i][j].x, 2) + Math.pow(pos.y - this.map[i][j].y, 2))
               this.map[i][j].getComponent('cell').onTouched(color, false, true, distance)
+              console.log("魔法棒触发的点", i,j,this.map[i][j].getComponent('cell').color, this.map[i][j].getComponent('cell').isSingle)
             }
           }
         }

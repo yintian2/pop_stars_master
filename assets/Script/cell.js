@@ -100,11 +100,11 @@ cc.Class({
   onTouched(color, isChain, isBomb, time) { //道具新增参数 isChain是否连锁 isBomb是否强制消除
     if (time) {
       setTimeout(() => {
-        this.onTouched(color, isChain, isBomb)
+        this.onTouched(color, false, isBomb)
       }, time)
       return
     }
-    isChain = isChain ? isChain : true
+    isChain = JSON.stringify(isChain) == 'null' ? true : isChain
     isBomb = isBomb ? isBomb : false
     let self = this
     // 爆炸触发
@@ -153,7 +153,7 @@ cc.Class({
   },
   onBlockPop(color, isChain, isBomb) {
     let self = this
-    isChain = isChain ? isChain : true
+    isChain = JSON.stringify(isChain) == 'null' ? true : isChain
     isBomb = isBomb ? isBomb : false
     self._game.checkNeedFall()
     self._game._status = 5
